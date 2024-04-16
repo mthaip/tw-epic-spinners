@@ -24,6 +24,7 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -32,6 +33,7 @@
     "eslint": "8.56.0",
     "esthetic": "^0.6.4-beta.1",
     "highlight.js": "^11.9.0",
+    "markdown-it": "^14.1.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
