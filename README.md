@@ -1,9 +1,25 @@
-# Vue 3 + TypeScript + Vite
+# Tailwindcss Epic Spinners
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This library is the Tailwind integration of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners)
 
-## Recommended Setup
+## Installation
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+```bash
+# TODO
+```
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+## Demo
+
+An online demo is available [here](https://tw-epic-spinners.mthaip.com)
+
+## Usage
+
+TODO
+
+### Examples
+
+TODO
+
+## License
+
+TODO
