@@ -34,7 +34,7 @@
   "engines": {
     "node": "21.7.3",
     "npm": "plase-use-yarn",
-    "yarn": "1.22.21"
+    "yarn": "1.22.22"
   },
-  "packageManager": "yarn@1.22.21"
+  "packageManager": "yarn@1.22.22"
 }
