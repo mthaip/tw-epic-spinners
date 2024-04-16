@@ -1,9 +1,13 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
+import spinners from './src';
 
 export default {
-  content: [],
+  content: ['**/*.vue', '**/*.html'],
   theme: {
-    extend: {},
+    extend: {
+      sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+    },
   },
-  plugins: [],
+  plugins: [spinners],
 } satisfies Config;
