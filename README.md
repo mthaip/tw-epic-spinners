@@ -321,6 +321,16 @@ Using arbitrary values:
 </div>
 ```
 
+#### Color
+
+Color can be controlled by [Tailwind CSS Text Color utility](https://tailwindcss.com/docs/text-color).
+
+```html
+<div class="spinner-fulfilling-square text-sky-600">
+  <div class="shape"></div>
+</div>
+```
+
 ## License
 
 [MIT](./LICENSE) License
