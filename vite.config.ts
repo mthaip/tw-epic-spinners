@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import mdPlugin from 'vite-plugin-markdown';
 
 // TODO
 // const alias = Object.entries(tsConfig.compilerOptions.paths).reduce(([]));
@@ -8,6 +8,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  assetsInclude: ['**/*.md'],
   // TODO
   // resolve: {
   //   alias: {
