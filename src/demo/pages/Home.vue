@@ -6,12 +6,16 @@
           href="https://github.com/mthaip/tw-epic-spinners"
           class="mr-auto"
         >
-          <Github class="h-8 w-8 text-sky-600" />
+          <Github class="h-6 w-6 text-sky-600 md:h-8 md:w-8" />
         </a>
       </div>
       <div class="flex flex-col items-center justify-center gap-3">
-        <h1 class="text-4xl font-bold text-sky-600">Epic Spinners</h1>
-        <div class="flex flex-row items-center justify-center gap-2">
+        <h1 class="text-xl font-bold text-sky-600 md:text-4xl">
+          Epic Spinners
+        </h1>
+        <div
+          class="flex flex-col items-center justify-center gap-2 md:flex-row"
+        >
           <span class="text-gray-80 text-nowrap font-light"> Plugin for </span>
           <img
             :src="tailwindLogo"
@@ -23,7 +27,7 @@
       <div class="flex flex-1">
         <RouterLink
           to="/docs"
-          class="ml-auto text-end transition-colors hover:text-sky-600 hover:underline"
+          class="ml-auto text-end text-sm transition-colors hover:text-sky-600 hover:underline md:text-base"
         >
           Get started
         </RouterLink>
