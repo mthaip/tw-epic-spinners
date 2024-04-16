@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "description": "A tailwindcss plugin of Epic Spinners.",
   "author": "mthaip <fanmt.fmt@gmail.com>",
-  "homepage": "https://epic-spinners.mthaip.com",
+  "homepage": "https://tw-epic-spinners.mthaip.com",
   "url": "https://github.com/mthaip/tw-epic-spinners",
   "repository": {
     "type": "git",
