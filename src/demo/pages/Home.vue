@@ -2,7 +2,7 @@
   <div>
     <div class="mx-auto flex max-w-4xl items-center justify-between py-6">
       <a
-        href="https://github.com/mthaip"
+        href="https://github.com/mthaip/tw-epic-spinners"
         class="flex-1"
       >
         <Github class="h-8 w-8 text-sky-600" />
