@@ -1,18 +1,30 @@
 {
   "name": "tw-epic-spinners",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
+  "license": "MIT",
   "type": "module",
+  "main": "dist/index.js",
+  "description": "A tailwindcss plugin of Epic Spinners.",
+  "author": "mthaip <fanmt.fmt@gmail.com>",
+  "homepage": "https://tw-epic-spinners.mthaip.com",
+  "url": "https://github.com/mthaip/tw-epic-spinners",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mthaip/tw-epic-spinners.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts"
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
+    "build:npm": "vite build -c ./configs/build.ts",
+    "release": "yarn build:npm && npm publish"
   },
   "dependencies": {
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -21,6 +33,9 @@
     "eslint": "8.56.0",
     "esthetic": "^0.6.4-beta.1",
     "highlight.js": "^11.9.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-toc-done-right": "^4.2.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
