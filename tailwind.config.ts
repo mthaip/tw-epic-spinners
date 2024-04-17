@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss';
 import spinners from './src';
 
 export default {
+  darkMode: 'selector',
   content: ['**/*.vue', '**/*.html'],
   theme: {
     extend: {

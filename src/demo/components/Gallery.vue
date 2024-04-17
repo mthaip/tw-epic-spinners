@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-auto my-16 grid max-w-4xl grid-cols-1 items-center justify-items-center gap-5 text-sky-600 sm:grid-cols-2 md:grid-cols-5"
+    class="my-16 grid grid-cols-2 items-center justify-items-center gap-10 px-6 text-violet-600 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5 dark:text-white"
   >
     <Preview
       @view-code="handleViewCode"
@@ -348,7 +348,7 @@
 
   <Transition name="slide-fade">
     <div
-      class="fixed bottom-0 left-0 right-0 top-0 z-20 bg-white/30 backdrop-blur-sm"
+      class="fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center bg-white/30 backdrop-blur-sm"
       v-if="!!previewCode"
     >
       <button
@@ -358,7 +358,7 @@
         <span class="material-symbols-outlined"> close </span>
       </button>
       <div
-        class="relative mx-auto mt-20 aspect-video max-w-xl rounded-xl border bg-white px-4 pt-0 text-sm shadow-xl"
+        class="relative mx-auto max-w-2xl rounded-xl border bg-white px-4 pt-0 text-sm shadow-xl"
       >
         <button
           class="absolute right-2 top-2 flex items-center justify-center rounded-lg border bg-white p-2 transition-colors hover:bg-gray-100"
@@ -415,7 +415,7 @@ const hasCustomSize = ref(true);
 const hasCustomDuration = ref(true);
 
 const classes = {
-  'spinner-size-16': hasCustomSize.value,
+  'spinner-size-12 sm:spinner-size-16': hasCustomSize.value,
   'spinner-duration-[2.5s]': hasCustomDuration.value,
 };
 </script>

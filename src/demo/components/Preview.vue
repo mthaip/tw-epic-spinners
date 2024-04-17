@@ -1,7 +1,7 @@
 <template>
   <div
     @click="$emit('view-code', code?.innerHTML || '')"
-    class="group flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4 p-4 transition-all duration-300 hover:scale-110 hover:rounded-xl hover:bg-sky-600 hover:shadow-xl"
+    class="group flex aspect-[3/4] h-full w-full cursor-pointer flex-col items-center justify-center gap-4 px-2 py-3 transition-all duration-300 hover:scale-110 hover:rounded-xl hover:bg-violet-600 hover:shadow-xl"
   >
     <div
       ref="code"
@@ -9,7 +9,9 @@
     >
       <slot />
     </div>
-    <span class="mt-auto text-center text-sm group-hover:text-white">
+    <span
+      class="mt-auto text-center text-xs group-hover:text-white sm:text-sm dark:text-white"
+    >
       <code>{{ name }}</code>
     </span>
   </div>

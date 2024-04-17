@@ -1,26 +1,24 @@
 <template>
-  <div class="mx-auto max-w-4xl p-6 pb-16">
-    <div class="mb-10 flex flex-row items-center justify-between">
-      <RouterLink
-        to="/"
-        class="flex flex-row items-center gap-2 transition-colors hover:text-sky-600"
-      >
-        <span class="material-symbols-outlined"> keyboard_backspace </span>
-        Home
-      </RouterLink>
+  <div class="page-container">
+    <Navigation>
+      <template #left>
+        <RouterLink
+          to="/"
+          class="flex flex-row items-center gap-2 transition-colors hover:text-violet-600 dark:text-gray-50"
+        >
+          <span class="material-symbols-outlined"> keyboard_backspace </span>
+          Home
+        </RouterLink>
+      </template>
+    </Navigation>
 
-      <a
-        class="ml-auto block"
-        href="https://github.com/mthaip/tw-epic-spinners"
-      >
-        <Github class="h-6 w-6 text-sky-600 md:h-8 md:w-8" />
-      </a>
-    </div>
     <div
-      class="markdown-body"
+      class="markdown-body mt-16"
       v-html="markdown.render(readme)"
     />
   </div>
+
+  <Footer />
 </template>
 
 <script setup lang="ts">
@@ -30,7 +28,8 @@ import markdownItAnchor from 'markdown-it-anchor';
 // import markdownItTocDoneRight from 'markdown-it-toc-done-right';
 
 import readme from '../../../README.md?raw';
-import Github from '../components/logos/Github.vue';
+import Footer from '../components/Footer.vue';
+import Navigation from '../components/Navigation.vue';
 
 const markdown = new MarkdownIt({
   highlight: function (str, lang) {
@@ -60,7 +59,7 @@ const markdown = new MarkdownIt({
 
 <style>
 .markdown-body {
-  @apply w-full bg-white text-black;
+  @apply w-full bg-transparent text-black  dark:text-gray-50;
 
   & .table-of-contents {
     @apply fixed bottom-0 left-0 top-0 bg-white p-6 pr-8 shadow-xl;
@@ -92,22 +91,36 @@ const markdown = new MarkdownIt({
   }
 
   & code {
-    @apply bg-gray-300;
+    @apply bg-gray-300 dark:bg-gray-600;
   }
 
   & a {
-    @apply text-sky-600;
+    @apply text-violet-600;
 
     &[class='header-anchor'] {
-      @apply text-black;
+      @apply text-black dark:text-gray-50;
     }
   }
 
   & pre {
-    @apply bg-sky-50;
+    @apply bg-gray-100 dark:bg-gray-800;
 
     & code {
-      @apply text-gray-800;
+      @apply text-gray-800 dark:text-gray-50;
+
+      & span {
+        &.hljs-name {
+          @apply dark:text-green-500;
+        }
+
+        &.hljs-attr {
+          @apply dark:text-blue-600;
+        }
+
+        &.hljs-string {
+          @apply dark:text-blue-400;
+        }
+      }
     }
   }
 }
