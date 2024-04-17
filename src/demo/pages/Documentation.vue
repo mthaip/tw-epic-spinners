@@ -3,14 +3,14 @@
     <div class="mb-10 flex flex-row items-center justify-between">
       <RouterLink
         to="/"
-        class="flex flex-1 flex-row items-center gap-2 transition-colors hover:text-sky-600"
+        class="flex flex-row items-center gap-2 transition-colors hover:text-sky-600"
       >
         <span class="material-symbols-outlined"> keyboard_backspace </span>
         Home
       </RouterLink>
 
       <a
-        class="block"
+        class="ml-auto block"
         href="https://github.com/mthaip/tw-epic-spinners"
       >
         <Github class="h-6 w-6 text-sky-600 md:h-8 md:w-8" />
@@ -84,7 +84,7 @@ const markdown = new MarkdownIt({
   }
 
   & * ol {
-    @apply !list-none pl-4;
+    @apply !list-none pl-4 text-black;
   }
 
   & ul {
@@ -97,6 +97,10 @@ const markdown = new MarkdownIt({
 
   & a {
     @apply text-sky-600;
+
+    &[class='header-anchor'] {
+      @apply text-black;
+    }
   }
 
   & pre {
