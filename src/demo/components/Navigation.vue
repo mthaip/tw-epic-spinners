@@ -2,8 +2,11 @@
   <div
     class="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
   >
-    <div class="flex flex-col gap-1">
-      <slot name="left">
+    <slot name="left">
+      <RouterLink
+        to="/"
+        class="flex flex-col gap-1"
+      >
         <h1
           class="dark:text-whte text-xl font-bold text-violet-600 md:text-2xl dark:text-white"
         >
@@ -26,8 +29,8 @@
             class="hidden h-3 dark:block"
           />
         </div>
-      </slot>
-    </div>
+      </RouterLink>
+    </slot>
     <div
       class="ml-auto flex flex-row divide-x divide-gray-300 dark:divide-gray-600"
     >

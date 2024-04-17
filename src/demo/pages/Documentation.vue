@@ -1,16 +1,6 @@
 <template>
   <div class="page-container">
-    <Navigation>
-      <template #left>
-        <RouterLink
-          to="/"
-          class="flex flex-row items-center gap-2 transition-colors hover:text-violet-600 dark:text-gray-50"
-        >
-          <span class="material-symbols-outlined"> keyboard_backspace </span>
-          Home
-        </RouterLink>
-      </template>
-    </Navigation>
+    <Navigation />
 
     <div
       class="markdown-body mt-16"
