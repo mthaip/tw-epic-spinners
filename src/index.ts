@@ -25,6 +25,8 @@ import spring from './components/spinners/spring';
 import atom from './components/spinners/atom';
 import loopingRhombuses from './components/spinners/looping-rhombuses';
 import breedingRhombus from './components/spinners/breeding-rhombus';
+
+// Utils
 import { buildTailwindComponent } from './utils/builder';
 
 const utilities = [sizes, durations];
