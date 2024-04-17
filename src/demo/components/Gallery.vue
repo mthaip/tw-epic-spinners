@@ -228,7 +228,7 @@
 
     <Preview
       @view-code="handleViewCode"
-      name="spinner-swapping-squares"
+      name="swapping-squares"
     >
       <!-- spinner-swapping-squares -->
       <div
@@ -314,7 +314,7 @@
 
     <Preview
       @view-code="handleViewCode"
-      name="spinner-looping-rhombuses"
+      name="looping-rhombuses"
     >
       <!-- spinner-looping-rhombuses -->
       <div
