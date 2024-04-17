@@ -12,6 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/mthaip/tw-epic-spinners.git"
   },
+  "keywords": [
+    "tailwindcss",
+    "tailwindcss-plugin",
+    "spinners",
+    "vuejs",
+    "reactjs"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
