@@ -14,7 +14,12 @@
     </Navigation>
 
     <div
-      class="markdown-body"
+      class="toc-wrapper"
+      v-html="toc"
+    ></div>
+
+    <div
+      class="markdown-body mt-16"
       v-html="markdown.render(readme)"
     />
   </div>
@@ -23,14 +28,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import markdownItAnchor from 'markdown-it-anchor';
-// import markdownItTocDoneRight from 'markdown-it-toc-done-right';
+import markdownItTocDoneRight from 'markdown-it-toc-done-right';
 
 import readme from '../../../README.md?raw';
 import Footer from '../components/Footer.vue';
 import Navigation from '../components/Navigation.vue';
+
+const toc = ref<string | null>(null);
+const isTocOpen = ref<boolean>(true);
 
 const markdown = new MarkdownIt({
   highlight: function (str, lang) {
@@ -45,34 +54,34 @@ const markdown = new MarkdownIt({
   html: false,
   xhtmlOut: true,
   typographer: true,
-}).use(markdownItAnchor, {
-  permalink: markdownItAnchor.permalink.headerLink(),
-  permalinkBefore: true,
-  permalinkSymbol: '#',
-});
-// TODO: ToC - add [[toc]] in .md
-// .use(markdownItTocDoneRight, {
-//   callback: () => {
-//     console.log('rendered');
-//   },
-// });
+})
+  .use(markdownItAnchor, {
+    permalink: markdownItAnchor.permalink.headerLink({ symbol: '#' }),
+  })
+  .use(markdownItTocDoneRight, {
+    callback: (tocHtml) => {
+      toc.value = tocHtml;
+    },
+  });
 </script>
 
 <style>
-.markdown-body {
-  @apply w-full bg-transparent text-black  dark:text-gray-50;
+.toc-wrapper .table-of-contents {
+  & ol {
+    @apply pl-2;
 
-  & .table-of-contents {
-    @apply fixed bottom-0 left-0 top-0 bg-white p-6 pr-8 shadow-xl;
-
-    & > ol {
+    &:first-child {
       @apply pl-0;
     }
-
-    & li > a {
-      @apply block w-full rounded-lg px-3 py-2 transition-colors hover:bg-gray-100 hover:no-underline;
-    }
   }
+
+  & li > a {
+    @apply block w-full text-nowrap py-1.5 text-gray-500 transition-colors hover:text-black hover:underline;
+  }
+}
+
+.markdown-body {
+  @apply w-full bg-white text-black;
 
   & h1,
   h2,

@@ -2,6 +2,8 @@
 
 This library is the Tailwind CSS Plugin of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners)
 
+[[toc]]
+
 ## Installation
 
 ```bash
