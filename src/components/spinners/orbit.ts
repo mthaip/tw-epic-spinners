@@ -38,23 +38,25 @@ const orbitCSS = {
     height: '100%',
     borderRadius: '50%',
 
+    '--borderWidth': `calc(var(${SPINNER_SIZE_VAR}) / 18.3)`,
+
     '&:nth-child(1)': {
       left: '0%',
       top: '0%',
       animation: `${ORBIT_ANIMATION.FIRST} var(${SPINNER_DURATION_VAR}) linear infinite`,
-      borderBottom: '3px solid currentColor',
+      borderBottom: 'var(--borderWidth) solid currentColor',
     },
     '&:nth-child(2)': {
       right: '0%',
       top: '0%',
       animation: `${ORBIT_ANIMATION.SECOND} var(${SPINNER_DURATION_VAR}) linear infinite`,
-      borderRight: '3px solid currentColor',
+      borderRight: 'var(--borderWidth) solid currentColor',
     },
     '&:nth-child(3)': {
       right: '0%',
       bottom: '0%',
       animation: `${ORBIT_ANIMATION.THIRD} var(${SPINNER_DURATION_VAR}) 1200ms linear infinite`,
-      borderTop: '3px solid currentColor',
+      borderTop: 'var(--borderWidth) solid currentColor',
     },
   },
 

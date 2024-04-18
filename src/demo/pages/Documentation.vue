@@ -1,19 +1,20 @@
 <template>
   <div class="page-container">
     <Navigation>
-      <template #left>
-        <RouterLink
-          to="/"
-          class="flex flex-row items-center gap-2 transition-colors hover:text-violet-600 dark:text-gray-50"
-        >
-          <span class="material-symbols-outlined"> keyboard_backspace </span>
-          Home
-        </RouterLink>
+      <template #right>
+        <div class="flex flex-row">
+          <RouterLink
+            to="/playground"
+            class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
+          >
+            Playground
+          </RouterLink>
+        </div>
       </template>
     </Navigation>
 
     <div
-      class="markdown-body mt-16"
+      class="markdown-body"
       v-html="markdown.render(readme)"
     />
   </div>

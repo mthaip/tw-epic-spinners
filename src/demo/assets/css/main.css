@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 .page-container {
-  @apply mx-auto max-w-4xl p-6 pb-16;
+  @apply mx-auto w-full max-w-4xl flex-1 p-6;
 }

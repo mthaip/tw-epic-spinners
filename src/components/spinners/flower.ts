@@ -10,6 +10,10 @@ const FLOWER_ANIMATION = {
 };
 
 const flowerKeyframes: CSSRuleObject | CSSRuleObject[] = {
+  '--factor1': `calc(var(${SPINNER_SIZE_VAR}) / 2.7)`,
+  '--factor2': `calc(var(${SPINNER_SIZE_VAR}) / 3.7)`,
+  '--factor3': `calc(var(${SPINNER_SIZE_VAR}) / 5)`,
+  '--factor4': `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
   [`@keyframes ${FLOWER_ANIMATION.BIGGER_DOT}`]: {
     '0%, 100%': {
       boxShadow: `
@@ -26,14 +30,14 @@ const flowerKeyframes: CSSRuleObject | CSSRuleObject[] = {
     '50%': { transform: 'rotate(180deg)' },
     '25%, 75%': {
       boxShadow: `
-        currentColor 26px 0px 0px, 
-        currentColor -26px 0px 0px, 
-        currentColor 0px 26px 0px, 
-        currentColor 0px -26px 0px, 
-        currentColor 19px -19px 0px, 
-        currentColor 19px 19px 0px, 
-        currentColor -19px -19px 0px, 
-        currentColor -19px 19px 0px
+        currentColor var(--factor1) 0px 0px, 
+        currentColor calc(var(--factor1) * -1) 0px 0px, 
+        currentColor 0px var(--factor1) 0px, 
+        currentColor 0px calc(var(--factor1) * -1) 0px, 
+        currentColor var(--factor2) calc(var(--factor2) * -1) 0px, 
+        currentColor var(--factor2) var(--factor2) 0px, 
+        currentColor calc(var(--factor2) * -1) calc(var(--factor2) * -1) 0px, 
+        currentColor calc(var(--factor2) * -1) var(--factor2) 0px
       `,
     },
     '100%': {
@@ -65,14 +69,14 @@ const flowerKeyframes: CSSRuleObject | CSSRuleObject[] = {
     },
     '25%, 75%': {
       boxShadow: `
-        currentColor 14px 0px 0px,
-        currentColor -14px 0px 0px,
-        currentColor 0px 14px 0px,
-        currentColor 0px -14px 0px,
-        currentColor 10px -10px 0px,
-        currentColor 10px 10px 0px,
-        currentColor -10px -10px 0px,
-        currentColor -10px 10px 0px
+        currentColor var(--factor3) 0px 0px,
+        currentColor calc(var(--factor3) * -1) 0px 0px,
+        currentColor 0px var(--factor3) 0px,
+        currentColor 0px calc(var(--factor3) * -1) 0px,
+        currentColor var(--factor4) calc(var(--factor4) * -1) 0px,
+        currentColor var(--factor4) var(--factor4) 0px,
+        currentColor calc(var(--factor4) * -1) calc(var(--factor4) * -1) 0px,
+        currentColor calc(var(--factor4) * -1) var(--factor4) 0px
       `,
     },
     '100%': {

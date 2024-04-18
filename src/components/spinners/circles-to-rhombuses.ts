@@ -32,7 +32,7 @@ const circlesToRhombusesCSS = {
     marginLeft: `calc(var(${SPINNER_SIZE_VAR}) * 1.125)`,
     transform: 'rotate(45deg)',
     borderRadius: '10%',
-    border: '3px solid currentColor', // ? can border be adapted dynamically
+    border: `calc(var(${SPINNER_SIZE_VAR}) / 5) solid currentColor`,
     overflow: 'hidden',
     background: 'transparent',
     animation: `${CIRCLES_TO_RHOMBUSES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,

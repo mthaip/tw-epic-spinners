@@ -10,5 +10,17 @@ export default {
       sans: ['Roboto', ...defaultTheme.fontFamily.sans],
     },
   },
+  // ! Used for showcase only
+  safelist: [
+    {
+      pattern: /spinner-size-*/,
+    },
+    {
+      pattern: /spinner-duration-*/,
+    },
+    {
+      pattern: /text-violet-*/,
+    },
+  ],
   plugins: [spinners],
 } satisfies Config;

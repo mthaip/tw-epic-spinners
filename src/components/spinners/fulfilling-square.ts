@@ -30,7 +30,7 @@ const fulfillingSquareCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   width: `var(${SPINNER_SIZE_VAR})`,
   position: 'relative',
-  border: '4px solid currentColor',
+  border: `calc(var(${SPINNER_SIZE_VAR}) / 12.5) solid currentColor`,
   animation: `${FULFILLING_SQUARE_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite ease`,
 
   '& .shape': {
