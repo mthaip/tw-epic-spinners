@@ -18,9 +18,9 @@
         <div>
           <label
             for="spinners-select"
-            class="mb-2 block text-sm font-medium text-black dark:text-white"
+            class="mb-2 block font-mono text-sm text-black dark:text-white"
           >
-            Spinner
+            spinner-*
           </label>
           <select
             id="spinners-select"
@@ -43,9 +43,9 @@
         <div class="flex-1">
           <label
             for="spinner-styles-input"
-            class="mb-2 block text-sm font-medium text-black dark:text-white"
+            class="mb-2 block font-mono text-sm text-black dark:text-white"
           >
-            Styles
+            class="..."
           </label>
           <input
             type="text"
