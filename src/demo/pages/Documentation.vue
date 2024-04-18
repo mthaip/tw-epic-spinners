@@ -3,7 +3,7 @@
     <Navigation />
 
     <div
-      class="markdown-body mt-16"
+      class="markdown-body"
       v-html="markdown.render(readme)"
     />
   </div>

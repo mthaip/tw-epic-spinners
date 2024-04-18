@@ -1,6 +1,6 @@
 <template>
   <div
-    class="my-16 grid grid-cols-2 items-center justify-items-center gap-10 px-6 text-violet-600 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5 dark:text-white"
+    class="mb-16 grid grid-cols-2 items-center justify-items-center gap-10 px-6 text-violet-600 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5 dark:text-white"
   >
     <Preview
       v-for="spinner in spinners"
@@ -45,6 +45,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useClipboard } from '@vueuse/core';
+
 import hljs from 'highlight.js';
 import esthetic from 'esthetic';
 import DOMPurify from 'dompurify';

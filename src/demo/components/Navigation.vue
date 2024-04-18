@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+    class="mx-auto mb-12 flex max-w-4xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
   >
     <slot name="left">
       <RouterLink
