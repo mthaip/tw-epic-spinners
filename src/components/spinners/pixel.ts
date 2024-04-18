@@ -45,12 +45,14 @@ const pixelCSS = {
   alignItems: 'center',
 
   '& .shape': {
+    '--shadowFactor': `calc(var(${SPINNER_SIZE_VAR}) / 4.7)`,
+    '--shadowFactorNeg': `calc(var(--shadowFactor) * -1)`,
     height: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
     backgroundColor: 'currentColor',
     color: 'currentColor',
     boxShadow:
-      '15px 15px 0 0, -15px -15px 0 0, 15px -15px 0 0, -15px 15px 0 0, 0 15px 0 0, 15px 0 0 0, -15px 0 0 0, 0 -15px 0 0',
+      'var(--shadowFactor) var(--shadowFactor) 0 0, var(--shadowFactorNeg) var(--shadowFactorNeg) 0 0, var(--shadowFactor) var(--shadowFactorNeg) 0 0, var(--shadowFactorNeg) var(--shadowFactor) 0 0, 0 var(--shadowFactor) 0 0, var(--shadowFactor) 0 0 0, var(--shadowFactorNeg) 0 0 0, 0 var(--shadowFactorNeg) 0 0',
     animation: `${PIXEL_ANIMATION} var(${SPINNER_DURATION_VAR}) linear infinite`,
   },
 

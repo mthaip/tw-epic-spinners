@@ -45,21 +45,21 @@ const trinityRingsCSS = {
     opacity: '1',
 
     '&:nth-child(1)': {
-      borderWidth: '3px',
+      borderWidth: `calc(var(${SPINNER_SIZE_VAR}) / 22)`,
       height: `var(${SPINNER_SIZE_VAR})`,
       width: `var(${SPINNER_SIZE_VAR})`,
       animation: `${TRINITY_RINGS_ANIMATION.FIRST} var(${SPINNER_DURATION_VAR}) infinite linear`,
     },
 
     '&:nth-child(2)': {
-      borderWidth: '2px',
+      borderWidth: `calc(var(${SPINNER_SIZE_VAR}) / 33)`,
       height: `calc(var(${SPINNER_SIZE_VAR}) * 0.65)`,
       width: `calc(var(${SPINNER_SIZE_VAR}) * 0.65)`,
       animation: `${TRINITY_RINGS_ANIMATION.SECOND} var(${SPINNER_DURATION_VAR}) infinite linear`,
     },
 
     '&:nth-child(3)': {
-      borderWidth: '1px',
+      borderWidth: `calc(var(${SPINNER_SIZE_VAR}) / 66)`,
       height: `calc(var(${SPINNER_SIZE_VAR}) * 0.1)`,
       width: `calc(var(${SPINNER_SIZE_VAR}) * 0.1)`,
       animation: `${TRINITY_RINGS_ANIMATION.THIRD} var(${SPINNER_DURATION_VAR}) infinite linear`,

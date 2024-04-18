@@ -36,7 +36,7 @@ const intersectingCirclesCSS = {
     },
 
     display: 'block',
-    border: '2px solid currentColor',
+    border: `calc(var(${SPINNER_SIZE_VAR}) / 35) solid currentColor`,
     borderRadius: '50%',
     height: '100%',
     width: '100%',
