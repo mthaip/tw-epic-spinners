@@ -35,7 +35,7 @@ const swappingSquaresCSS = {
   justifyContent: 'center',
   alignItems: 'center',
 
-  '& .shape': {
+  '& > div': {
     height: `calc(var(${SPINNER_SIZE_VAR}) * 0.25 / 1.3)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) * 0.25 / 1.3)`,
     border: `calc(var(${SPINNER_SIZE_VAR}) * 0.04 / 1.3) solid currentColor`,

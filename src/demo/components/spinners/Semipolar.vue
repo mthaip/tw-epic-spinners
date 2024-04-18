@@ -1,9 +1,9 @@
 <template>
   <div class="spinner-semipolar">
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
   </div>
 </template>

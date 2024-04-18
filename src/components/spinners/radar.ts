@@ -18,7 +18,7 @@ const radarCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   position: 'relative',
 
-  '& .shape': {
+  '& > div': {
     position: 'absolute',
     height: '100%',
     width: '100%',
@@ -46,14 +46,16 @@ const radarCSS = {
       animationDelay: '0ms',
     },
 
-    '& > div, & > div > div': {
+    '& > div, & > div::after': {
+      display: 'inline-block',
       height: '100%',
       width: '100%',
       borderRadius: '50%',
       border: `calc(var(${SPINNER_SIZE_VAR}) * 5 / 110) solid transparent`,
     },
 
-    '& > div > div': {
+    '& > div::after': {
+      content: '""',
       borderLeftColor: 'currentColor',
       borderRightColor: 'currentColor',
     },

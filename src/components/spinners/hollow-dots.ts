@@ -18,7 +18,7 @@ const hollowDotsCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   width: `calc(var(${SPINNER_SIZE_VAR}) * 2 * 3)`,
 
-  '& .shape': {
+  '& > div': {
     width: `var(${SPINNER_SIZE_VAR})`,
     height: `var(${SPINNER_SIZE_VAR})`,
     margin: `0 calc(var(${SPINNER_SIZE_VAR}) / 2)`,

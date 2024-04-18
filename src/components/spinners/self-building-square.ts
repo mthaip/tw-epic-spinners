@@ -25,7 +25,7 @@ const selfBuildingSquareCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   top: 'calc(var(--shapeSize) * -1 * 2 / 3)',
 
-  '& .shape': {
+  '& > div': {
     height: 'var(--shapeSize)',
     width: 'var(--shapeSize)',
     top: 'calc(var(--shapeSize) * -1 * 2 / 3)',
@@ -51,6 +51,7 @@ const selfBuildingSquareCSS = {
 
     '&:nth-child(4)': {
       animationDelay: 'calc(var(--shapeDelay) * 3)',
+      clear: 'both',
     },
 
     '&:nth-child(5)': {
@@ -63,6 +64,7 @@ const selfBuildingSquareCSS = {
 
     '&:nth-child(7)': {
       animationDelay: 'calc(var(--shapeDelay) * 0)',
+      clear: 'both',
     },
 
     '&:nth-child(8)': {
@@ -72,8 +74,6 @@ const selfBuildingSquareCSS = {
     '&:nth-child(9)': {
       animationDelay: 'calc(var(--shapeDelay) * 2)',
     },
-
-    '&.clear': { clear: 'both' },
   },
 
   ...selfBuildingSquareKeyframes,

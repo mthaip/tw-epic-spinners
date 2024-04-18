@@ -44,9 +44,13 @@ const pixelCSS = {
   justifyContent: 'center',
   alignItems: 'center',
 
-  '& .shape': {
+  '&::before': {
+    content: '""',
+    display: 'block',
+
     '--shadowFactor': `calc(var(${SPINNER_SIZE_VAR}) / 4.7)`,
     '--shadowFactorNeg': `calc(var(--shadowFactor) * -1)`,
+
     height: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
     backgroundColor: 'currentColor',

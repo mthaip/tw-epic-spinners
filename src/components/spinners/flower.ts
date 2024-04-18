@@ -102,7 +102,7 @@ const flowerCSS = {
   alignItems: 'center',
   justifyContent: 'center',
 
-  '& .shape': {
+  '& > div': {
     height: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
 
@@ -114,7 +114,9 @@ const flowerCSS = {
       borderRadius: '50%',
       animation: `${FLOWER_ANIMATION.BIGGER_DOT} var(${SPINNER_DURATION_VAR}) 0s infinite both`,
 
-      '& > div': {
+      '&::before': {
+        content: '""',
+        display: 'block',
         background: 'currentColor',
         height: '100%',
         width: '100%',

@@ -37,10 +37,10 @@ const fingerprintCSS = {
   overflow: 'hidden',
   position: 'relative',
 
-  '& .shape': {
+  '& > div': {
     position: 'absolute',
     borderRadius: '50%',
-    border: '2px solid transparent',
+    border: `calc(var(${SPINNER_SIZE_VAR}) / 32) solid transparent`,
     borderTopColor: 'currentColor',
     animation: `${FINGERPRINT_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) cubic-bezier(0.680, -0.750, 0.265, 1.750) infinite forwards`,
     margin: 'auto',

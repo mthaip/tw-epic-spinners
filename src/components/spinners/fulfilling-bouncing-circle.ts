@@ -58,29 +58,32 @@ const fulfillingBouncingCircleCSS = {
   position: 'relative',
   animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.MAIN} infinite var(${SPINNER_DURATION_VAR}) ease`,
 
-  '& .shape': {
-    '&:nth-child(1)': {
-      height: `var(${SPINNER_SIZE_VAR})`,
-      width: `var(${SPINNER_SIZE_VAR})`,
-      border: `calc(var(${SPINNER_SIZE_VAR}) * 0.1) solid currentColor`,
-      color: 'currentColor',
-      display: 'block',
-      borderRadius: '50%',
-      position: 'relative',
-      transform: 'rotate(0deg) scale(1)',
-      animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.FIRST} infinite var(${SPINNER_DURATION_VAR}) ease`,
-    },
+  '&::before, &::after': {
+    content: '""',
+    display: 'block',
+  },
 
-    '&:nth-child(2)': {
-      height: `var(${SPINNER_SIZE_VAR})`,
-      width: `var(${SPINNER_SIZE_VAR})`,
-      border: `calc(var(${SPINNER_SIZE_VAR}) * 0.03) solid currentColor`,
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      borderRadius: '50%',
-      animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.SECOND} infinite var(${SPINNER_DURATION_VAR}) ease`,
-    },
+  '&::before': {
+    height: `var(${SPINNER_SIZE_VAR})`,
+    width: `var(${SPINNER_SIZE_VAR})`,
+    border: `calc(var(${SPINNER_SIZE_VAR}) * 0.1) solid currentColor`,
+    color: 'currentColor',
+    display: 'block',
+    borderRadius: '50%',
+    position: 'relative',
+    transform: 'rotate(0deg) scale(1)',
+    animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.FIRST} infinite var(${SPINNER_DURATION_VAR}) ease`,
+  },
+
+  '&::after': {
+    height: `var(${SPINNER_SIZE_VAR})`,
+    width: `var(${SPINNER_SIZE_VAR})`,
+    border: `calc(var(${SPINNER_SIZE_VAR}) * 0.03) solid currentColor`,
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    borderRadius: '50%',
+    animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.SECOND} infinite var(${SPINNER_DURATION_VAR}) ease`,
   },
 
   ...fulfillingBouncingCircleKeyframes,

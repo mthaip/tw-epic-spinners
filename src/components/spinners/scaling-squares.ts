@@ -42,7 +42,7 @@ const scalingSquaresCSS = {
   transform: 'rotate(0deg)',
   animation: `${SCALING_SQUARES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite`,
 
-  '& .shape': {
+  '& > div': {
     height: `calc(var(${SPINNER_SIZE_VAR}) * 0.25 / 1.3)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) * 0.25 / 1.3)`,
     marginRight: 'auto',
