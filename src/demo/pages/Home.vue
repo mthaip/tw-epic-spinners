@@ -5,7 +5,7 @@
         <div class="flex flex-row">
           <RouterLink
             to="/docs"
-            class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
+            class="ml-auto flex items-center text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
           >
             Docs
           </RouterLink>
@@ -14,7 +14,7 @@
             to="/playground"
             class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
           >
-            Try it
+            Playground
           </RouterLink>
         </div>
       </template>

@@ -16,27 +16,29 @@
 
   <Transition name="slide-fade">
     <div
-      class="fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center bg-white/30 backdrop-blur-sm"
+      class="fixed bottom-0 left-0 right-0 top-0 z-20 flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm"
       v-if="!!previewCode"
     >
-      <button
-        class="absolute right-5 top-5 flex items-center justify-center rounded-lg border bg-white p-2 transition-colors hover:bg-red-600 hover:text-white"
-        @click="previewCode = ''"
-      >
-        <span class="material-symbols-outlined"> close </span>
-      </button>
-      <div
-        class="relative mx-auto max-w-2xl rounded-xl border bg-white px-4 pt-0 text-sm shadow-xl dark:border-gray-800 dark:bg-gray-800"
-      >
+      <div class="w-full sm:w-fit">
         <button
-          class="absolute right-2 top-2 flex items-center justify-center rounded-lg border bg-white p-2 transition-colors hover:bg-gray-100"
-          @click="handleCopyCode"
+          class="mb-2 ml-auto flex items-center justify-center rounded-lg border bg-white p-1 transition-colors hover:border-transparent hover:bg-red-600 hover:text-white"
+          @click="previewCode = ''"
         >
-          <span class="material-symbols-outlined"> content_copy </span>
+          <span class="material-symbols-outlined"> close </span>
         </button>
-        <pre class="aspect-video h-full overflow-y-auto pr-16">
+        <div
+          class="relative mx-auto max-w-2xl rounded-xl border bg-white px-4 pt-0 text-sm shadow-xl dark:bg-gray-300"
+        >
+          <button
+            class="absolute right-2 top-2 flex items-center justify-center rounded-lg border bg-white p-2 transition-colors hover:bg-gray-100"
+            @click="handleCopyCode"
+          >
+            <span class="material-symbols-outlined"> content_copy </span>
+          </button>
+          <pre class="w-full overflow-y-auto pr-16">
           <code class="language-html " v-html="getPreviewCode()" />
         </pre>
+        </div>
       </div>
     </div>
   </Transition>

@@ -14,7 +14,7 @@
     </Navigation>
 
     <div class="text-violet-600 dark:text-white">
-      <div class="flex flex-row gap-4">
+      <div class="flex flex-col gap-4 md:flex-row">
         <div>
           <label
             for="spinners-select"
@@ -51,13 +51,17 @@
             type="text"
             id="spinner-styles-input"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-black placeholder:font-mono focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
-            placeholder="spinner-size-* | spinner-duration-* | text-*-*"
+            placeholder="spinner-size-* | spinner-duration-* | text-violet-*"
             @input="
               inputStyles = ($event.target as HTMLInputElement)?.value || ''
             "
             :value="inputStyles"
           />
         </div>
+      </div>
+
+      <div class="mt-4 text-sm font-light text-red-600">
+        Playground does not support arbitrary values!
       </div>
 
       <div
