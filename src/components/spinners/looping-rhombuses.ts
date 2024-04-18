@@ -35,7 +35,7 @@ const loopingRhombusesCircleCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   position: 'relative',
 
-  '& .shape': {
+  '& > div': {
     height: `var(${SPINNER_SIZE_VAR})`,
     width: `var(${SPINNER_SIZE_VAR})`,
     backgroundColor: 'currentColor',

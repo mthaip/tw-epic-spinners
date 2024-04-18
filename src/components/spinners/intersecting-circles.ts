@@ -26,57 +26,57 @@ const intersectingCirclesCSS = {
 
   '--halfSpinnerSize': `calc(var(${SPINNER_SIZE_VAR}) / 2)`,
 
-  '& .shape': {
-    '&-container': {
-      transformOrigin: 'center',
-      display: 'block',
-      height: 'var(--halfSpinnerSize)',
-      width: 'var(--halfSpinnerSize)',
-      animation: `${INTERSECTING_CIRCLES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,
-    },
-
+  '& > div': {
+    transformOrigin: 'center',
     display: 'block',
-    border: `calc(var(${SPINNER_SIZE_VAR}) / 35) solid currentColor`,
-    borderRadius: '50%',
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    left: '0',
-    top: '0',
+    height: 'var(--halfSpinnerSize)',
+    width: 'var(--halfSpinnerSize)',
+    animation: `${INTERSECTING_CIRCLES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,
 
-    '&:nth-child(1)': {
+    '& > div': {
+      display: 'block',
+      border: `calc(var(${SPINNER_SIZE_VAR}) / 35) solid currentColor`,
+      borderRadius: '50%',
+      height: '100%',
+      width: '100%',
+      position: 'absolute',
       left: '0',
       top: '0',
-    },
 
-    '&:nth-child(2)': {
-      left: 'calc(var(--halfSpinnerSize) * -0.36)',
-      top: 'calc(var(--halfSpinnerSize) * 0.2)',
-    },
+      '&:nth-child(1)': {
+        left: '0',
+        top: '0',
+      },
 
-    '&:nth-child(3)': {
-      left: 'calc(var(--halfSpinnerSize) * -0.36)',
-      top: 'calc(var(--halfSpinnerSize) * -0.2)',
-    },
+      '&:nth-child(2)': {
+        left: 'calc(var(--halfSpinnerSize) * -0.36)',
+        top: 'calc(var(--halfSpinnerSize) * 0.2)',
+      },
 
-    '&:nth-child(4)': {
-      left: '0',
-      top: 'calc(var(--halfSpinnerSize) * -0.36)',
-    },
+      '&:nth-child(3)': {
+        left: 'calc(var(--halfSpinnerSize) * -0.36)',
+        top: 'calc(var(--halfSpinnerSize) * -0.2)',
+      },
 
-    '&:nth-child(5)': {
-      left: 'calc(var(--halfSpinnerSize) * 0.36)',
-      top: 'calc(var(--halfSpinnerSize) * -0.2)',
-    },
+      '&:nth-child(4)': {
+        left: '0',
+        top: 'calc(var(--halfSpinnerSize) * -0.36)',
+      },
 
-    '&:nth-child(6)': {
-      left: 'calc(var(--halfSpinnerSize) * 0.36)',
-      top: 'calc(var(--halfSpinnerSize) * 0.2)',
-    },
+      '&:nth-child(5)': {
+        left: 'calc(var(--halfSpinnerSize) * 0.36)',
+        top: 'calc(var(--halfSpinnerSize) * -0.2)',
+      },
 
-    '&:nth-child(7)': {
-      left: '0',
-      top: 'calc(var(--halfSpinnerSize) * 0.36)',
+      '&:nth-child(6)': {
+        left: 'calc(var(--halfSpinnerSize) * 0.36)',
+        top: 'calc(var(--halfSpinnerSize) * 0.2)',
+      },
+
+      '&:nth-child(7)': {
+        left: '0',
+        top: 'calc(var(--halfSpinnerSize) * 0.36)',
+      },
     },
   },
 

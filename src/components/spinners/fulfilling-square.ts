@@ -33,7 +33,8 @@ const fulfillingSquareCSS = {
   border: `calc(var(${SPINNER_SIZE_VAR}) / 12.5) solid currentColor`,
   animation: `${FULFILLING_SQUARE_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite ease`,
 
-  '& .shape': {
+  '&::before': {
+    content: '""',
     verticalAlign: 'top',
     display: 'inline-block',
     backgroundColor: 'currentColor',

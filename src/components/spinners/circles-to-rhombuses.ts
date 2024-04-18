@@ -26,7 +26,7 @@ const circlesToRhombusesCSS = {
   alignItems: 'center',
   justifyContent: 'center',
 
-  '& .shape': {
+  '& > div': {
     width: `var(${SPINNER_SIZE_VAR})`,
     height: `var(${SPINNER_SIZE_VAR})`,
     marginLeft: `calc(var(${SPINNER_SIZE_VAR}) * 1.125)`,

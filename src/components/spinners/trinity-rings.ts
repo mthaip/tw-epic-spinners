@@ -37,7 +37,7 @@ const trinityRingsCSS = {
   overflow: 'hidden',
   boxSizing: 'border-box',
 
-  '& .shape': {
+  '& > div': {
     position: 'absolute',
     display: 'block',
     borderRadius: '50%',

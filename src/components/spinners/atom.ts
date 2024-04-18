@@ -27,7 +27,7 @@ const atomCSS = {
   width: `var(${SPINNER_SIZE_VAR})`,
   overflow: 'hidden',
 
-  '& .shape': {
+  '& > div': {
     position: 'relative',
     display: 'block',
     height: '100%',
@@ -44,7 +44,7 @@ const atomCSS = {
       transform: 'translate(-50%, -50%)',
     },
 
-    '& div': {
+    '& > div': {
       position: 'absolute',
       width: '100%',
       height: '100%',

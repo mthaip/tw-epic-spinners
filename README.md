@@ -37,10 +37,8 @@ export default {
 
 ```html
 <div class="spinner-flower">
-  <div class="shape">
-    <div>
-      <div></div>
-    </div>
+  <div>
+    <div />
   </div>
 </div>
 ```
@@ -48,18 +46,16 @@ export default {
 - `spinner-pixel`
 
 ```html
-<div class="spinner-pixel">
-  <div class="shape"></div>
-</div>
+<div class="spinner-pixel" />
 ```
 
 - `spinner-hollow-dots`
 
 ```html
 <div class="spinner-hollow-dots">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -67,14 +63,14 @@ export default {
 
 ```html
 <div class="spinner-intersecting-circles">
-  <div class="shape-container">
-    <span class="shape"></span>
-    <span class="shape"></span>
-    <span class="shape"></span>
-    <span class="shape"></span>
-    <span class="shape"></span>
-    <span class="shape"></span>
-    <span class="shape"></span>
+  <div>
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
   </div>
 </div>
 ```
@@ -83,9 +79,9 @@ export default {
 
 ```html
 <div class="spinner-orbit">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -93,25 +89,17 @@ export default {
 
 ```html
 <div class="spinner-radar">
-  <div class="shape">
-    <div>
-      <div></div>
-    </div>
+  <div>
+    <div />
   </div>
-  <div class="shape">
-    <div>
-      <div></div>
-    </div>
+  <div>
+    <div />
   </div>
-  <div class="shape">
-    <div>
-      <div></div>
-    </div>
+  <div>
+    <div />
   </div>
-  <div class="shape">
-    <div>
-      <div></div>
-    </div>
+  <div>
+    <div />
   </div>
 </div>
 ```
@@ -120,47 +108,42 @@ export default {
 
 ```html
 <div class="spinner-scaling-squares">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
 - `spinner-half-circle`
 
 ```html
-<div class="spinner-half-circle">
-  <div class="shape"></div>
-  <div class="shape"></div>
-</div>
+<div class="spinner-half-circle" />
 ```
 
 - `spinner-trinity-rings`
 
 ```html
 <div class="spinner-trinity-rings">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
 - `spinner-fulfilling-square`
 
 ```html
-<div class="spinner-fulfilling-square">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square" />
 ```
 
 - `spinner-circles-to-rhombuses`
 
 ```html
 <div class="spinner-circles-to-rhombuses">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -168,11 +151,11 @@ export default {
 
 ```html
 <div class="spinner-semipolar">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -180,15 +163,15 @@ export default {
 
 ```html
 <div class="spinner-self-building-square">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape clear"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape clear"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -196,35 +179,32 @@ export default {
 
 ```html
 <div class="spinner-swapping-squares">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
 - `spinner-fulfilling-bouncing-circle`
 
 ```html
-<div class="spinner-fulfilling-bouncing-circle">
-  <div class="shape"></div>
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-bouncing-circle" />
 ```
 
 - `spinner-fingerprint`
 
 ```html
 <div class="spinner-fingerprint">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -232,12 +212,8 @@ export default {
 
 ```html
 <div class="spinner-spring">
-  <div class="shape">
-    <div></div>
-  </div>
-  <div class="shape">
-    <div></div>
-  </div>
+  <div />
+  <div />
 </div>
 ```
 
@@ -245,10 +221,10 @@ export default {
 
 ```html
 <div class="spinner-atom">
-  <div class="shape">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div>
+    <div />
+    <div />
+    <div />
   </div>
 </div>
 ```
@@ -257,9 +233,9 @@ export default {
 
 ```html
 <div class="spinner-looping-rhombuses">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -267,15 +243,14 @@ export default {
 
 ```html
 <div class="spinner-breeding-rhombus">
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
-  <div class="shape"></div>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
 </div>
 ```
 
@@ -288,17 +263,13 @@ The `spinner-size-*` utility class allows you to quickly define the size of a sp
 It follows a similar pattern to [Tailwind CSS spacing](https://tailwindcss.com/docs/theme#spacing) utilities.
 
 ```html
-<div class="spinner-fulfilling-square spinner-size-16">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square spinner-size-16" />
 ```
 
 Using arbitrary values:
 
 ```html
-<div class="spinner-fulfilling-square spinner-size-[70px]">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square spinner-size-[70px]" />
 ```
 
 #### Duration
@@ -308,17 +279,13 @@ The `spinner-duration-*` utility class allows you control the duration.
 It follows also a similar pattern to [Tailwind CSS Transition duration](https://tailwindcss.com/docs/transition-duration) utilities.
 
 ```html
-<div class="spinner-fulfilling-square spinner-duration-1000">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square spinner-duration-1000" />
 ```
 
 Using arbitrary values:
 
 ```html
-<div class="spinner-fulfilling-square spinner-duration-[2.5s]">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square spinner-duration-[2.5s]" />
 ```
 
 #### Color
@@ -326,9 +293,7 @@ Using arbitrary values:
 Color can be controlled by [Tailwind CSS Text Color utility](https://tailwindcss.com/docs/text-color).
 
 ```html
-<div class="spinner-fulfilling-square text-sky-600">
-  <div class="shape"></div>
-</div>
+<div class="spinner-fulfilling-square text-sky-600" />
 ```
 
 ## License

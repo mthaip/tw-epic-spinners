@@ -54,7 +54,19 @@ const breedingRhombusCircleCSS = {
   position: 'relative',
   transform: 'rotate(45deg)',
 
-  '& .shape': {
+  '&::after': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    height: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
+    width: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
+    top: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
+    left: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
+    backgroundColor: 'currentColor',
+    animation: `${BREEDING_RHOMBUS_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite calc(var(${SPINNER_DURATION_VAR}) / 4)`,
+  },
+
+  '& > div': {
     height: `calc(var(${SPINNER_SIZE_VAR}) / 7.5)`,
     width: `calc(var(${SPINNER_SIZE_VAR}) / 7.5)`,
     top: `calc(var(${SPINNER_SIZE_VAR}) / 2.3077)`,
@@ -63,15 +75,6 @@ const breedingRhombusCircleCSS = {
     backgroundColor: 'currentColor',
 
     '&:nth-child(2n+0)': { marginRight: '0' },
-
-    '&:last-child': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) / 3)`,
-      backgroundColor: 'currentColor',
-      animation: `${BREEDING_RHOMBUS_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite calc(var(${SPINNER_DURATION_VAR}) / 4)`,
-    },
 
     ...buildNthChilds(),
   },

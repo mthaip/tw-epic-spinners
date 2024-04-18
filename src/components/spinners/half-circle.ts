@@ -19,8 +19,9 @@ const halfCircleCSS = {
   borderRadius: '100%',
   position: 'relative',
 
-  '& .shape': {
+  '&::before, &::after': {
     content: '""',
+    display: 'block',
     position: 'absolute',
     width: '100%',
     height: '100%',
@@ -28,12 +29,12 @@ const halfCircleCSS = {
     border: `calc(var(${SPINNER_SIZE_VAR}) / 10) solid transparent`,
     borderTopColor: 'currentColor',
     animation: `${HALF_CIRCLE_ANIMATION} var(${SPINNER_DURATION_VAR}) infinite`,
+  },
 
-    '&:nth-child(2)': {
-      borderTopColor: 'transparent',
-      borderBottomColor: 'currentColor',
-      animationDirection: 'alternate',
-    },
+  '&::after': {
+    borderTopColor: 'transparent',
+    borderBottomColor: 'currentColor',
+    animationDirection: 'alternate',
   },
 
   ...halfCircleKeyframes,

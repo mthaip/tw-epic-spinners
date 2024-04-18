@@ -31,7 +31,7 @@ const orbitCSS = {
   borderRadius: '50%',
   perspective: '800px', // ? what is this
 
-  '& .shape': {
+  '& > div': {
     position: 'absolute',
     boxSizing: 'border-box',
     width: '100%',

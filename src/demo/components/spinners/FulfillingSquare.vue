@@ -1,5 +1,3 @@
 <template>
-  <div class="spinner-fulfilling-square">
-    <div class="shape"></div>
-  </div>
+  <div class="spinner-fulfilling-square" />
 </template>

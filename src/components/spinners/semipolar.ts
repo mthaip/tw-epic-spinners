@@ -17,7 +17,7 @@ const semipolarCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   position: 'relative',
 
-  '& .shape': {
+  '& > div': {
     borderRadius: '50%',
     position: 'absolute',
     border: `calc(var(${SPINNER_SIZE_VAR}) * 0.05) solid transparent`,

@@ -25,12 +25,14 @@ const springCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   width: `var(${SPINNER_SIZE_VAR})`,
 
-  '& .shape': {
+  '& > div': {
     overflow: 'hidden',
     height: `calc(var(${SPINNER_SIZE_VAR}) / 2)`,
     width: `var(${SPINNER_SIZE_VAR})`,
 
-    '& > div': {
+    '&::before': {
+      content: '""',
+      display: 'block',
       width: `var(${SPINNER_SIZE_VAR})`,
       height: `var(${SPINNER_SIZE_VAR})`,
       border: `calc(var(${SPINNER_SIZE_VAR}) / 7) solid transparent`,
