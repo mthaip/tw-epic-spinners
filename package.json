@@ -27,11 +27,13 @@
     "build:npm": "vite build -c ./configs/build.ts"
   },
   "peerDependencies": {
-    "tailwindcss": "3.x"
+    "tailwindcss": "^3.0.0 || ^4.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
     "@types/dompurify": "^3.0.5",
     "@types/markdown-it": "^14.0.1",
+    "@types/node": "22.16.5",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -44,15 +46,17 @@
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-toc-done-right": "^4.2.0",
-    "postcss": "^8.4.38",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.13",
-    "tailwindcss": "^3.4.3",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue": "3.4.23",
     "vue-router": "4",
     "vue-tsc": "^2.0.6"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "22.17.1"
+  }
 }
