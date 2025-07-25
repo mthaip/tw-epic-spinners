@@ -27,15 +27,16 @@
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 font-mono text-sm text-gray-800 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
             @change="
               selectedSpinner =
-                ($event.target as HTMLSelectElement)?.value || ''
+                (($event.target as HTMLSelectElement)?.value as Spinner) ||
+                undefined
             "
           >
             <option
               v-for="spinner in spinners"
-              :value="spinner.name"
-              :selected="spinner.name === selectedSpinner"
+              :value="spinner"
+              :selected="spinner === selectedSpinner"
             >
-              {{ spinner.name }}
+              {{ spinner }}
             </option>
           </select>
         </div>
@@ -86,16 +87,18 @@ import { refDebounced } from '@vueuse/core';
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 
-import spinners from '../components/spinners';
+import spinners from '../data/spinners';
 import { computed, ref } from 'vue';
+import { creator, Spinner } from '../..';
 
-const selectedSpinner = ref<string>(spinners[0].name);
+const selectedSpinner = ref<Spinner | undefined>(spinners[0]);
 
 const spinnerComponent = computed(() => {
-  return (
-    spinners?.find((spinner) => spinner.name === selectedSpinner.value)
-      ?.component || null
-  );
+  if (selectedSpinner.value) {
+    return creator(selectedSpinner.value);
+  }
+
+  return null;
 });
 
 const inputStyles = ref<string>('');

@@ -10,12 +10,13 @@ import App from './App.vue';
 
 import Home from './pages/Home.vue';
 import Documentation from './pages/Documentation.vue';
-import Playground from './pages/Playground.vue';
+// import Playground from './pages/Playground.vue';
 
 const routes = [
   { path: '/', component: Home },
   { path: '/docs', component: Documentation },
-  { path: '/playground', component: Playground },
+  // TODO: Re-enable playground
+  // { path: '/playground', component: Playground },
 ];
 
 const router = createRouter({

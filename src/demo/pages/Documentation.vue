@@ -1,7 +1,8 @@
 <template>
   <div class="page-container">
     <Navigation>
-      <template #right>
+      <!-- TODO: FIX -->
+      <!-- <template #right>
         <div class="flex flex-row">
           <RouterLink
             to="/playground"
@@ -10,7 +11,7 @@
             Playground
           </RouterLink>
         </div>
-      </template>
+      </template> -->
     </Navigation>
 
     <div
@@ -59,11 +60,13 @@ const markdown = new MarkdownIt({
 </script>
 
 <style>
+@reference "tailwindcss";
+
 .markdown-body {
-  @apply w-full bg-transparent text-black  dark:text-gray-50;
+  @apply w-full bg-transparent text-black dark:text-gray-50;
 
   & .table-of-contents {
-    @apply fixed bottom-0 left-0 top-0 bg-white p-6 pr-8 shadow-xl;
+    @apply fixed top-0 bottom-0 left-0 bg-white p-6 pr-8 shadow-xl;
 
     & > ol {
       @apply pl-0;
@@ -84,7 +87,7 @@ const markdown = new MarkdownIt({
   }
 
   & * ol {
-    @apply !list-none pl-4 text-black;
+    @apply list-none! pl-4 text-black;
   }
 
   & ul {
