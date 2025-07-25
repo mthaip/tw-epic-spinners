@@ -1,17 +1,17 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_SWAPPING_SQUARES = 'spinner-swapping-squares';
 
 const SWAPPING_SQUARES_ANIMATION = {
-  FIRST: 'swapping-squares-animation-child-1',
-  SECOND: 'swapping-squares-animation-child-2',
-  THIRD: 'swapping-squares-animation-child-3',
-  FOURTH: 'swapping-squares-animation-child-4',
-};
+  FIRST: buildSpinnerAnimationName(SPINNER_SWAPPING_SQUARES, 'first'),
+  SECOND: buildSpinnerAnimationName(SPINNER_SWAPPING_SQUARES, 'second'),
+  THIRD: buildSpinnerAnimationName(SPINNER_SWAPPING_SQUARES, 'third'),
+  FOURTH: buildSpinnerAnimationName(SPINNER_SWAPPING_SQUARES, 'fourth'),
+} as const;
 
-const swappingSquaresKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const swappingSquaresKeyframes = {
   [`@keyframes ${SWAPPING_SQUARES_ANIMATION.FIRST}`]: {
     '50%': { transform: 'translate(150%,150%) scale(2,2)' },
   },
@@ -65,11 +65,22 @@ const swappingSquaresCSS = {
       animationDelay: '0ms',
     },
   },
+};
 
-  ...swappingSquaresKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_SWAPPING_SQUARES} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_SWAPPING_SQUARES,
   components: swappingSquaresCSS,
+  keyframes: swappingSquaresKeyframes,
+  creator,
 };

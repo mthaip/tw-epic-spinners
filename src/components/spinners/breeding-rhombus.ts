@@ -1,13 +1,13 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_BREEDING_RHOMBUS = 'spinner-breeding-rhombus';
 
 const BREEDING_RHOMBUS_ANIMATION = {
-  MAIN: 'breeding-rhombus-spinner-animation',
-  SHAPE: 'breeding-rhombus-spinner-animation-shape',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_BREEDING_RHOMBUS, 'main'),
+  SHAPE: buildSpinnerAnimationName(SPINNER_BREEDING_RHOMBUS, 'shape'),
+} as const;
 
 const childTransforms = [
   [-325, -325],
@@ -20,7 +20,7 @@ const childTransforms = [
   [-325, 0],
 ];
 
-const breedingRhombusCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const breedingRhombusCircleKeyframes = {
   [`@keyframes ${BREEDING_RHOMBUS_ANIMATION.MAIN}`]: {
     '50%': { transform: 'scale(0.5)' },
   },
@@ -34,9 +34,9 @@ const breedingRhombusCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
   }, {}),
 };
 
-const buildNthChilds = () => {
+const buildNthChild = () => {
   const result: {
-    [k: `&:nth-child(${number})`]: CSSRuleObject | CSSRuleObject[];
+    [k: `&:nth-child(${number})`]: unknown;
   } = {};
 
   for (let i = 0; i < childTransforms.length; i++) {
@@ -76,13 +76,28 @@ const breedingRhombusCircleCSS = {
 
     '&:nth-child(2n+0)': { marginRight: '0' },
 
-    ...buildNthChilds(),
+    ...buildNthChild(),
   },
+};
 
-  ...breedingRhombusCircleKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_BREEDING_RHOMBUS} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_BREEDING_RHOMBUS,
   components: breedingRhombusCircleCSS,
+  keyframes: breedingRhombusCircleKeyframes,
+  creator,
 };

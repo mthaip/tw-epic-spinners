@@ -27,39 +27,58 @@ import loopingRhombuses from './components/spinners/looping-rhombuses';
 import breedingRhombus from './components/spinners/breeding-rhombus';
 
 // Utils
-import { buildTailwindComponent } from './utils/builder';
+import { buildTailwindComponent, normalizeClasses } from './utils/builder';
 
 const utilities = [sizes, durations];
-const spinners = [
+
+const spinners = {
   flower,
   pixel,
-  hollowDots,
-  intersectingCircles,
+  'hollow-dots': hollowDots,
+  'intersecting-circles': intersectingCircles,
   orbit,
   radar,
-  scalingSquares,
-  halfCircle,
-  trinityRings,
-  fulfillingSquare,
-  circlesToRhombuses,
+  'scaling-squares': scalingSquares,
+  'half-circle': halfCircle,
+  'trinity-rings': trinityRings,
+  'fulfilling-square': fulfillingSquare,
+  'circles-to-rhombuses': circlesToRhombuses,
   semipolar,
-  selfBuildingSquare,
-  swappingSquares,
-  fulfillingBouncingCircle,
+  'self-building-square': selfBuildingSquare,
+  'swapping-squares': swappingSquares,
+  'fulfilling-bouncing-circle': fulfillingBouncingCircle,
   fingerprint,
   spring,
   atom,
-  loopingRhombuses,
-  breedingRhombus,
-];
+  'looping-rhombuses': loopingRhombuses,
+  'breeding-rhombus': breedingRhombus,
+} as const;
+
+export type Spinner = keyof typeof spinners;
+
+export function creator(spinner: Spinner, classes?: string | string[]) {
+  return spinners[spinner].creator(normalizeClasses(classes));
+}
 
 export default plugin(({ matchUtilities, addComponents, theme }) => {
+  // Registers custom utilities
   utilities.forEach(({ utility, buildComponents, themeKey }) => {
+    // Registers dynamic utility spinner-size-* & spinner-duration-*
     matchUtilities(utility);
+
+    // Registers theses utilities with tailwind default spacings
     addComponents(buildComponents(theme(themeKey)));
   });
 
-  spinners.forEach(({ name, components }) => {
+  // Registers spinners
+  Object.values(spinners).forEach(({ name, components, keyframes }) => {
+    // Registers spinner as components
     addComponents(buildTailwindComponent(name, components));
+
+    // ! Temporary disable type check since tailwwind v4 does not export CssInJs type
+    // Registers keyframes as separate component
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    addComponents(keyframes);
   });
 });

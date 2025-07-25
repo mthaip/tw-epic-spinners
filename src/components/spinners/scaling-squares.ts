@@ -1,18 +1,18 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_SCALING_SQUARES = 'spinner-scaling-squares';
 
 const SCALING_SQUARES_ANIMATION = {
-  MAIN: 'scaling-squares-animation',
-  FIRST: 'scaling-squares-spinner-animation-child-1',
-  SECOND: 'scaling-squares-spinner-animation-child-2',
-  THIRD: 'scaling-squares-spinner-animation-child-3',
-  FOURTH: 'scaling-squares-spinner-animation-child-4',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_SCALING_SQUARES, 'main'),
+  FIRST: buildSpinnerAnimationName(SPINNER_SCALING_SQUARES, 'first'),
+  SECOND: buildSpinnerAnimationName(SPINNER_SCALING_SQUARES, 'second'),
+  THIRD: buildSpinnerAnimationName(SPINNER_SCALING_SQUARES, 'third'),
+  FOURTH: buildSpinnerAnimationName(SPINNER_SCALING_SQUARES, 'fourth'),
+} as const;
 
-const scalingSquaresKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const scalingSquaresKeyframes = {
   [`@keyframes ${SCALING_SQUARES_ANIMATION.MAIN}`]: {
     '50%': { transform: 'rotate(90deg)' },
     '100%': { transform: 'rotate(180deg)' },
@@ -68,11 +68,22 @@ const scalingSquaresCSS = {
       animationName: SCALING_SQUARES_ANIMATION.FOURTH,
     },
   },
+};
 
-  ...scalingSquaresKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_SCALING_SQUARES} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_SCALING_SQUARES,
   components: scalingSquaresCSS,
+  keyframes: scalingSquaresKeyframes,
+  creator,
 };
