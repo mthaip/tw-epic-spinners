@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mb-16 grid grid-cols-2 items-center justify-items-center gap-10 px-6 text-violet-600 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5 dark:text-white"
+    class="container my-8 grid grid-cols-2 items-center justify-items-center gap-10 max-sm:px-6 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5"
   >
     <Preview
       v-for="spinner in spinners"
@@ -9,97 +9,137 @@
     />
   </div>
 
-  <Transition name="slide-fade">
-    <div
-      class="fixed top-0 right-0 bottom-0 left-0 z-20 flex flex-col items-center justify-center bg-white/30 backdrop-blur-sm"
-      v-if="!!previewCode"
-    >
-      <div class="w-full sm:w-fit">
-        <button
-          class="mb-2 ml-auto flex items-center justify-center rounded-lg border bg-white p-1 transition-colors hover:border-transparent hover:bg-red-600 hover:text-white"
-          @click="previewCode = ''"
-        >
-          <span class="material-symbols-outlined"> close </span>
-        </button>
-        <div
-          class="relative mx-auto max-w-2xl rounded-xl border bg-white px-4 pt-0 text-sm shadow-xl dark:bg-gray-300"
-        >
-          <button
-            class="absolute top-2 right-2 flex items-center justify-center rounded-lg border bg-white p-2 transition-colors hover:bg-gray-100"
-            @click="handleCopyCode"
-          >
-            <span class="material-symbols-outlined"> content_copy </span>
-          </button>
-          <pre class="w-full overflow-y-auto pr-16">
-          <code class="language-html " v-html="getPreviewCode()" />
-        </pre>
+  <dialog
+    ref="previewModal"
+    class="modal"
+    @close="clipboardCode = initialClipboardCode"
+  >
+    <div class="modal-box">
+      <div class="tabs tabs-lift">
+        <input
+          type="radio"
+          name="spinner-code-preview"
+          class="tab"
+          aria-label="HTML"
+          checked
+        />
+        <div class="tab-content bg-base-100 border-base-300 relative">
+          <div
+            class="prose"
+            v-html="htmlContentRef"
+          />
+          <CopyToClipboard
+            class="absolute top-2 right-2"
+            :content="clipboardCode.html"
+          />
+        </div>
+
+        <input
+          type="radio"
+          name="spinner-code-preview"
+          class="tab"
+          aria-label="Creator"
+        />
+        <div class="tab-content bg-base-100 border-base-300 relative">
+          <div
+            class="prose"
+            v-html="creatorContentRef"
+          />
+          <CopyToClipboard
+            class="absolute top-2 right-2"
+            :content="clipboardCode.creator"
+          />
         </div>
       </div>
+
+      <form method="dialog">
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2"
+          >
+            ✕
+          </button>
+        </form>
+      </form>
     </div>
-  </Transition>
+
+    <form
+      method="dialog"
+      class="modal-backdrop"
+    >
+      <button>close</button>
+    </form>
+  </dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useClipboard } from '@vueuse/core';
 
-import hljs from 'highlight.js';
-import esthetic from 'esthetic';
 import DOMPurify from 'dompurify';
+import { createHighlighter } from 'shiki';
 
 import Preview from './Preview.vue';
 import spinners from '../data/spinners';
+import { codeHighlightTheme } from '../data/config';
+import { type Spinner } from '../../index';
+import CopyToClipboard from './CopyToClipboard.vue';
 
-const previewCode = ref<string>('');
-
-const { copy } = useClipboard({
-  source: previewCode,
-});
-
-const handleCopyCode = () => {
-  copy(previewCode.value);
-  setTimeout(() => {
-    previewCode.value = '';
-  }, 350);
+const initialClipboardCode = {
+  html: '',
+  creator: '',
 };
 
-const handleViewCode = (codeData: string) => {
+const htmlContentRef = ref<string>('');
+const creatorContentRef = ref<string>('');
+
+const clipboardCode = ref<{ html: string; creator: string }>(
+  initialClipboardCode,
+);
+
+const previewModal = ref<HTMLDialogElement | null>(null);
+
+const highlighter = await createHighlighter({
+  themes: [codeHighlightTheme],
+  langs: ['html', 'typescript'],
+});
+
+const handleViewCode = (
+  name: Spinner,
+  spinnerHTML: string,
+  spinnerClasses: string[],
+) => {
   try {
-    const sanitized = DOMPurify.sanitize(codeData, {
+    const sanitized = DOMPurify.sanitize(spinnerHTML, {
       ALLOWED_ATTR: ['class'],
       ALLOWED_TAGS: ['div', 'span'],
       USE_PROFILES: { html: true },
       ALLOW_DATA_ATTR: false,
       SAFE_FOR_TEMPLATES: true,
     });
-    previewCode.value = `\n${esthetic.format(sanitized)}`;
-  } catch (error) {
-    previewCode.value = '';
-  }
-};
 
-const getPreviewCode = () => {
-  if (!previewCode.value) {
-    return '';
+    htmlContentRef.value = highlighter.codeToHtml(sanitized, {
+      lang: 'html',
+      theme: codeHighlightTheme,
+    });
+
+    const creatorStr = `const innerHTMLContent = creator('${name}', '${spinnerClasses.join(' ')}');`;
+
+    creatorContentRef.value = highlighter.codeToHtml(
+      `// The returned HTML string can be directly used with \`v-html\` in Vue or \`dangerouslySetInnerHTML\` in React to render the spinner\n${creatorStr}`,
+      {
+        lang: 'typescript',
+        theme: codeHighlightTheme,
+      },
+    );
+
+    clipboardCode.value = {
+      html: sanitized,
+      creator: creatorStr,
+    };
+
+    previewModal.value?.showModal();
+  } catch (error) {
+    clipboardCode.value = initialClipboardCode;
   }
-  return hljs.highlight(previewCode.value, {
-    language: 'html',
-  }).value;
 };
 </script>
-
-<style scoped>
-.slide-fade-enter-active {
-  transition: all 350ms ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 250ms cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
-}
-</style>

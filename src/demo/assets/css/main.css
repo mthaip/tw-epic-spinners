@@ -3,11 +3,19 @@ layer(base);
 
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* TODO: Add safelist to enable playground */
 
 @plugin '../../../index.ts';
+
+@plugin "@tailwindcss/typography";
+
+@plugin "daisyui" {
+  /* themes:
+    light --default,
+    dark --prefersdark; */
+
+  themes: all;
+}
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -27,6 +35,6 @@ layer(base);
   }
 }
 
-.page-container {
-  @apply mx-auto w-full max-w-4xl flex-1 p-6;
+.container {
+  @apply mx-auto w-full max-w-4xl;
 }

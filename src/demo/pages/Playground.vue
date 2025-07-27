@@ -1,17 +1,6 @@
 <template>
   <div class="page-container">
-    <Navigation>
-      <template #right>
-        <div class="flex flex-row">
-          <RouterLink
-            to="/docs"
-            class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
-          >
-            Docs
-          </RouterLink>
-        </div>
-      </template>
-    </Navigation>
+    <Navigation />
 
     <div class="text-violet-600 dark:text-white">
       <div class="flex flex-col gap-4 md:flex-row">
@@ -87,9 +76,9 @@ import { refDebounced } from '@vueuse/core';
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 
-import spinners from '../data/spinners';
+import spinners from '../data/spinners.ts';
 import { computed, ref } from 'vue';
-import { creator, Spinner } from '../..';
+import { creator, type Spinner } from '../../index.ts';
 
 const selectedSpinner = ref<Spinner | undefined>(spinners[0]);
 

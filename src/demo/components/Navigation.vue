@@ -1,71 +1,88 @@
 <template>
-  <div
-    class="mx-auto mb-12 flex max-w-4xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
-  >
-    <slot name="left">
-      <RouterLink
-        to="/"
-        class="flex flex-col gap-1"
-      >
-        <h1
-          class="dark:text-whte text-xl font-bold text-violet-600 md:text-2xl dark:text-white"
-        >
-          Epic Spinners
-        </h1>
-        <div class="flex flex-row items-center gap-2">
-          <span
-            class="font-seminbold text-xs text-nowrap text-black dark:text-white"
-          >
-            Plugin for
-          </span>
-          <img
-            :src="tailwindLogo"
-            alt="tailwindcss logo"
-            class="h-3 dark:hidden"
-          />
-          <img
-            :src="tailwindLogoWhite"
-            alt="tailwindcss logo"
-            class="hidden h-3 dark:block"
-          />
-        </div>
-      </RouterLink>
-    </slot>
-    <div
-      class="ml-auto flex flex-row divide-x divide-gray-300 dark:divide-gray-600"
+  <nav class="navbar container">
+    <RouterLink
+      to="/"
+      class="flex flex-col gap-1"
     >
-      <slot name="right"></slot>
-
-      <label class="inline-flex cursor-pointer items-center px-2">
-        <input
-          type="checkbox"
-          :checked="isDark"
-          class="peer sr-only"
-          @change="toggleDark()"
+      <h1 class="text-xl font-bold md:text-2xl">Epic Spinners</h1>
+      <div class="flex flex-row items-center gap-2">
+        <span class="font-seminbold text-xs text-nowrap"> Plugin for </span>
+        <img
+          :src="tailwindLogo"
+          alt="tailwindcss logo"
+          class="h-3 dark:hidden"
         />
-        <div
-          class="peer relative h-6 w-11 rounded-full bg-gray-200 peer-checked:bg-violet-600 peer-focus:ring-4 peer-focus:ring-violet-300 after:absolute after:start-[2px] after:top-0.5 after:flex after:h-5 after:w-5 after:items-center after:justify-center after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-['\263C'] peer-checked:after:translate-x-full peer-checked:after:border-white peer-checked:after:content-['\263E'] rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-violet-800"
-        ></div>
-      </label>
+        <img
+          :src="tailwindLogoWhite"
+          alt="tailwindcss logo"
+          class="hidden h-3 dark:block"
+        />
+      </div>
+    </RouterLink>
+
+    <div class="ml-auto flex items-center">
+      <ul class="menu menu-horizontal">
+        <li v-for="otherRoute in otherRoutes">
+          <RouterLink :to="otherRoute.path">
+            {{ otherRoute.name }}
+          </RouterLink>
+        </li>
+      </ul>
+
+      <div class="dropdown">
+        <button class="btn btn-ghost">
+          <span class="material-symbols-outlined"> colors </span>{{ mode }}
+        </button>
+        <ul
+          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 p-2 shadow"
+        >
+          <li v-for="theme in themes">
+            <button @click="mode = theme">{{ theme }}</button>
+          </li>
+        </ul>
+      </div>
 
       <a
         href="https://github.com/mthaip/tw-epic-spinners"
-        class="mr-auto block px-2 last:pr-0"
+        class="btn btn-ghost btn-square"
       >
-        <Github
-          class="h-6 w-6 text-gray-500 transition-colors hover:text-gray-800 dark:hover:text-gray-100"
-        />
+        <Github class="size-6" />
       </a>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script setup lang="ts">
-import { useToggle, useDark } from '@vueuse/core';
+import { useColorMode } from '@vueuse/core';
 import Github from './logos/Github.vue';
 import tailwindLogo from '../assets/images/tailwindcss-logotype.svg';
 import tailwindLogoWhite from '../assets/images/tailwindcss-logotype-white.svg';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+import { routes } from '../main';
 
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
+const vueRoute = useRoute();
+
+const otherRoutes = computed(() => {
+  return routes.filter((appRoute) => appRoute.path !== vueRoute.path);
+});
+
+const themes = {
+  light: 'light',
+  dark: 'dark',
+  corporate: 'corporate',
+  synthwave: 'synthwave',
+  retro: 'retro',
+  cyberpunk: 'cyberpunk',
+  valentine: 'valentine',
+  halloween: 'halloween',
+  aqua: 'aqua',
+  luxury: 'luxury',
+  coffee: 'coffee',
+} as const;
+
+const mode = useColorMode({
+  attribute: 'data-theme',
+  modes: themes,
+});
 </script>

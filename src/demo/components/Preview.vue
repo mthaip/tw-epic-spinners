@@ -1,16 +1,16 @@
 <template>
   <div
-    @click="$emit('view-code', code?.innerHTML || '')"
-    class="group flex aspect-3/4 h-full w-full cursor-pointer flex-col items-center justify-center gap-4 px-2 py-3 transition-all duration-300 hover:scale-110 hover:rounded-xl hover:bg-violet-600 hover:shadow-xl"
+    @click="
+      $emit('view-code', name, spinnerHTML?.innerHTML || '', getClasses(name))
+    "
+    class="group hover:bg-accent flex aspect-3/4 h-full w-full cursor-pointer flex-col items-center justify-center gap-4 px-2 py-3 transition-all duration-300 hover:scale-110 hover:rounded-xl hover:shadow-xl"
   >
     <div
-      ref="code"
+      ref="spinnerHTML"
       class="flex flex-1 items-center justify-center group-hover:text-white!"
       v-html="creator(name, getClasses(name))"
     />
-    <span
-      class="mt-auto text-center text-xs group-hover:text-white sm:text-sm dark:text-white"
-    >
+    <span class="mt-auto text-center text-xs group-hover:text-white sm:text-sm">
       <code>{{ name }}</code>
     </span>
   </div>
@@ -24,9 +24,13 @@ defineProps<{
   name: Spinner;
 }>();
 
-const code = ref<HTMLElement | null>(null);
+defineEmits<{
+  'view-code': [name: Spinner, html: string, classes: string[]];
+}>();
 
-const getClasses = (name: Spinner) => {
+const spinnerHTML = ref<HTMLElement | null>(null);
+
+const getClasses = (name: Spinner): string[] => {
   if (
     ['hollow-dots', 'circles-to-rhombuses', 'looping-rhombuses'].includes(name)
   ) {

@@ -1,9 +1,9 @@
 <template>
   <footer
-    class="flex w-full items-center border-t border-t-gray-600 bg-gray-900 p-6 text-white dark:bg-gray-800"
+    class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4"
   >
-    <span class="mx-auto"> mthaip © 2025 </span>
+    <aside>
+      <p>mthaip © {{ new Date().getFullYear() }}</p>
+    </aside>
   </footer>
 </template>
-
-<script setup lang="ts"></script>
