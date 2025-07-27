@@ -18,7 +18,15 @@ An online demo is available [here](https://tw-epic-spinners.mthaip.com)
 
 ## Usage
 
-Add the Plug-In in your `tailwind.config.ts`:
+Then, when using Tailwind CSS v4, add the plugin to your main stylesheet:
+
+```css
+/* app.css */
+@import "tailwindcss";
+@plugin "tw-epic-spinners";
+```
+
+If you are still using Tailwind CSS v3, add the plugin to your `tailwind.config.js` file:
 
 ```javascript
 import spinners from 'tw-epic-spinners';
@@ -30,6 +38,49 @@ export default {
 ```
 
 ## How to use
+
+### `creator(spinner, classes?) => string`
+
+Returns an HTML string for a given spinner type, which can be injected into your UI.
+
+#### Parameters
+
+- `spinner` (`string`): `flower`, `pixel`, `hollow-dots`, `intersecting-circles`, `orbit`, `radar`, `scaling-squares`, `half-circle`, `trinity-rings`, `fulfilling-square`, `circles-to-rhombuses`, `semipolar`, `self-building-square`, `swapping-squares`, `fulfilling-bouncing-circle`, `fingerprint`, `spring`, `atom`, `looping-rhombuses` or `breeding-rhombus`.
+
+- `classes` (`string | string[]`, optional): Additional classes to apply to the spinner wrapper. Can be a string or array of Tailwind utility classes.
+
+#### Returns
+
+- `string`: HTML markup string representing the selected spinner.
+
+#### Usage Examples
+
+##### Vue
+
+```vue
+<template>
+  <div v-html="spinnerHTML" />
+</template>
+
+<script setup>
+import { creator } from '@/lib/spinners';
+
+const spinnerHTML = creator('half-circle', ['spinner-size-12', 'sm:spinner-size-16', 'spinner-duration-[2.5s]']);
+</script>
+```
+
+##### React
+
+```tsx
+const Spinner = () => {
+  const html = creator('half-circle', 'spinner-size-12 sm:spinner-size-16 spinner-duration-[2.5s]');
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
+export default Spinner;
+```
+
 
 ### Spinners
 
