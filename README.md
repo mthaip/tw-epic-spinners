@@ -21,7 +21,7 @@ An online demo is available [here](https://tw-epic-spinners.mthaip.com)
 Then, when using Tailwind CSS v4, add the plugin to your main stylesheet:
 
 ```css
-/* app.css */
+/* Your main css file */
 @import "tailwindcss";
 @plugin "tw-epic-spinners";
 ```
@@ -37,15 +37,40 @@ export default {
 };
 ```
 
-## How to use
+## Spinners
 
-### `creator(spinner, classes?) => string`
+- [`spinner-flower`](#spinner-flower)
+- [`spinner-pixel`](#spinner-pixel)
+- [`spinner-hollow-dots`](#spinner-hollow-dots)
+- [`spinner-intersecting-circles`](#spinner-intersecting-circles)
+- [`spinner-orbit`](#spinner-orbit)
+- [`spinner-radar`](#spinner-radar)
+- [`spinner-scaling-squares`](#spinner-scaling-squares)
+- [`spinner-half-circle`](#spinner-half-circle)
+- [`spinner-trinity-rings`](#spinner-trinity-rings)
+- [`spinner-fulfilling-square`](#spinner-fulfilling-square)
+- [`spinner-circles-to-rhombuses`](#spinner-circles-to-rhombuses)
+- [`spinner-semipolar`](#spinner-semipolar)
+- [`spinner-self-building-square`](#spinner-self-building-square)
+- [`spinner-swapping-squares`](#spinner-swapping-squares)
+- [`spinner-fulfilling-bouncing-circle`](#spinner-fulfilling-bouncing-circle)
+- [`spinner-fingerprint`](#spinner-fingerprint)
+- [`spinner-spring`](#spinner-spring)
+- [`spinner-atom`](#spinner-atom)
+- [`spinner-looping-rhombuses`](#spinner-looping-rhombuses)
+- [`spinner-breeding-rhombus`](#spinner-breeding-rhombus)
+
+## Core concepts
+
+### Using Spinner Creator (BETA)
+
+`creator(spinner, classes?) => string`
 
 Returns an HTML string for a given spinner type, which can be injected into your UI.
 
 #### Parameters
 
-- `spinner` (`string`): `flower`, `pixel`, `hollow-dots`, `intersecting-circles`, `orbit`, `radar`, `scaling-squares`, `half-circle`, `trinity-rings`, `fulfilling-square`, `circles-to-rhombuses`, `semipolar`, `self-building-square`, `swapping-squares`, `fulfilling-bouncing-circle`, `fingerprint`, `spring`, `atom`, `looping-rhombuses` or `breeding-rhombus`.
+- `spinner` (`string`): Spinner name (see [Spinners](#spinners) section).
 
 - `classes` (`string | string[]`, optional): Additional classes to apply to the spinner wrapper. Can be a string or array of Tailwind utility classes.
 
@@ -65,7 +90,7 @@ Returns an HTML string for a given spinner type, which can be injected into your
 <script setup>
 import { creator } from '@/lib/spinners';
 
-const spinnerHTML = creator('half-circle', ['spinner-size-12', 'sm:spinner-size-16', 'spinner-duration-[2.5s]']);
+const spinnerHTML = creator('spinner-half-circle', ['spinner-size-12', 'sm:spinner-size-16', 'spinner-duration-[2.5s]']);
 </script>
 ```
 
@@ -73,7 +98,7 @@ const spinnerHTML = creator('half-circle', ['spinner-size-12', 'sm:spinner-size-
 
 ```tsx
 const Spinner = () => {
-  const html = creator('half-circle', 'spinner-size-12 sm:spinner-size-16 spinner-duration-[2.5s]');
+  const html = creator('spinner-half-circle', 'spinner-size-12 sm:spinner-size-16 spinner-duration-[2.5s]');
 
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
@@ -82,9 +107,9 @@ export default Spinner;
 ```
 
 
-### Spinners
+### Using Spinner with HTML
 
-- `spinner-flower`
+#### `spinner-flower`
 
 ```html
 <div class="spinner-flower">
@@ -94,13 +119,13 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-pixel`
+#### `spinner-pixel`
 
 ```html
 <div class="spinner-pixel" />
 ```
 
-- `spinner-hollow-dots`
+#### `spinner-hollow-dots`
 
 ```html
 <div class="spinner-hollow-dots">
@@ -110,7 +135,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-intersecting-circles`
+#### `spinner-intersecting-circles`
 
 ```html
 <div class="spinner-intersecting-circles">
@@ -126,7 +151,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-orbit`
+#### `spinner-orbit`
 
 ```html
 <div class="spinner-orbit">
@@ -136,7 +161,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-radar`
+#### `spinner-radar`
 
 ```html
 <div class="spinner-radar">
@@ -155,7 +180,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-scaling-squares`
+#### `spinner-scaling-squares`
 
 ```html
 <div class="spinner-scaling-squares">
@@ -166,13 +191,13 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-half-circle`
+#### `spinner-half-circle`
 
 ```html
 <div class="spinner-half-circle" />
 ```
 
-- `spinner-trinity-rings`
+#### `spinner-trinity-rings`
 
 ```html
 <div class="spinner-trinity-rings">
@@ -182,13 +207,13 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-fulfilling-square`
+#### `spinner-fulfilling-square`
 
 ```html
 <div class="spinner-fulfilling-square" />
 ```
 
-- `spinner-circles-to-rhombuses`
+#### `spinner-circles-to-rhombuses`
 
 ```html
 <div class="spinner-circles-to-rhombuses">
@@ -198,7 +223,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-semipolar`
+#### `spinner-semipolar`
 
 ```html
 <div class="spinner-semipolar">
@@ -210,7 +235,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-self-building-square`
+#### `spinner-self-building-square`
 
 ```html
 <div class="spinner-self-building-square">
@@ -226,7 +251,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-swapping-squares`
+#### `spinner-swapping-squares`
 
 ```html
 <div class="spinner-swapping-squares">
@@ -237,13 +262,13 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-fulfilling-bouncing-circle`
+#### `spinner-fulfilling-bouncing-circle`
 
 ```html
 <div class="spinner-fulfilling-bouncing-circle" />
 ```
 
-- `spinner-fingerprint`
+#### `spinner-fingerprint`
 
 ```html
 <div class="spinner-fingerprint">
@@ -259,7 +284,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-spring`
+#### `spinner-spring`
 
 ```html
 <div class="spinner-spring">
@@ -268,7 +293,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-atom`
+#### `spinner-atom`
 
 ```html
 <div class="spinner-atom">
@@ -280,7 +305,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-looping-rhombuses`
+#### `spinner-looping-rhombuses`
 
 ```html
 <div class="spinner-looping-rhombuses">
@@ -290,7 +315,7 @@ export default Spinner;
 </div>
 ```
 
-- `spinner-breeding-rhombus`
+#### `spinner-breeding-rhombus`
 
 ```html
 <div class="spinner-breeding-rhombus">
