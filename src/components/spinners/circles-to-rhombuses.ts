@@ -1,15 +1,15 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_CIRCLES_TO_RHOMBUSES = 'spinner-circles-to-rhombuses';
 
 const CIRCLES_TO_RHOMBUSES_ANIMATION = {
-  MAIN: 'spinner-circles-to-rhombuses-animation',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_CIRCLES_TO_RHOMBUSES, 'main'),
+} as const;
 
 // ! Loop does not work
-const circlesToRhombusesKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const circlesToRhombusesKeyframes = {
   [`@keyframes ${CIRCLES_TO_RHOMBUSES_ANIMATION.MAIN}`]: {
     '0%': { borderRadius: '10%' },
     '17.5%': { borderRadius: '10%' },
@@ -48,11 +48,21 @@ const circlesToRhombusesCSS = {
       animationDelay: `calc(var(${SPINNER_DURATION_VAR}) / 8 * 3)`,
     },
   },
+};
 
-  ...circlesToRhombusesKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_CIRCLES_TO_RHOMBUSES} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_CIRCLES_TO_RHOMBUSES,
   components: circlesToRhombusesCSS,
+  keyframes: circlesToRhombusesKeyframes,
+  creator,
 };

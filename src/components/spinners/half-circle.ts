@@ -1,12 +1,12 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_HALF_CIRCLE = 'spinner-half-circle';
 
-const HALF_CIRCLE_ANIMATION = 'animation-half-circle';
+const HALF_CIRCLE_ANIMATION = buildSpinnerAnimationName(SPINNER_HALF_CIRCLE);
 
-const halfCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const halfCircleKeyframes = {
   [`@keyframes ${HALF_CIRCLE_ANIMATION}`]: {
     '0%': { transform: 'rotate(0deg)' },
     '100%': { transform: 'rotate(360deg)' },
@@ -36,11 +36,17 @@ const halfCircleCSS = {
     borderBottomColor: 'currentColor',
     animationDirection: 'alternate',
   },
+};
 
-  ...halfCircleKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_HALF_CIRCLE} ${classes}"></div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_HALF_CIRCLE,
   components: halfCircleCSS,
+  keyframes: halfCircleKeyframes,
+  creator,
 };

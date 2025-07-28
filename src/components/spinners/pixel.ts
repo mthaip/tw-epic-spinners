@@ -1,12 +1,12 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_PIXEL = 'spinner-pixel';
 
-const PIXEL_ANIMATION = 'pixel-spinner-animation';
+const PIXEL_ANIMATION = buildSpinnerAnimationName(SPINNER_PIXEL);
 
-const pixelKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const pixelKeyframes = {
   [`@keyframes ${PIXEL_ANIMATION}`]: {
     '50%': {
       boxShadow: `
@@ -59,11 +59,17 @@ const pixelCSS = {
       'var(--shadowFactor) var(--shadowFactor) 0 0, var(--shadowFactorNeg) var(--shadowFactorNeg) 0 0, var(--shadowFactor) var(--shadowFactorNeg) 0 0, var(--shadowFactorNeg) var(--shadowFactor) 0 0, 0 var(--shadowFactor) 0 0, var(--shadowFactor) 0 0 0, var(--shadowFactorNeg) 0 0 0, 0 var(--shadowFactorNeg) 0 0',
     animation: `${PIXEL_ANIMATION} var(${SPINNER_DURATION_VAR}) linear infinite`,
   },
+};
 
-  ...pixelKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_PIXEL} ${classes}"></div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_PIXEL,
   components: pixelCSS,
+  keyframes: pixelKeyframes,
+  creator,
 };

@@ -1,35 +1,26 @@
 <template>
-  <div class="page-container">
-    <Navigation>
-      <template #right>
-        <div class="flex flex-row">
-          <RouterLink
-            to="/docs"
-            class="ml-auto flex items-center text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
-          >
-            Docs
-          </RouterLink>
+  <Navigation />
 
-          <RouterLink
-            to="/playground"
-            class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
-          >
-            Playground
-          </RouterLink>
-        </div>
-      </template>
-    </Navigation>
-
+  <Suspense>
     <Gallery />
-  </div>
+
+    <template #fallback>
+      <div
+        class="inline-flex flex-1 items-center justify-center"
+        v-html="creator('spinner-half-circle', 'spinner-size-16')"
+      />
+    </template>
+  </Suspense>
 
   <Footer />
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { Suspense } from 'vue';
 
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 import Gallery from '../components/Gallery.vue';
+
+import { creator } from '../../index';
 </script>

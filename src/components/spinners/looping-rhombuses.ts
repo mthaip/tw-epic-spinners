@@ -1,14 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_FULFILLING_BOUNCING = 'spinner-looping-rhombuses';
 
 const FULFILLING_BOUNCING_ANIMATION = {
-  MAIN: 'looping-rhombuses-spinner-animation',
+  MAIN: buildSpinnerAnimationName(SPINNER_FULFILLING_BOUNCING, 'main'),
 };
 
-const loopingRhombusesCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const loopingRhombusesCircleKeyframes = {
   [`@keyframes ${FULFILLING_BOUNCING_ANIMATION.MAIN}`]: {
     '0%': { transform: 'translateX(0) rotate(45deg) scale(0)' },
     '50%': { transform: 'translateX(-233%) rotate(45deg) scale(1)' },
@@ -18,7 +18,7 @@ const loopingRhombusesCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
 
 const buildNthChilds = () => {
   const result: {
-    [k: `&:nth-child(${number})`]: CSSRuleObject | CSSRuleObject[];
+    [k: `&:nth-child(${number})`]: unknown;
   } = {};
 
   for (let i = 0; i < 3; i++) {
@@ -48,11 +48,21 @@ const loopingRhombusesCircleCSS = {
 
     ...buildNthChilds(),
   },
+};
 
-  ...loopingRhombusesCircleKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_FULFILLING_BOUNCING} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_FULFILLING_BOUNCING,
   components: loopingRhombusesCircleCSS,
+  keyframes: loopingRhombusesCircleKeyframes,
+  creator,
 };

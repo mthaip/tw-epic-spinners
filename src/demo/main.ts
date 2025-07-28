@@ -3,19 +3,22 @@ import { createWebHistory, createRouter } from 'vue-router';
 
 import './assets/css/main.css';
 
-import 'highlight.js/styles/default.css';
-import 'highlight.js/styles/a11y-light.css';
-
 import App from './App.vue';
 
 import Home from './pages/Home.vue';
 import Documentation from './pages/Documentation.vue';
-import Playground from './pages/Playground.vue';
+// import Playground from './pages/Playground.vue';
 
-const routes = [
-  { path: '/', component: Home },
-  { path: '/docs', component: Documentation },
-  { path: '/playground', component: Playground },
+export const routes = [
+  { path: '/', name: 'Home', component: Home, icon: 'home' },
+  {
+    path: '/docs',
+    name: 'Documentation',
+    component: Documentation,
+    icon: 'docs',
+  },
+  // TODO: Re-enable playground
+  // { path: '/playground', component: Playground },
 ];
 
 const router = createRouter({

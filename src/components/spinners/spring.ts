@@ -1,14 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_SPRING = 'spinner-spring';
 
 const SPRING_ANIMATION = {
-  MAIN: 'spring-animation',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_SPRING, 'main'),
+} as const;
 
-const springKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const springKeyframes = {
   [`@keyframes ${SPRING_ANIMATION.MAIN}`]: {
     '0%': { borderWidth: `calc(var(${SPINNER_SIZE_VAR}) / 7)` },
     '25%': { borderWidth: `calc(var(${SPINNER_SIZE_VAR}) / 23.33)` },
@@ -48,11 +48,20 @@ const springCSS = {
       transform: 'rotate(180deg) scale(-1, 1)',
     },
   },
+};
 
-  ...springKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_SPRING} ${classes}">
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_SPRING,
   components: springCSS,
+  keyframes: springKeyframes,
+  creator,
 };

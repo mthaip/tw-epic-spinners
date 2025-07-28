@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin';
+import tailwindPlugin from 'tailwindcss/plugin';
 
 // Utilities
 import durations from './components/utilities/durations';
@@ -27,39 +27,65 @@ import loopingRhombuses from './components/spinners/looping-rhombuses';
 import breedingRhombus from './components/spinners/breeding-rhombus';
 
 // Utils
-import { buildTailwindComponent } from './utils/builder';
+import { buildTailwindComponent, normalizeClasses } from './utils/builder';
 
 const utilities = [sizes, durations];
-const spinners = [
-  flower,
-  pixel,
-  hollowDots,
-  intersectingCircles,
-  orbit,
-  radar,
-  scalingSquares,
-  halfCircle,
-  trinityRings,
-  fulfillingSquare,
-  circlesToRhombuses,
-  semipolar,
-  selfBuildingSquare,
-  swappingSquares,
-  fulfillingBouncingCircle,
-  fingerprint,
-  spring,
-  atom,
-  loopingRhombuses,
-  breedingRhombus,
-];
 
-export default plugin(({ matchUtilities, addComponents, theme }) => {
-  utilities.forEach(({ utility, buildComponents, themeKey }) => {
-    matchUtilities(utility);
-    addComponents(buildComponents(theme(themeKey)));
-  });
+const spinners = {
+  'spinner-flower': flower,
+  'spinner-pixel': pixel,
+  'spinner-hollow-dots': hollowDots,
+  'spinner-intersecting-circles': intersectingCircles,
+  'spinner-orbit': orbit,
+  'spinner-radar': radar,
+  'spinner-scaling-squares': scalingSquares,
+  'spinner-half-circle': halfCircle,
+  'spinner-trinity-rings': trinityRings,
+  'spinner-fulfilling-square': fulfillingSquare,
+  'spinner-circles-to-rhombuses': circlesToRhombuses,
+  'spinner-semipolar': semipolar,
+  'spinner-self-building-square': selfBuildingSquare,
+  'spinner-swapping-squares': swappingSquares,
+  'spinner-fulfilling-bouncing-circle': fulfillingBouncingCircle,
+  'spinner-fingerprint': fingerprint,
+  'spinner-spring': spring,
+  'spinner-atom': atom,
+  'spinner-looping-rhombuses': loopingRhombuses,
+  'spinner-breeding-rhombus': breedingRhombus,
+} as const;
 
-  spinners.forEach(({ name, components }) => {
-    addComponents(buildTailwindComponent(name, components));
-  });
-});
+export type Spinner = keyof typeof spinners;
+
+export const creator = (
+  spinner: Spinner,
+  classes?: string | string[],
+): string => {
+  return spinners[spinner].creator(normalizeClasses(classes));
+};
+
+const plugin: ReturnType<typeof tailwindPlugin> = tailwindPlugin(
+  ({ matchUtilities, addComponents, theme }) => {
+    // Registers custom utilities
+    utilities.forEach(({ utility, buildComponents, themeKey }) => {
+      // Registers dynamic utility spinner-size-* & spinner-duration-*
+      matchUtilities(utility);
+
+      // Registers theses utilities with tailwind default spacings
+      addComponents(buildComponents(theme(themeKey)));
+    });
+
+    // Registers spinners
+    Object.values(spinners).forEach(({ name, components, keyframes }) => {
+      // Registers spinner as components
+      addComponents(buildTailwindComponent(name, components));
+
+      // ! Temporary disable type check since tailwwind v4 does not export CssInJs type
+      // Registers keyframes as separate component
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      addComponents(keyframes);
+    });
+  },
+);
+
+export default plugin;

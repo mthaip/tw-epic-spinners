@@ -1,14 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_FINGERPRINT = 'spinner-fingerprint';
 
 const FINGERPRINT_ANIMATION = {
-  MAIN: 'fingerprint-spinner-animation',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_FINGERPRINT, 'main'),
+} as const;
 
-const fingerprintKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const fingerprintKeyframes = {
   [`@keyframes ${FINGERPRINT_ANIMATION.MAIN}`]: {
     '100%': { transform: 'rotate( 360deg )' },
   },
@@ -16,7 +16,7 @@ const fingerprintKeyframes: CSSRuleObject | CSSRuleObject[] = {
 
 const buildNthChilds = () => {
   const result: {
-    [k: `&:nth-child(${number})`]: CSSRuleObject | CSSRuleObject[];
+    [k: `&:nth-child(${number})`]: unknown;
   } = {};
 
   for (let i = 0; i < 9; i++) {
@@ -51,8 +51,27 @@ const fingerprintCSS = {
 
     ...buildNthChilds(),
   },
-
-  ...fingerprintKeyframes,
 };
 
-export default { name: SPINNER_FINGERPRINT, components: fingerprintCSS };
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_FINGERPRINT} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
+};
+
+export default {
+  name: SPINNER_FINGERPRINT,
+  components: fingerprintCSS,
+  keyframes: fingerprintKeyframes,
+  creator,
+};

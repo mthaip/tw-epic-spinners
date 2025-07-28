@@ -1,9 +1,12 @@
 <template>
   <footer
-    class="flex w-full items-center border-t border-t-gray-600 bg-gray-900 p-6 text-white dark:bg-gray-800"
+    class="footer sm:footer-horizontal footer-center bg-base-200 text-base-content p-4"
   >
-    <span class="mx-auto"> mthaip © 2024 </span>
+    <aside>
+      <p>
+        <a href="https://mthaip.com/">mthaip</a> ©
+        {{ new Date().getFullYear() }}
+      </p>
+    </aside>
   </footer>
 </template>
-
-<script setup lang="ts"></script>

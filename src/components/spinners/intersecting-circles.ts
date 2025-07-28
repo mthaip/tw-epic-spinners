@@ -1,14 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_INTERSECTING_CIRCLES = 'spinner-intersecting-circles';
 
 const INTERSECTING_CIRCLES_ANIMATION = {
-  MAIN: 'animation-intersecting-circles',
+  MAIN: buildSpinnerAnimationName(SPINNER_INTERSECTING_CIRCLES),
 };
 
-const intersectingCirclesKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const intersectingCirclesKeyframes = {
   [`@keyframes ${INTERSECTING_CIRCLES_ANIMATION.MAIN}`]: {
     from: { transform: 'rotate(0deg)' },
     to: { transform: 'rotate(360deg)' },
@@ -79,11 +79,27 @@ const intersectingCirclesCSS = {
       },
     },
   },
+};
 
-  ...intersectingCirclesKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_INTERSECTING_CIRCLES} ${classes}">
+      <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_INTERSECTING_CIRCLES,
   components: intersectingCirclesCSS,
+  keyframes: intersectingCirclesKeyframes,
+  creator,
 };

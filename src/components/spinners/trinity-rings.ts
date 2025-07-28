@@ -1,16 +1,16 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_TRINITY_RINGS = 'spinner-trinity-rings';
 
 const TRINITY_RINGS_ANIMATION = {
-  FIRST: 'trinity-rings-spinner-circle1-animation',
-  SECOND: 'trinity-rings-spinner-circle2-animation',
-  THIRD: 'trinity-rings-spinner-circle3-animation',
-};
+  FIRST: buildSpinnerAnimationName(SPINNER_TRINITY_RINGS, 'first'),
+  SECOND: buildSpinnerAnimationName(SPINNER_TRINITY_RINGS, 'second'),
+  THIRD: buildSpinnerAnimationName(SPINNER_TRINITY_RINGS, 'third'),
+} as const;
 
-const trinityRingsKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const trinityRingsKeyframes = {
   [`@keyframes ${TRINITY_RINGS_ANIMATION.FIRST}`]: {
     '0%': { transform: 'rotateZ(20deg) rotateY(0deg)' },
     '100%': { transform: 'rotateZ(100deg) rotateY(360deg)' },
@@ -65,11 +65,21 @@ const trinityRingsCSS = {
       animation: `${TRINITY_RINGS_ANIMATION.THIRD} var(${SPINNER_DURATION_VAR}) infinite linear`,
     },
   },
+};
 
-  ...trinityRingsKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_TRINITY_RINGS} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_TRINITY_RINGS,
   components: trinityRingsCSS,
+  keyframes: trinityRingsKeyframes,
+  creator,
 };

@@ -1,14 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_SELF_BUILDING_SQUARE = 'spinner-self-building-square';
 
 const SELF_BUILDING_SQUARE_ANIMATION = {
-  MAIN: 'animation-self-building-square',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_SELF_BUILDING_SQUARE, 'main'),
+} as const;
 
-const selfBuildingSquareKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const selfBuildingSquareKeyframes = {
   [`@keyframes ${SELF_BUILDING_SQUARE_ANIMATION.MAIN}`]: {
     '0%': { opacity: '0' },
     '5%': { opacity: '1', top: '0' },
@@ -31,8 +31,8 @@ const selfBuildingSquareCSS = {
     top: 'calc(var(--shapeSize) * -1 * 2 / 3)',
     marginRight: 'calc(var(--shapeSize) / 3)',
     marginTop: 'calc(var(--shapeSize) / 3)',
-    background: 'currentColor',
-    cssFloat: 'left',
+    backgroundColor: 'currentColor',
+    float: 'left',
     position: 'relative',
     opacity: '0',
     animation: `${SELF_BUILDING_SQUARE_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite`,
@@ -75,11 +75,27 @@ const selfBuildingSquareCSS = {
       animationDelay: 'calc(var(--shapeDelay) * 2)',
     },
   },
+};
 
-  ...selfBuildingSquareKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_SELF_BUILDING_SQUARE} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_SELF_BUILDING_SQUARE,
   components: selfBuildingSquareCSS,
+  keyframes: selfBuildingSquareKeyframes,
+  creator,
 };

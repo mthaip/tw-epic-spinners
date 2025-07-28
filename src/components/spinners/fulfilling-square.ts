@@ -1,15 +1,15 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_FULFILLING_SQUARE = 'spinner-fulfilling-square';
 
 const FULFILLING_SQUARE_ANIMATION = {
-  MAIN: 'fulfilling-square-spinner-animation',
-  SHAPE: 'fulfilling-square-spinner-inner-animation',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_FULFILLING_SQUARE, 'main'),
+  SHAPE: buildSpinnerAnimationName(SPINNER_FULFILLING_SQUARE, 'shape'),
+} as const;
 
-const fulfillingSquareKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const fulfillingSquareKeyframes = {
   [`@keyframes ${FULFILLING_SQUARE_ANIMATION.MAIN}`]: {
     '0%': { transform: 'rotate(0deg)' },
     '25%': { transform: 'rotate(180deg)' },
@@ -42,11 +42,17 @@ const fulfillingSquareCSS = {
     opacity: '1',
     animation: `${FULFILLING_SQUARE_ANIMATION.SHAPE} var(${SPINNER_DURATION_VAR}) infinite ease-in`,
   },
+};
 
-  ...fulfillingSquareKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_FULFILLING_SQUARE} ${classes}"></div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_FULFILLING_SQUARE,
   components: fulfillingSquareCSS,
+  keyframes: fulfillingSquareKeyframes,
+  creator,
 };

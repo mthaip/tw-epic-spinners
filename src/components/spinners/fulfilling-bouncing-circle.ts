@@ -1,16 +1,19 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_FULFILLING_BOUNCING_CIRCLE = 'spinner-fulfilling-bouncing-circle';
 
 const FULFILLING_BOUNCING_CIRCLE_ANIMATION = {
-  MAIN: 'fulfilling-bouncing-circle-spinner-animation',
-  FIRST: 'fulfilling-bouncing-circle-animation-child-1',
-  SECOND: 'fulfilling-bouncing-circle-animation-child-2',
-};
+  MAIN: buildSpinnerAnimationName(SPINNER_FULFILLING_BOUNCING_CIRCLE, 'main'),
+  FIRST: buildSpinnerAnimationName(SPINNER_FULFILLING_BOUNCING_CIRCLE, 'first'),
+  SECOND: buildSpinnerAnimationName(
+    SPINNER_FULFILLING_BOUNCING_CIRCLE,
+    'second',
+  ),
+} as const;
 
-const fulfillingBouncingCircleKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const fulfillingBouncingCircleKeyframes = {
   [`@keyframes ${FULFILLING_BOUNCING_CIRCLE_ANIMATION.MAIN}`]: {
     '0%': { transform: 'rotate(0deg)' },
     '100%': { transform: 'rotate(360deg)' },
@@ -85,11 +88,17 @@ const fulfillingBouncingCircleCSS = {
     borderRadius: '50%',
     animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.SECOND} infinite var(${SPINNER_DURATION_VAR}) ease`,
   },
+};
 
-  ...fulfillingBouncingCircleKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_FULFILLING_BOUNCING_CIRCLE} ${classes}"></div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_FULFILLING_BOUNCING_CIRCLE,
   components: fulfillingBouncingCircleCSS,
+  keyframes: fulfillingBouncingCircleKeyframes,
+  creator,
 };

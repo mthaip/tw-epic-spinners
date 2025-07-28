@@ -1,17 +1,6 @@
 <template>
   <div class="page-container">
-    <Navigation>
-      <template #right>
-        <div class="flex flex-row">
-          <RouterLink
-            to="/docs"
-            class="ml-auto flex items-center px-2 text-end text-sm font-semibold transition-colors hover:text-violet-600 dark:text-white"
-          >
-            Docs
-          </RouterLink>
-        </div>
-      </template>
-    </Navigation>
+    <Navigation />
 
     <div class="text-violet-600 dark:text-white">
       <div class="flex flex-col gap-4 md:flex-row">
@@ -27,15 +16,16 @@
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 font-mono text-sm text-gray-800 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
             @change="
               selectedSpinner =
-                ($event.target as HTMLSelectElement)?.value || ''
+                (($event.target as HTMLSelectElement)?.value as Spinner) ||
+                undefined
             "
           >
             <option
               v-for="spinner in spinners"
-              :value="spinner.name"
-              :selected="spinner.name === selectedSpinner"
+              :value="spinner"
+              :selected="spinner === selectedSpinner"
             >
-              {{ spinner.name }}
+              {{ spinner }}
             </option>
           </select>
         </div>
@@ -86,16 +76,18 @@ import { refDebounced } from '@vueuse/core';
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 
-import spinners from '../components/spinners';
+import spinners from '../data/spinners.ts';
 import { computed, ref } from 'vue';
+import { creator, type Spinner } from '../../index.ts';
 
-const selectedSpinner = ref<string>(spinners[0].name);
+const selectedSpinner = ref<Spinner | undefined>(spinners[0]);
 
 const spinnerComponent = computed(() => {
-  return (
-    spinners?.find((spinner) => spinner.name === selectedSpinner.value)
-      ?.component || null
-  );
+  if (selectedSpinner.value) {
+    return creator(selectedSpinner.value);
+  }
+
+  return null;
 });
 
 const inputStyles = ref<string>('');

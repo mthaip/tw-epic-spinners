@@ -1,16 +1,16 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_ATOM = 'spinner-atom';
 
 const ATOM_ANIMATION = {
-  FIRST: 'atom-animation-1',
-  SECOND: 'atom-animation-2',
-  THIRD: 'atom-animation-3',
-};
+  FIRST: buildSpinnerAnimationName(SPINNER_ATOM, 'first'),
+  SECOND: buildSpinnerAnimationName(SPINNER_ATOM, 'second'),
+  THIRD: buildSpinnerAnimationName(SPINNER_ATOM, 'third'),
+} as const;
 
-const atomKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const atomKeyframes = {
   [`@keyframes ${ATOM_ANIMATION.FIRST}`]: {
     '100%': { transform: 'rotateZ(120deg) rotateX(66deg) rotateZ(360deg)' },
   },
@@ -73,8 +73,23 @@ const atomCSS = {
       },
     },
   },
-
-  ...atomKeyframes,
 };
 
-export default { name: SPINNER_ATOM, components: atomCSS };
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_ATOM} ${classes}">
+      <div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  `.trim();
+};
+
+export default {
+  name: SPINNER_ATOM,
+  components: atomCSS,
+  keyframes: atomKeyframes,
+  creator,
+};

@@ -1,4 +1,3 @@
-import { CSSRuleObject } from 'tailwindcss/types/config';
 import {
   SPINNER_SIZE_DEFAULT,
   SPINNER_SIZE_VAR,
@@ -8,12 +7,10 @@ import {
   SPINNER_DURATION_DEFAULT,
 } from '../components/utilities/durations';
 
-type CSSRules = CSSRuleObject | CSSRuleObject[];
-
 export const buildTailwindComponent = (
   className: string,
-  otherCSSRules: CSSRules,
-): CSSRules => {
+  otherCSSRules: Record<string, unknown>,
+) => {
   return {
     [`.${className}`]: {
       // CSS vars
@@ -26,5 +23,24 @@ export const buildTailwindComponent = (
       },
       ...otherCSSRules,
     },
-  } as CSSRules;
+  };
+};
+
+export const buildSpinnerAnimationName = (...names: string[]) => {
+  return ['animation', ...names].map((name) => name.trim()).join('-');
+};
+
+export const normalizeClasses = (stringInput: unknown): string => {
+  if (typeof stringInput === 'string') {
+    return stringInput;
+  }
+
+  if (
+    Array.isArray(stringInput) &&
+    stringInput.every((item) => typeof item === 'string')
+  ) {
+    return stringInput.join(' ');
+  }
+
+  return '';
 };
