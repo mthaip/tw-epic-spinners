@@ -1,11 +1,11 @@
 <template>
   <div
-    class="container my-8 grid grid-cols-2 items-center justify-items-center gap-10 max-sm:px-6 sm:grid-cols-3 md:mx-auto md:max-w-4xl md:grid-cols-4 lg:grid-cols-5"
+    class="container grid grid-cols-2 items-center justify-items-center gap-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
   >
     <Preview
       v-for="spinner in spinners"
       @view-code="handleViewCode"
-      :name="spinner"
+      :name="`spinner-${spinner}`"
     />
   </div>
 

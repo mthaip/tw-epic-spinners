@@ -10,8 +10,13 @@ import Documentation from './pages/Documentation.vue';
 // import Playground from './pages/Playground.vue';
 
 export const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/docs', name: 'Documentation', component: Documentation },
+  { path: '/', name: 'Home', component: Home, icon: 'home' },
+  {
+    path: '/docs',
+    name: 'Documentation',
+    component: Documentation,
+    icon: 'docs',
+  },
   // TODO: Re-enable playground
   // { path: '/playground', component: Playground },
 ];
