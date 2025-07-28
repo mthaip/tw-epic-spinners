@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin';
+import tailwindPlugin from 'tailwindcss/plugin';
 
 // Utilities
 import durations from './components/utilities/durations';
@@ -56,29 +56,36 @@ const spinners = {
 
 export type Spinner = keyof typeof spinners;
 
-export function creator(spinner: Spinner, classes?: string | string[]) {
+export const creator = (
+  spinner: Spinner,
+  classes?: string | string[],
+): string => {
   return spinners[spinner].creator(normalizeClasses(classes));
-}
+};
 
-export default plugin(({ matchUtilities, addComponents, theme }) => {
-  // Registers custom utilities
-  utilities.forEach(({ utility, buildComponents, themeKey }) => {
-    // Registers dynamic utility spinner-size-* & spinner-duration-*
-    matchUtilities(utility);
+const plugin: ReturnType<typeof tailwindPlugin> = tailwindPlugin(
+  ({ matchUtilities, addComponents, theme }) => {
+    // Registers custom utilities
+    utilities.forEach(({ utility, buildComponents, themeKey }) => {
+      // Registers dynamic utility spinner-size-* & spinner-duration-*
+      matchUtilities(utility);
 
-    // Registers theses utilities with tailwind default spacings
-    addComponents(buildComponents(theme(themeKey)));
-  });
+      // Registers theses utilities with tailwind default spacings
+      addComponents(buildComponents(theme(themeKey)));
+    });
 
-  // Registers spinners
-  Object.values(spinners).forEach(({ name, components, keyframes }) => {
-    // Registers spinner as components
-    addComponents(buildTailwindComponent(name, components));
+    // Registers spinners
+    Object.values(spinners).forEach(({ name, components, keyframes }) => {
+      // Registers spinner as components
+      addComponents(buildTailwindComponent(name, components));
 
-    // ! Temporary disable type check since tailwwind v4 does not export CssInJs type
-    // Registers keyframes as separate component
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    addComponents(keyframes);
-  });
-});
+      // ! Temporary disable type check since tailwwind v4 does not export CssInJs type
+      // Registers keyframes as separate component
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      addComponents(keyframes);
+    });
+  },
+);
+
+export default plugin;
