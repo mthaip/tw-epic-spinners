@@ -1,12 +1,14 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_SEMIPOLAR = 'spinner-semipolar';
 
-const SEMIPOLAR_ANIMATION = { MAIN: 'animation-semipolar' };
+const SEMIPOLAR_ANIMATION = {
+  MAIN: buildSpinnerAnimationName(SPINNER_SEMIPOLAR, 'main'),
+} as const;
 
-const semipolarKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const semipolarKeyframes = {
   [`@keyframes ${SEMIPOLAR_ANIMATION.MAIN}`]: {
     '50%': { transform: 'rotate(360deg) scale(0.7)' },
   },
@@ -70,11 +72,23 @@ const semipolarCSS = {
       zIndex: '1',
     },
   },
+};
 
-  ...semipolarKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_SEMIPOLAR} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_SEMIPOLAR,
   components: semipolarCSS,
+  keyframes: semipolarKeyframes,
+  creator,
 };

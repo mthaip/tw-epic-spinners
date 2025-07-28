@@ -1,12 +1,12 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_RADAR = 'spinner-radar';
 
-const RADAR_ANIMATION = 'radar-spinner-animation';
+const RADAR_ANIMATION = buildSpinnerAnimationName(SPINNER_RADAR);
 
-const radarKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const radarKeyframes = {
   [`@keyframes ${RADAR_ANIMATION}`]: {
     '50%': { transform: 'rotate(180deg)' },
     '100%': { transform: 'rotate(0deg)' },
@@ -60,11 +60,30 @@ const radarCSS = {
       borderRightColor: 'currentColor',
     },
   },
+};
 
-  ...radarKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_RADAR} ${classes}">
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_RADAR,
   components: radarCSS,
+  keyframes: radarKeyframes,
+  creator,
 };

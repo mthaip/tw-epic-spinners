@@ -1,16 +1,16 @@
 import { SPINNER_SIZE_VAR } from '../utilities/sizes';
 import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { CSSRuleObject } from 'tailwindcss/types/config';
+import { buildSpinnerAnimationName } from '../../utils/builder';
 
 const SPINNER_ORBIT = 'spinner-orbit';
 
 const ORBIT_ANIMATION = {
-  FIRST: 'orbit-spinner-orbit-one-animation',
-  SECOND: 'orbit-spinner-orbit-two-animation',
-  THIRD: 'orbit-spinner-orbit-three-animation',
-};
+  FIRST: buildSpinnerAnimationName(SPINNER_ORBIT, 'first'),
+  SECOND: buildSpinnerAnimationName(SPINNER_ORBIT, 'second'),
+  THIRD: buildSpinnerAnimationName(SPINNER_ORBIT, 'third'),
+} as const;
 
-const orbitKeyframes: CSSRuleObject | CSSRuleObject[] = {
+const orbitKeyframes = {
   [`@keyframes ${ORBIT_ANIMATION.FIRST}`]: {
     '0%': { transform: 'rotateX(35deg) rotateY(-45deg) rotateZ(0deg)' },
     '100%': { transform: 'rotateX(35deg) rotateY(-45deg) rotateZ(360deg)' },
@@ -59,11 +59,21 @@ const orbitCSS = {
       borderTop: 'var(--borderWidth) solid currentColor',
     },
   },
+};
 
-  ...orbitKeyframes,
+const creator = (classes: string = ''): string => {
+  return `
+    <div class="${SPINNER_ORBIT} ${classes}">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `.trim();
 };
 
 export default {
   name: SPINNER_ORBIT,
   components: orbitCSS,
+  keyframes: orbitKeyframes,
+  creator,
 };
