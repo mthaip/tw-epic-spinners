@@ -88,7 +88,7 @@ Returns an HTML string for a given spinner type, which can be injected into your
 </template>
 
 <script setup>
-import { creator } from '@/lib/spinners';
+import { creator } from 'tw-epic-spinners';
 
 const spinnerHTML = creator('spinner-half-circle', ['spinner-size-12', 'sm:spinner-size-16', 'spinner-duration-[2.5s]']);
 </script>
@@ -97,6 +97,8 @@ const spinnerHTML = creator('spinner-half-circle', ['spinner-size-12', 'sm:spinn
 ##### React
 
 ```tsx
+import { creator } from 'tw-epic-spinners';
+
 const Spinner = () => {
   const html = creator('spinner-half-circle', 'spinner-size-12 sm:spinner-size-16 spinner-duration-[2.5s]');
 
