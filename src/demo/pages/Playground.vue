@@ -23,7 +23,7 @@
             <option
               v-for="spinner in spinners"
               :value="spinner"
-              :selected="spinner === selectedSpinner"
+              :selected="`spinner-${spinner}` === selectedSpinner"
             >
               {{ spinner }}
             </option>
@@ -70,7 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
 import { refDebounced } from '@vueuse/core';
 
 import Navigation from '../components/Navigation.vue';
@@ -80,7 +79,7 @@ import spinners from '../data/spinners.ts';
 import { computed, ref } from 'vue';
 import { creator, type Spinner } from '../../index.ts';
 
-const selectedSpinner = ref<Spinner | undefined>(spinners[0]);
+const selectedSpinner = ref<Spinner | undefined>(`spinner-${spinners[0]}`);
 
 const spinnerComponent = computed(() => {
   if (selectedSpinner.value) {
