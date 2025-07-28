@@ -1,6 +1,6 @@
 {
   "name": "tw-epic-spinners",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -16,9 +16,19 @@
   "keywords": [
     "tailwindcss",
     "tailwindcss-plugin",
+    "tailwind-plugin",
+    "tailwind",
+    "tailwindcss v4",
+    "tailwindcss v3",
     "spinners",
-    "vuejs",
-    "reactjs"
+    "loading",
+    "vue",
+    "react",
+    "tw-epic-spinners",
+    "epic-spinners",
+    "open-source",
+    "frontend",
+    "plugin"
   ],
   "scripts": {
     "dev": "vite",
