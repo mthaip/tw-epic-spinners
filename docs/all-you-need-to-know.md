@@ -1,10 +1,11 @@
 ## Requirements
 
-```json
-"engines": {
-  "node": "22.17.1",
-},
-```
+- NodeJS `22.17.1`
+
+### Development
+
+- `nvm use`
+- `yarn dev`
 
 ### How to build
 

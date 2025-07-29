@@ -63,9 +63,9 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^4.5.4",
-    "vue": "3.4.23",
-    "vue-router": "4",
-    "vue-tsc": "^2.0.6"
+    "vue": "3.5.18",
+    "vue-router": "4.5.1",
+    "vue-tsc": "3.0.4"
   },
   "packageManager": "yarn@1.22.22"
 }
