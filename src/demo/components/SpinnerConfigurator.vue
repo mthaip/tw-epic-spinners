@@ -13,7 +13,7 @@
           :id="spinnerSelectId"
           @change="
             selectedSpinner =
-              (($event.target as HTMLSelectElement)?.value as Spinner) ||
+              (`spinner-${($event.target as HTMLSelectElement)?.value}` as Spinner) ||
               undefined
           "
         >
@@ -148,7 +148,7 @@ const handleViewCode = () => {
       code: sanitized,
     };
 
-    const creatorStr = `const innerHTMLContent = creator('${selectedSpinner}', '${dInputStyles.value}');`;
+    const creatorStr = `const innerHTMLContent = creator('${selectedSpinner.value}'${dInputStyles.value ? `, '${dInputStyles.value}'` : ''});`;
 
     creatorRef.value = {
       preview: highlighter.codeToHtml(
