@@ -3,8 +3,6 @@ layer(base);
 
 @import 'tailwindcss';
 
-/* TODO: Add safelist to enable playground */
-
 @plugin '../../../index.ts';
 
 @plugin "@tailwindcss/typography";
@@ -12,6 +10,10 @@ layer(base);
 @plugin "daisyui" {
   themes: all;
 }
+
+@source inline("spinner-size-{0..100}");
+@source inline("spinner-duration-{0..1000}");
+@source inline("text-{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,gray,state,zinc,neutral,stone}-{50..950}");
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,

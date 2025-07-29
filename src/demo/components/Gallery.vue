@@ -2,101 +2,49 @@
   <div
     class="container grid grid-cols-2 items-center justify-items-center gap-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
   >
-    <Preview
+    <SpinnerCard
       v-for="spinner in spinners"
       @view-code="handleViewCode"
       :name="`spinner-${spinner}`"
     />
   </div>
 
-  <dialog
-    ref="previewModal"
-    class="modal"
-    @close="clipboardCode = initialClipboardCode"
-  >
-    <div class="modal-box">
-      <div class="tabs tabs-lift">
-        <input
-          type="radio"
-          name="spinner-code-preview"
-          class="tab"
-          aria-label="HTML"
-          checked
-        />
-        <div class="tab-content bg-base-100 border-base-300 relative">
-          <div
-            class="prose"
-            v-html="htmlContentRef"
-          />
-          <CopyToClipboard
-            class="absolute top-2 right-2"
-            :content="clipboardCode.html"
-          />
-        </div>
-
-        <input
-          type="radio"
-          name="spinner-code-preview"
-          class="tab"
-          aria-label="Creator"
-        />
-        <div class="tab-content bg-base-100 border-base-300 relative">
-          <div
-            class="prose"
-            v-html="creatorContentRef"
-          />
-          <CopyToClipboard
-            class="absolute top-2 right-2"
-            :content="clipboardCode.creator"
-          />
-        </div>
-      </div>
-
-      <form method="dialog">
-        <form method="dialog">
-          <button
-            class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2"
-          >
-            ✕
-          </button>
-        </form>
-      </form>
-    </div>
-
-    <form
-      method="dialog"
-      class="modal-backdrop"
-    >
-      <button>close</button>
-    </form>
-  </dialog>
+  <CodePreviewModal
+    :id="previewModalId"
+    :html="htmlRef"
+    :creator="creatorRef"
+    @close="resetPreviewData"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useId } from 'vue';
 
 import DOMPurify from 'dompurify';
 import { createHighlighter } from 'shiki';
 
-import Preview from './Preview.vue';
+import SpinnerCard from './SpinnerCard.vue';
+import CodePreviewModal, { type CodePreviewData } from './CodePreviewModal.vue';
+
 import spinners from '../data/spinners';
 import { codeHighlightTheme } from '../data/config';
-import { type Spinner } from '../../index';
-import CopyToClipboard from './CopyToClipboard.vue';
 
-const initialClipboardCode = {
-  html: '',
-  creator: '',
+import { type Spinner } from '../../index';
+
+const previewModalId = useId();
+
+const initialPreviewData: CodePreviewData = {
+  preview: '',
+  code: '',
 };
 
-const htmlContentRef = ref<string>('');
-const creatorContentRef = ref<string>('');
+const htmlRef = ref<CodePreviewData>(initialPreviewData);
+const creatorRef = ref<CodePreviewData>(initialPreviewData);
 
-const clipboardCode = ref<{ html: string; creator: string }>(
-  initialClipboardCode,
-);
-
-const previewModal = ref<HTMLDialogElement | null>(null);
+const resetPreviewData = () => {
+  htmlRef.value = initialPreviewData;
+  creatorRef.value = initialPreviewData;
+};
 
 const highlighter = await createHighlighter({
   themes: [codeHighlightTheme],
@@ -117,29 +65,30 @@ const handleViewCode = (
       SAFE_FOR_TEMPLATES: true,
     });
 
-    htmlContentRef.value = highlighter.codeToHtml(sanitized, {
-      lang: 'html',
-      theme: codeHighlightTheme,
-    });
+    htmlRef.value = {
+      preview: highlighter.codeToHtml(sanitized, {
+        lang: 'html',
+        theme: codeHighlightTheme,
+      }),
+      code: sanitized,
+    };
 
     const creatorStr = `const innerHTMLContent = creator('${name}', '${spinnerClasses.join(' ')}');`;
 
-    creatorContentRef.value = highlighter.codeToHtml(
-      `// The returned HTML string can be directly used with \`v-html\` in Vue or \`dangerouslySetInnerHTML\` in React to render the spinner\n${creatorStr}`,
-      {
-        lang: 'typescript',
-        theme: codeHighlightTheme,
-      },
-    );
-
-    clipboardCode.value = {
-      html: sanitized,
-      creator: creatorStr,
+    creatorRef.value = {
+      preview: highlighter.codeToHtml(
+        `// The returned HTML string can be directly used with \`v-html\` in Vue or \`dangerouslySetInnerHTML\` in React to render the spinner\n${creatorStr}`,
+        {
+          lang: 'typescript',
+          theme: codeHighlightTheme,
+        },
+      ),
+      code: creatorStr,
     };
 
-    previewModal.value?.showModal();
+    (document.getElementById(previewModalId) as HTMLDialogElement)?.showModal();
   } catch (error) {
-    clipboardCode.value = initialClipboardCode;
+    resetPreviewData();
   }
 };
 </script>

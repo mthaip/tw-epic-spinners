@@ -1,5 +1,9 @@
 import { createApp } from 'vue';
-import { createWebHistory, createRouter } from 'vue-router';
+import {
+  createWebHistory,
+  createRouter,
+  type RouteRecordRaw,
+} from 'vue-router';
 
 import './assets/css/main.css';
 
@@ -7,18 +11,22 @@ import App from './App.vue';
 
 import Home from './pages/Home.vue';
 import Documentation from './pages/Documentation.vue';
-// import Playground from './pages/Playground.vue';
+import Playground from './pages/Playground.vue';
 
-export const routes = [
+export const routes: (RouteRecordRaw & { icon: string })[] = [
   { path: '/', name: 'Home', component: Home, icon: 'home' },
   {
     path: '/docs',
-    name: 'Documentation',
+    name: 'Docs',
     component: Documentation,
     icon: 'docs',
   },
-  // TODO: Re-enable playground
-  // { path: '/playground', component: Playground },
+  {
+    path: '/playground',
+    name: 'Playground',
+    component: Playground,
+    icon: 'brick',
+  },
 ];
 
 const router = createRouter({

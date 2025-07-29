@@ -1,71 +1,69 @@
 <template>
-  <BaseLayout>
-    <div class="container">
-      <div class="flex flex-col gap-4 md:flex-row md:items-end">
-        <div>
-          <label
-            :for="spinnerSelectId"
-            class="mb-2 block font-mono text-sm"
-          >
-            spinner-*
-          </label>
-          <select
-            class="select w-full"
-            :id="spinnerSelectId"
-            @change="
-              selectedSpinner =
-                (($event.target as HTMLSelectElement)?.value as Spinner) ||
-                undefined
-            "
-          >
-            <option
-              v-for="spinner in spinners"
-              :value="spinner"
-              :selected="`spinner-${spinner}` === selectedSpinner"
-            >
-              {{ spinner }}
-            </option>
-          </select>
-        </div>
-
-        <div class="flex-1">
-          <label
-            :for="classInputId"
-            class="mb-2 block font-mono text-sm"
-          >
-            class="..."
-          </label>
-          <input
-            type="text"
-            :id="classInputId"
-            class="input w-full"
-            placeholder="spinner-size-* | spinner-duration-* | text-violet-*"
-            @input="
-              inputStyles = ($event.target as HTMLInputElement)?.value || ''
-            "
-            :value="inputStyles"
-          />
-        </div>
-
-        <button
-          class="btn btn-primary"
-          @click="handleViewCode"
-          :disabled="!spinnerHTML"
+  <div class="container">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end">
+      <div>
+        <label
+          :for="spinnerSelectId"
+          class="mb-2 block font-mono text-sm"
         >
-          Get Code
-        </button>
+          spinner-*
+        </label>
+        <select
+          class="select w-full"
+          :id="spinnerSelectId"
+          @change="
+            selectedSpinner =
+              (($event.target as HTMLSelectElement)?.value as Spinner) ||
+              undefined
+          "
+        >
+          <option
+            v-for="spinner in spinners"
+            :value="spinner"
+            :selected="`spinner-${spinner}` === selectedSpinner"
+          >
+            {{ spinner }}
+          </option>
+        </select>
       </div>
 
-      <div class="text-warning font-warning mt-4 text-sm">
-        Playground does not support arbitrary and custom values!
+      <div class="flex-1">
+        <label
+          :for="classInputId"
+          class="mb-2 block font-mono text-sm"
+        >
+          class="..."
+        </label>
+        <input
+          type="text"
+          :id="classInputId"
+          class="input w-full"
+          placeholder="spinner-size-* | spinner-duration-* | text-violet-*"
+          @input="
+            inputStyles = ($event.target as HTMLInputElement)?.value || ''
+          "
+          :value="inputStyles"
+        />
       </div>
 
-      <div
-        v-if="!!spinnerHTML"
-        class="mt-16 flex items-center justify-center"
-        v-html="spinnerHTML"
-      />
+      <button
+        class="btn btn-primary"
+        @click="handleViewCode"
+        :disabled="!spinnerHTML"
+      >
+        Get Code
+      </button>
     </div>
+
+    <div class="text-warning font-warning mt-4 text-sm">
+      Playground does not support arbitrary and custom values!
+    </div>
+
+    <div
+      v-if="!!spinnerHTML"
+      class="mt-16 flex items-center justify-center"
+      v-html="spinnerHTML"
+    />
 
     <CodePreviewModal
       :id="previewModalId"
@@ -73,7 +71,7 @@
       :creator="creatorRef"
       @close="resetPreviewData"
     />
-  </BaseLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -82,8 +80,6 @@ import { computed, ref, useId } from 'vue';
 import { refDebounced } from '@vueuse/core';
 import { createHighlighter } from 'shiki';
 import DOMPurify from 'dompurify';
-
-import BaseLayout from '../layouts/BaseLayout.vue';
 
 import spinners from '../data/spinners.ts';
 import { codeHighlightTheme } from '../data/config';
