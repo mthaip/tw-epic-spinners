@@ -48,6 +48,7 @@
     "@types/node": "22.16.5",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
+    "@unhead/vue": "^2.0.12",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vueuse/core": "^10.9.0",
     "daisyui": "^5.0.46",

@@ -60,7 +60,7 @@
         </div>
       </RouterLink>
 
-      <div class="badge badge-dash badge-accent">{{ pkg.version }}</div>
+      <div class="badge badge-soft badge-accent">{{ pkg.version }}</div>
     </div>
 
     <div class="ml-auto flex items-center">
