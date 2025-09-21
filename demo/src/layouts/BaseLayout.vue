@@ -24,7 +24,7 @@ import { useHead } from '@unhead/vue';
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 
-import { creator } from 'tw-epic-spinners/index';
+import { creator } from 'tw-epic-spinners';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();

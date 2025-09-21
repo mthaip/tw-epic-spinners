@@ -14,11 +14,6 @@
     "noEmit": true,
     "jsx": "preserve",
 
-    "baseUrl": ".",
-    "paths": {
-      "tw-epic-spinners/index": ["../src/index.ts"]
-    },
-
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
