@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { creator, type Spinner } from '../../index.ts';
+import { creator, type Spinner } from 'tw-epic-spinners/index';
 import { ref } from 'vue';
 
 defineProps<{
@@ -32,17 +32,32 @@ defineEmits<{
 
 const spinnerHTML = ref<HTMLElement | null>(null);
 
+// ! List all classes to ensure tailwindcss can scan all of them
 const getClasses = (name: Spinner): string[] => {
-  const spinnersWithSpecialClasses: Spinner[] = [
-    'spinner-hollow-dots',
-    'spinner-circles-to-rhombuses',
-    'spinner-looping-rhombuses',
-  ];
-
-  if (spinnersWithSpecialClasses.includes(name)) {
-    return ['spinner-size-3', 'spinner-duration-[2.5s]'];
+  switch (name) {
+    case 'spinner-hollow-dots':
+    case 'spinner-circles-to-rhombuses':
+    case 'spinner-looping-rhombuses':
+      return ['spinner-size-3', 'spinner-duration-[2.5s]'];
+    case 'spinner-flower':
+    case 'spinner-pixel':
+    case 'spinner-orbit':
+    case 'spinner-radar':
+    case 'spinner-scaling-squares':
+    case 'spinner-half-circle':
+    case 'spinner-trinity-rings':
+    case 'spinner-fulfilling-square':
+    case 'spinner-semipolar':
+    case 'spinner-self-building-square':
+    case 'spinner-swapping-squares':
+    case 'spinner-fulfilling-bouncing-circle':
+    case 'spinner-fingerprint':
+    case 'spinner-spring':
+    case 'spinner-atom':
+    case 'spinner-breeding-rhombus':
+      return ['spinner-size-12 sm:spinner-size-16', 'spinner-duration-[2.5s]'];
+    default:
+      return [];
   }
-
-  return ['spinner-size-12 sm:spinner-size-16', 'spinner-duration-[2.5s]'];
 };
 </script>
