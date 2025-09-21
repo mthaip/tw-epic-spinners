@@ -3,7 +3,7 @@ layer(base);
 
 @import 'tailwindcss';
 
-@plugin 'tw-epic-spinners/index';
+@plugin 'tw-epic-spinners';
 
 @plugin "@tailwindcss/typography";
 

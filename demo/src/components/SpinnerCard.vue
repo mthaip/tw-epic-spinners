@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { creator, type Spinner } from 'tw-epic-spinners/index';
+import { creator, type Spinner } from 'tw-epic-spinners';
 import { ref } from 'vue';
 
 defineProps<{
