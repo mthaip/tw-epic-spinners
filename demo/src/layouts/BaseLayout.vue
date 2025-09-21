@@ -24,7 +24,7 @@ import { useHead } from '@unhead/vue';
 import Navigation from '../components/Navigation.vue';
 import Footer from '../components/Footer.vue';
 
-import { creator } from '../../index';
+import { creator } from '../../../src/index';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();

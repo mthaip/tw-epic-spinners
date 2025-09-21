@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { creator, type Spinner } from '../../index.ts';
+import { creator, type Spinner } from '../../../src/index';
 import { ref } from 'vue';
 
 defineProps<{

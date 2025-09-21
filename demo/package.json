@@ -1,0 +1,42 @@
+{
+  "name": "tw-epic-spinners-demo",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.0.0 || ^4.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/dompurify": "^3.0.5",
+    "@types/markdown-it": "^14.0.1",
+    "@types/node": "22.16.5",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "@unhead/vue": "^2.0.12",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vueuse/core": "^10.9.0",
+    "daisyui": "^5.0.46",
+    "dompurify": "^3.1.0",
+    "eslint": "8.56.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "shiki": "^3.8.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vue": "3.5.18",
+    "vue-router": "4.5.1",
+    "vue-tsc": "3.0.4"
+  },
+  "packageManager": "yarn@1.22.22"
+}
