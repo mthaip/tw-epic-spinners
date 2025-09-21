@@ -29,7 +29,7 @@ import CodePreviewModal, { type CodePreviewData } from './CodePreviewModal.vue';
 import spinners from '../data/spinners';
 import { codeHighlightTheme } from '../data/config';
 
-import { type Spinner } from '../../index';
+import { type Spinner } from 'tw-epic-spinners/index';
 
 const previewModalId = useId();
 

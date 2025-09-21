@@ -1,9 +1,31 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import tailwindcss from '@tailwindcss/vite';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import pkg from './package.json';
+import dts from 'vite-plugin-dts';
 
-// https://vitejs.dev/config/
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
-  assetsInclude: ['**/*.md'],
+  build: {
+    copyPublicDir: false,
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: pkg.name,
+      formats: ['es', 'cjs', 'umd'],
+      fileName: 'index',
+    },
+    rollupOptions: {
+      output: {
+        exports: 'named',
+      },
+    },
+  },
+  plugins: [
+    dts({
+      entryRoot: 'src',
+      include: ['src/index.ts'],
+      copyDtsFiles: true,
+    }),
+  ],
 });
