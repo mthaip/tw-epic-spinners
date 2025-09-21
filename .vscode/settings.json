@@ -3,5 +3,12 @@
   "editor.formatOnSave": true,
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "markdown.extension.toc.updateOnSave": false,
+  "markdown.extension.toc.levels": "1..6",
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false
   }
 }
