@@ -41,7 +41,6 @@ const getClasses = (name: Spinner): string[] => {
       return ['spinner-size-3', 'spinner-duration-[2.5s]'];
     case 'spinner-flower':
     case 'spinner-pixel':
-    case 'spinner-intersecting-circles':
     case 'spinner-orbit':
     case 'spinner-radar':
     case 'spinner-scaling-squares':
@@ -56,7 +55,6 @@ const getClasses = (name: Spinner): string[] => {
     case 'spinner-spring':
     case 'spinner-atom':
     case 'spinner-breeding-rhombus':
-    case 'spinner-looping-rhombuses':
       return ['spinner-size-12 sm:spinner-size-16', 'spinner-duration-[2.5s]'];
     default:
       return [];
