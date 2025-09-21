@@ -5,6 +5,11 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
   "description": "A tailwindcss plugin of Epic Spinners.",
   "author": "mthaip <fanmt.fmt@gmail.com>",
   "homepage": "https://tw-epic-spinners.mthaip.com",
