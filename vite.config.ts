@@ -10,9 +10,9 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, '../src/index.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: pkg.name,
-      formats: ['es', 'umd'],
+      formats: ['es', 'cjs', 'umd'],
       fileName: 'index',
     },
     rollupOptions: {
@@ -24,7 +24,7 @@ export default defineConfig({
   plugins: [
     dts({
       entryRoot: 'src',
-      exclude: ['src/demo/**/*'],
+      include: ['src/index.ts'],
       copyDtsFiles: true,
     }),
   ],
