@@ -7,7 +7,6 @@
     "skipLibCheck": true,
     "types": ["node"],
 
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -15,7 +14,11 @@
     "noEmit": true,
     "jsx": "preserve",
 
-    /* Linting */
+    "baseUrl": ".",
+    "paths": {
+      "tw-epic-spinners/index": ["../src/index.ts"]
+    },
+
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
