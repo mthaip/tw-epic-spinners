@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-base-100 flex min-h-screen flex-col">
+  <main class="bg-base-100 flex min-h-screen flex-col scroll-smooth">
     <AppNavigation />
 
     <Suspense>
@@ -46,6 +46,6 @@ watch(route, (newRoute) => {
     });
   }
 
-  useHead(baseHead);
+  useSeoMeta(baseHead);
 });
 </script>

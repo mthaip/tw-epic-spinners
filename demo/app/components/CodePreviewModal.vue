@@ -8,7 +8,7 @@
         >
           <input
             type="radio"
-            name="`spinner-code-preview"
+            name="spinner-code-preview"
             :aria-label="tab.name"
             class="tab"
             :checked="index === 0"
