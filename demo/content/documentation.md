@@ -24,7 +24,7 @@ Then, when using Tailwind CSS v4, add the plugin to your main stylesheet:
 
 If you are still using Tailwind CSS v3, add the plugin to your `tailwind.config.js` file:
 
-```javascript
+```typescript
 import spinners from 'tw-epic-spinners';
 
 export default {
@@ -32,29 +32,6 @@ export default {
   plugins: [spinners],
 };
 ```
-
-## Spinners
-
-- [`spinner-flower`](#spinner-flower)
-- [`spinner-pixel`](#spinner-pixel)
-- [`spinner-hollow-dots`](#spinner-hollow-dots)
-- [`spinner-intersecting-circles`](#spinner-intersecting-circles)
-- [`spinner-orbit`](#spinner-orbit)
-- [`spinner-radar`](#spinner-radar)
-- [`spinner-scaling-squares`](#spinner-scaling-squares)
-- [`spinner-half-circle`](#spinner-half-circle)
-- [`spinner-trinity-rings`](#spinner-trinity-rings)
-- [`spinner-fulfilling-square`](#spinner-fulfilling-square)
-- [`spinner-circles-to-rhombuses`](#spinner-circles-to-rhombuses)
-- [`spinner-semipolar`](#spinner-semipolar)
-- [`spinner-self-building-square`](#spinner-self-building-square)
-- [`spinner-swapping-squares`](#spinner-swapping-squares)
-- [`spinner-fulfilling-bouncing-circle`](#spinner-fulfilling-bouncing-circle)
-- [`spinner-fingerprint`](#spinner-fingerprint)
-- [`spinner-spring`](#spinner-spring)
-- [`spinner-atom`](#spinner-atom)
-- [`spinner-looping-rhombuses`](#spinner-looping-rhombuses)
-- [`spinner-breeding-rhombus`](#spinner-breeding-rhombus)
 
 ## Core concepts
 
@@ -105,7 +82,7 @@ export default Spinner;
 ```
 
 
-### Using Spinner with HTML
+### Spinners
 
 #### `spinner-flower`
 

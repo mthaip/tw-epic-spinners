@@ -2,10 +2,13 @@
   <dialog class="modal">
     <div class="modal-box">
       <div class="tabs tabs-lift">
-        <template v-for="(tab, index) in tabs">
+        <template
+          v-for="(tab, index) in tabs"
+          :key="tab.name"
+        >
           <input
             type="radio"
-            name="`spinner-code-preview"
+            name="spinner-code-preview"
             :aria-label="tab.name"
             class="tab"
             :checked="index === 0"
@@ -15,10 +18,12 @@
               class="prose"
               v-html="tab.preview"
             />
-            <CopyToClipboard
-              class="absolute top-2 right-2"
-              :content="tab.code"
-            />
+            <ClientOnly>
+              <CopyToClipboard
+                class="absolute top-2 right-2"
+                :content="tab.code"
+              />
+            </ClientOnly>
           </div>
         </template>
       </div>
@@ -40,9 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import CopyToClipboard from './CopyToClipboard.vue';
-
 export type CodePreviewData = {
   preview: string;
   code: string;
