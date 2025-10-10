@@ -77,6 +77,7 @@
 
 <script setup lang="ts">
 import { refDebounced } from '@vueuse/core';
+// Installed by @nuxt/content
 import { createHighlighter } from 'shiki';
 import DOMPurify from 'dompurify';
 

@@ -130,7 +130,6 @@
 </template>
 
 <script setup lang="ts">
-import { useColorMode } from '@vueuse/core';
 import Github from './logos/Github.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
@@ -139,6 +138,7 @@ import Tailwindcss from './logos/Tailwindcss.vue';
 import Npm from './logos/Npm.vue';
 
 import pkg from '~~/../package.json';
+import useTheme, { themes } from '~/composable/useTheme';
 
 const vueRoute = useRoute();
 
@@ -146,30 +146,5 @@ const otherRoutes = computed(() => {
   return routes.filter((appRoute) => appRoute.path !== vueRoute.path);
 });
 
-const themes = {
-  light: 'light',
-  dark: 'dark',
-  cupcake: 'cupcake',
-  emerald: 'emerald',
-  synthwave: 'synthwave',
-  cyberpunk: 'cyberpunk',
-  valentine: 'valentine',
-  halloween: 'halloween',
-  aqua: 'aqua',
-  fantasy: 'fantasy',
-  luxury: 'luxury',
-  coffee: 'coffee',
-  dracula: 'dracula',
-  cmyk: 'cmyk',
-  autumn: 'autumn',
-  lemonade: 'lemonade',
-  night: 'night',
-  caramellatte: 'caramellatte',
-  abyss: 'abyss',
-} as const;
-
-const mode = useColorMode({
-  attribute: 'data-theme',
-  modes: themes,
-});
+const mode = useTheme();
 </script>

@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import DOMPurify from 'dompurify';
+// Installed by @nuxt/content
 import { createHighlighter } from 'shiki';
 
 import spinners from '~/data/spinners';
