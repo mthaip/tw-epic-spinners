@@ -5,6 +5,8 @@ layer(base);
 
 @plugin 'tw-epic-spinners';
 
+@plugin "@iconify/tailwind4";
+
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {

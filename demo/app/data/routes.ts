@@ -1,25 +1,9 @@
-import { createApp } from 'vue';
-import {
-  createWebHistory,
-  createRouter,
-  type RouteRecordRaw,
-} from 'vue-router';
-import { createHead } from '@unhead/vue/client';
-
-import './assets/css/main.css';
-
-import App from './App.vue';
-
-import Home from './pages/Home.vue';
-import Documentation from './pages/Documentation.vue';
-import Playground from './pages/Playground.vue';
-
-export const routes: (RouteRecordRaw & { icon: string })[] = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    icon: 'home',
+    // component: Home,
+    icon: 'icon-[lucide--house]',
     meta: {
       title: 'Tailwind Epic Spinners',
       description:
@@ -29,8 +13,8 @@ export const routes: (RouteRecordRaw & { icon: string })[] = [
   {
     path: '/docs',
     name: 'Docs',
-    component: Documentation,
-    icon: 'docs',
+    // component: Documentation,
+    icon: 'icon-[lucide--book-open-text]',
     meta: {
       title: 'Docs · Tailwind Epic Spinners',
       description:
@@ -40,21 +24,12 @@ export const routes: (RouteRecordRaw & { icon: string })[] = [
   {
     path: '/playground',
     name: 'Playground',
-    component: Playground,
-    icon: 'brick',
+    // component: Playground,
+    icon: 'icon-[lucide--codesandbox]',
     meta: {
       title: 'Playground · Tailwind Epic Spinners',
       description:
         'Try out and customize your favorite spinner components in our interactive playground.',
     },
   },
-];
-
-const router = createRouter({
-  history: createWebHistory('/'),
-  routes,
-});
-
-const head = createHead();
-
-createApp(App).use(router).use(head).mount('#app');
+] as const;

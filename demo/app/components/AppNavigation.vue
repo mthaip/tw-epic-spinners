@@ -7,46 +7,48 @@
           role="button"
           class="btn btn-ghost btn-circle lg:hidden"
         >
-          <span class="material-symbols-outlined size-6"> menu </span>
+          <span class="icon-[lucide--menu] size-6" />
         </div>
-        <ul
-          tabindex="0"
-          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-        >
-          <li v-for="otherRoute in otherRoutes">
-            <RouterLink :to="otherRoute.path">
-              <span class="material-symbols-outlined">
-                {{ otherRoute.icon }}
-              </span>
-              {{ otherRoute.name }}
-            </RouterLink>
-          </li>
-          <li>
-            <details>
-              <summary>
-                <span class="material-symbols-outlined"> colors </span>Themes
-              </summary>
-              <ul>
-                <li v-for="theme in themes">
-                  <button
-                    @click="mode = theme"
-                    :class="{
-                      'menu-active': theme === mode,
-                    }"
+        <ClientOnly>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li
+              v-for="otherRoute in otherRoutes"
+              :key="otherRoute.path"
+            >
+              <RouterLink :to="otherRoute.path">
+                <span :class="otherRoute.icon" />
+                {{ otherRoute.name }}
+              </RouterLink>
+            </li>
+            <li>
+              <details>
+                <summary><span class="icon-[lucide--palette]" />Themes</summary>
+                <ul>
+                  <li
+                    v-for="theme in themes"
+                    :key="theme"
                   >
-                    {{ theme }}
-                    <span
-                      v-if="theme === mode"
-                      class="material-symbols-outlined ms-auto"
+                    <button
+                      :class="{
+                        'menu-active': theme === mode,
+                      }"
+                      @click="mode = theme"
                     >
-                      check
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul>
+                      {{ theme }}
+                      <span
+                        v-if="theme === mode"
+                        class="icon-[lucide--check] ms-auto"
+                      />
+                    </button>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </ClientOnly>
       </div>
 
       <RouterLink
@@ -67,44 +69,46 @@
       <div class="hidden lg:flex">
         <RouterLink
           v-for="otherRoute in otherRoutes"
+          :key="otherRoute.path"
           :to="otherRoute.path"
           class="btn btn-ghost btn-sm"
         >
-          <span class="material-symbols-outlined">
-            {{ otherRoute.icon }}
-          </span>
+          <span :class="otherRoute.icon" />
           {{ otherRoute.name }}
         </RouterLink>
 
         <div class="dropdown dropdown-end block">
           <button
             tabindex="0"
-            class="btn btn-ghost btn-sm gap-0"
+            class="btn btn-ghost btn-sm"
           >
-            <span class="material-symbols-outlined"> colors </span>
+            <span class="icon-[lucide--palette]" />
             Themes
           </button>
-          <ul
-            tabindex="0"
-            class="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-48 p-2 shadow"
-          >
-            <li v-for="theme in themes">
-              <button
-                @click="mode = theme"
-                :class="{
-                  'menu-active': theme === mode,
-                }"
+          <ClientOnly>
+            <ul
+              tabindex="0"
+              class="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-48 p-2 shadow"
+            >
+              <li
+                v-for="theme in themes"
+                :key="theme"
               >
-                {{ theme }}
-                <span
-                  v-if="theme === mode"
-                  class="material-symbols-outlined ms-auto"
+                <button
+                  :class="{
+                    'menu-active': theme === mode,
+                  }"
+                  @click="mode = theme"
                 >
-                  check
-                </span>
-              </button>
-            </li>
-          </ul>
+                  {{ theme }}
+                  <span
+                    v-if="theme === mode"
+                    class="icon-[lucide--check] ms-auto"
+                  />
+                </button>
+              </li>
+            </ul>
+          </ClientOnly>
         </div>
       </div>
 
@@ -130,11 +134,11 @@ import { useColorMode } from '@vueuse/core';
 import Github from './logos/Github.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-import { routes } from '../main';
+import { routes } from '~/data/routes';
 import Tailwindcss from './logos/Tailwindcss.vue';
 import Npm from './logos/Npm.vue';
 
-import pkg from '../../../package.json';
+import pkg from '~~/../package.json';
 
 const vueRoute = useRoute();
 

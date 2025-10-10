@@ -5,10 +5,10 @@
     :data-tip="copied ? 'Copied' : 'Copy'"
   >
     <button
-      @click="() => copy(props.content)"
       class="btn btn-square"
+      @click="() => copy(props.content)"
     >
-      <span class="material-symbols-outlined"> content_copy </span>
+      <span class="icon-[lucide--clipboard]" />
     </button>
   </div>
 </template>

@@ -9,8 +9,8 @@
           spinner-*
         </label>
         <select
-          class="select w-full"
           :id="spinnerSelectId"
+          class="select w-full"
           @change="
             selectedSpinner =
               (`spinner-${($event.target as HTMLSelectElement)?.value}` as Spinner) ||
@@ -19,6 +19,7 @@
         >
           <option
             v-for="spinner in spinners"
+            :key="spinner"
             :value="spinner"
             :selected="`spinner-${spinner}` === selectedSpinner"
           >
@@ -35,21 +36,21 @@
           class="..."
         </label>
         <input
-          type="text"
           :id="classInputId"
+          type="text"
           class="input w-full"
           placeholder="spinner-size-* | spinner-duration-* | text-violet-*"
+          :value="inputStyles"
           @input="
             inputStyles = ($event.target as HTMLInputElement)?.value || ''
           "
-          :value="inputStyles"
         />
       </div>
 
       <button
         class="btn btn-primary"
-        @click="handleViewCode"
         :disabled="!spinnerHTML"
+        @click="handleViewCode"
       >
         Get Code
       </button>
@@ -75,19 +76,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useId } from 'vue';
-
 import { refDebounced } from '@vueuse/core';
 import { createHighlighter } from 'shiki';
 import DOMPurify from 'dompurify';
 
-import spinners from '../data/spinners.ts';
-import { codeHighlightTheme } from '../data/config';
+import spinners from '~/data/spinners';
+import { codeHighlightTheme } from '~/data/config';
 
 import { creator, type Spinner } from 'tw-epic-spinners';
-import CodePreviewModal, {
-  type CodePreviewData,
-} from '../components/CodePreviewModal.vue';
+import type { CodePreviewData } from '~/components/CodePreviewModal.vue';
 
 const spinnerSelectId = useId();
 const classInputId = useId();
@@ -162,7 +159,7 @@ const handleViewCode = () => {
     };
 
     (document.getElementById(previewModalId) as HTMLDialogElement)?.showModal();
-  } catch (error) {
+  } catch {
     resetPreviewData();
   }
 };

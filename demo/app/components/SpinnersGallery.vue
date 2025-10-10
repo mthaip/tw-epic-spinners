@@ -4,32 +4,29 @@
   >
     <SpinnerCard
       v-for="spinner in spinners"
-      @view-code="handleViewCode"
+      :key="spinner"
       :name="`spinner-${spinner}`"
+      @view-code="handleViewCode"
+    />
+
+    <CodePreviewModal
+      :id="previewModalId"
+      :html="htmlRef"
+      :creator="creatorRef"
+      @close="resetPreviewData"
     />
   </div>
-
-  <CodePreviewModal
-    :id="previewModalId"
-    :html="htmlRef"
-    :creator="creatorRef"
-    @close="resetPreviewData"
-  />
 </template>
 
 <script setup lang="ts">
-import { ref, useId } from 'vue';
-
 import DOMPurify from 'dompurify';
 import { createHighlighter } from 'shiki';
 
-import SpinnerCard from './SpinnerCard.vue';
-import CodePreviewModal, { type CodePreviewData } from './CodePreviewModal.vue';
+import spinners from '~/data/spinners';
+import { codeHighlightTheme } from '~/data/config';
 
-import spinners from '../data/spinners';
-import { codeHighlightTheme } from '../data/config';
-
-import { type Spinner } from 'tw-epic-spinners';
+import type { Spinner } from 'tw-epic-spinners';
+import type { CodePreviewData } from '~/components/CodePreviewModal.vue';
 
 const previewModalId = useId();
 
@@ -87,7 +84,7 @@ const handleViewCode = (
     };
 
     (document.getElementById(previewModalId) as HTMLDialogElement)?.showModal();
-  } catch (error) {
+  } catch {
     resetPreviewData();
   }
 };
