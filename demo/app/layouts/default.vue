@@ -26,14 +26,14 @@ import { routes } from '~/data/routes';
 
 const route = useRoute();
 
-watch(route, (newRoute) => {
+const updateSeoMeta = (path: string) => {
   const baseHead: MetaObject = {
     title: 'Tailwind Epic Spinners',
     htmlAttrs: { lang: 'en-US' },
     meta: [{ name: 'robots', content: 'index, follow' }],
   };
 
-  const matchRouteData = routes.find((r) => r.path === newRoute.path);
+  const matchRouteData = routes.find((r) => r.path === path);
 
   if (matchRouteData?.meta.title) {
     baseHead.title = matchRouteData.meta.title;
@@ -47,5 +47,11 @@ watch(route, (newRoute) => {
   }
 
   useSeoMeta(baseHead);
+};
+
+watch(route, (newRoute) => {
+  updateSeoMeta(newRoute.path);
 });
+
+updateSeoMeta(route.path);
 </script>
