@@ -3,7 +3,7 @@ layer(base);
 
 @import 'tailwindcss';
 
-@plugin 'tw-epic-spinners';
+@plugin '../../../../src/index.ts';
 
 @plugin "@iconify/tailwind4";
 

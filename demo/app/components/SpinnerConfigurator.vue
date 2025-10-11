@@ -84,7 +84,7 @@ import DOMPurify from 'dompurify';
 import spinners from '~/data/spinners';
 import { codeHighlightTheme } from '~/data/config';
 
-import { creator, type Spinner } from 'tw-epic-spinners';
+import { creator, type Spinner } from '../../../src/index';
 import type { CodePreviewData } from '~/components/CodePreviewModal.vue';
 
 const spinnerSelectId = useId();
