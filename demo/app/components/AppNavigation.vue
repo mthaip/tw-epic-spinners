@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar container">
+  <nav class="navbar container !px-0">
     <div class="navbar-start gap-2">
       <div class="dropdown">
         <div
