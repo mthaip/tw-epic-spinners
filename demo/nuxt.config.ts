@@ -1,7 +1,18 @@
 import tailwindcss from '@tailwindcss/vite';
+import mainPkgJson from '../package.json';
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/content'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/content',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
+  ],
+
+  site: {
+    url: mainPkgJson.homepage,
+    name: mainPkgJson.name,
+  },
 
   content: {
     build: {
