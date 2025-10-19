@@ -22,10 +22,28 @@ const atomKeyframes = {
   },
 };
 
+const CONTENT = `
+  <div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+`.trim();
+
 const atomCSS = {
   height: `var(${SPINNER_SIZE_VAR})`,
   width: `var(${SPINNER_SIZE_VAR})`,
   overflow: 'hidden',
+
+  // content: `'${encodeURIComponent(CONTENT)}'`,
+
+  // '&::before': {
+  //   content: `'${encodeURIComponent(CONTENT)}'`,
+  // },
+
+  'background-color': 'currentColor',
+  mask: 'no-repeat center / 100%',
+  'mask-image': `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='black' d='M11 8c0 2.21-1.79 4-4 4s-4-1.79-4-4s1.79-4 4-4s4 1.79 4 4m0 6.72V20H0v-2c0-2.21 3.13-4 7-4c1.5 0 2.87.27 4 .72M24 20H13V3h11v17m-8-8.5a2.5 2.5 0 0 1 5 0a2.5 2.5 0 0 1-5 0M22 7a2 2 0 0 1-2-2h-3c0 1.11-.89 2-2 2v9a2 2 0 0 1 2 2h3c0-1.1.9-2 2-2V7Z'/%3E%3C/svg%3E")`,
 
   '& > div': {
     position: 'relative',
@@ -78,11 +96,6 @@ const atomCSS = {
 const creator = (classes: string = ''): string => {
   return `
     <div class="${SPINNER_ATOM} ${classes}">
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
     </div>
   `.trim();
 };

@@ -3,7 +3,7 @@
     class="container grid grid-cols-2 items-center justify-items-center gap-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
   >
     <SpinnerCard
-      v-for="spinner in spinners"
+      v-for="spinner in ['atom']"
       :key="spinner"
       :name="`spinner-${spinner}`"
       @view-code="handleViewCode"
@@ -26,7 +26,7 @@ import { createHighlighter } from 'shiki';
 import spinners from '~/data/spinners';
 import { codeHighlightTheme } from '~/data/config';
 
-import type { Spinner } from 'tw-epic-spinners';
+import type { Spinner } from '../../../src/index';
 import type { CodePreviewData } from '~/components/CodePreviewModal.vue';
 
 const previewModalId = useId();

@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import type { MetaObject } from 'nuxt/schema';
-import { creator } from 'tw-epic-spinners';
+import { creator } from '../../../src/index';
 import { routes } from '~/data/routes';
 
 const route = useRoute();
