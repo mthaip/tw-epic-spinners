@@ -701,6 +701,13 @@
     fastq "^1.17.0"
     glob "^10.3.4"
 
+"@fingerprintjs/botd@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@fingerprintjs/botd/-/botd-1.9.1.tgz#6217541bc822bef4f17b3b1931955d2ddac5d4ec"
+  integrity sha512-7kv3Yolsx9E56i+L1hCEcupH5yqcI5cmVktxy6B0K7rimaH5qDXwsiA5FL+fkxeUny7XQKn7p13HvK7ofDZB3g==
+  dependencies:
+    tslib "^2.4.0"
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -1777,7 +1784,7 @@
     pathe "^2.0.3"
     unimport "^5.2.0"
 
-"@nuxt/kit@4.1.3", "@nuxt/kit@^4.0.3", "@nuxt/kit@^4.1.1":
+"@nuxt/kit@4.1.3", "@nuxt/kit@^4.0.3", "@nuxt/kit@^4.1.1", "@nuxt/kit@^4.1.3":
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-4.1.3.tgz#c2536419c0f8b4bdd2c3eb5dd158a1cd2baba705"
   integrity sha512-WK0yPIqcb3GQ8r4GutF6p/2fsyXnmmmkuwVLzN4YaJHrpA2tjEagjbxdjkWYeHW8o4XIKJ4micah4wPOVK49Mg==
@@ -1948,6 +1955,22 @@
     unist-util-visit "^5.0.0"
     unwasm "^0.3.11"
     vfile "^6.0.3"
+
+"@nuxtjs/robots@5.5.6":
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/robots/-/robots-5.5.6.tgz#08d3491d79d5feaf388b0920a3557121ffebf61f"
+  integrity sha512-PFp0sSaQs2ceEubvkiUPrWQ0GYTTu5bDH0lGVmJlm0h/Dqmt/e9TziXNKahL8HUV3VG22YzRyuyjd7p8+BaNgw==
+  dependencies:
+    "@fingerprintjs/botd" "^1.9.1"
+    "@nuxt/kit" "^4.1.3"
+    consola "^3.4.2"
+    defu "^6.1.4"
+    nuxt-site-config "^3.2.10"
+    pathe "^2.0.3"
+    pkg-types "^2.3.0"
+    sirv "^3.0.2"
+    std-env "^3.10.0"
+    ufo "^1.6.1"
 
 "@octokit/auth-token@^6.0.0":
   version "6.0.0"
@@ -8926,6 +8949,30 @@ nuxt-component-meta@^0.14.0:
     ufo "^1.6.1"
     vue-component-meta "^3.0.6"
 
+nuxt-site-config-kit@3.2.11:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/nuxt-site-config-kit/-/nuxt-site-config-kit-3.2.11.tgz#0ef33cd4dc4f9347d5bf10eb4ad8c72a970f4d20"
+  integrity sha512-Um9/JiJpskAC8H18pHs3D/c7ikKj37/OsM1rvTqDgdzShSzOAxGGN+8qBVtGaqp1V+9BuPFSXhr1+TV7+RRsRA==
+  dependencies:
+    "@nuxt/kit" "^4.1.3"
+    pkg-types "^2.3.0"
+    site-config-stack "3.2.11"
+    std-env "^3.10.0"
+    ufo "^1.6.1"
+
+nuxt-site-config@^3.2.10:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/nuxt-site-config/-/nuxt-site-config-3.2.11.tgz#a0883e54cdd58eacca0d59a63a8773e07b022437"
+  integrity sha512-hU78O5f0/n1LOIorDe6iKbW3xw19bao8YbQ7RCiUtVM+1XbD11JWzUXWygX7atV+KtzGhZUbTbhjxmfbnlF//A==
+  dependencies:
+    "@nuxt/kit" "^4.1.3"
+    nuxt-site-config-kit "3.2.11"
+    pathe "^2.0.3"
+    pkg-types "^2.3.0"
+    sirv "^3.0.2"
+    site-config-stack "3.2.11"
+    ufo "^1.6.1"
+
 nuxt@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-4.1.3.tgz#1b55e2bbe9d55a605b12e160daec3d88229bf8dd"
@@ -10913,6 +10960,13 @@ sisteransi@^1.0.5:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
+site-config-stack@3.2.11:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/site-config-stack/-/site-config-stack-3.2.11.tgz#51ff6fb61a9fdb745aa1adc0a1e111449f4c30ac"
+  integrity sha512-KRJ49L58VtJJo3WdB7hXv6lq3oEJNOoBpig1v+OuHSppiBp7X6xqcAByJHveeBpBE9kHwqy/sn1LEnIibQ4nOA==
+  dependencies:
+    ufo "^1.6.1"
+
 skin-tone@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/skin-tone/-/skin-tone-2.0.0.tgz#4e3933ab45c0d4f4f781745d64b9f4c208e41237"
@@ -11119,6 +11173,11 @@ statuses@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.2.tgz#8f75eecef765b5e1cfcdc080da59409ed424e382"
   integrity sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==
+
+std-env@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/std-env/-/std-env-3.10.0.tgz#d810b27e3a073047b2b5e40034881f5ea6f9c83b"
+  integrity sha512-5GS12FdOZNliM5mAOxFRg7Ir0pWz8MdpYm6AY6VPkGpbA7ZzmbzNcBJQ0GPvvyWgcY7QAhCgf9Uy89I03faLkg==
 
 std-env@^3.7.0, std-env@^3.8.1, std-env@^3.9.0:
   version "3.9.0"

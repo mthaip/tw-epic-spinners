@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/content'],
+  modules: ['@nuxt/eslint', '@nuxt/content', '@nuxtjs/robots'],
 
   content: {
     build: {
