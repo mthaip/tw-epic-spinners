@@ -39,6 +39,7 @@ const getClasses = (name: Spinner): string[] => {
     case 'spinner-circles-to-rhombuses':
     case 'spinner-looping-rhombuses':
       return ['spinner-size-3', 'spinner-duration-[2.5s]'];
+    case 'spinner-intersecting-circles':
     case 'spinner-flower':
     case 'spinner-pixel':
     case 'spinner-orbit':
