@@ -1,6 +1,6 @@
 ## Requirements
 
-- NodeJS `22.17.1`
+- NodeJS `24.14.1`
 
 ### Development
 
