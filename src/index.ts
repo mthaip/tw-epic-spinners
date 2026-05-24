@@ -31,7 +31,37 @@ import { buildTailwindComponent, normalizeClasses } from './utils/builder';
 
 const utilities = [sizes, durations];
 
-const spinners = {
+export type Spinner =
+  | 'spinner-flower'
+  | 'spinner-pixel'
+  | 'spinner-hollow-dots'
+  | 'spinner-intersecting-circles'
+  | 'spinner-orbit'
+  | 'spinner-radar'
+  | 'spinner-scaling-squares'
+  | 'spinner-half-circle'
+  | 'spinner-trinity-rings'
+  | 'spinner-fulfilling-square'
+  | 'spinner-circles-to-rhombuses'
+  | 'spinner-semipolar'
+  | 'spinner-self-building-square'
+  | 'spinner-swapping-squares'
+  | 'spinner-fulfilling-bouncing-circle'
+  | 'spinner-fingerprint'
+  | 'spinner-spring'
+  | 'spinner-atom'
+  | 'spinner-looping-rhombuses'
+  | 'spinner-breeding-rhombus';
+
+const spinners: Record<
+  Spinner,
+  {
+    name: string;
+    components: Record<string, unknown>;
+    keyframes: Record<string, unknown>;
+    creator: (classes?: string) => string;
+  }
+> = {
   'spinner-flower': flower,
   'spinner-pixel': pixel,
   'spinner-hollow-dots': hollowDots,
@@ -52,9 +82,7 @@ const spinners = {
   'spinner-atom': atom,
   'spinner-looping-rhombuses': loopingRhombuses,
   'spinner-breeding-rhombus': breedingRhombus,
-} as const;
-
-export type Spinner = keyof typeof spinners;
+};
 
 export const creator = (
   spinner: Spinner,
