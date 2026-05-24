@@ -8,9 +8,10 @@
   "files": [
     "dist/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "llms.txt"
   ],
-  "description": "A tailwindcss plugin of Epic Spinners.",
+  "description": "20 pure-CSS loading spinners as a Tailwind CSS plugin (v3 & v4). Zero JS, framework-agnostic — works with Vue, React, Svelte, Astro, Next.js, Nuxt, or plain HTML. A Tailwind port of Epic Spinners by EpicMax.",
   "author": "mthaip <fanmt.fmt@gmail.com>",
   "homepage": "https://tw-epic-spinners.mthaip.com",
   "url": "https://github.com/mthaip/tw-epic-spinners",
@@ -23,21 +24,36 @@
     "tailwindcss-plugin",
     "tailwind-plugin",
     "tailwind",
-    "tailwindcss v4",
-    "tailwindcss v3",
+    "tailwindcss-v4",
+    "tailwindcss-v3",
+    "spinner",
     "spinners",
+    "loading-spinner",
+    "loader",
     "loading",
+    "loading-indicator",
+    "css-spinner",
+    "css-animation",
+    "pure-css",
+    "no-js",
     "vue",
     "react",
-    "tw-epic-spinners",
+    "svelte",
+    "astro",
+    "nextjs",
+    "nuxt",
     "epic-spinners",
-    "open-source",
+    "tw-epic-spinners",
+    "ui",
     "frontend",
     "plugin"
   ],
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
-    "npm:build": "rm -rf dist && vite build -c ./vite.config.ts"
+    "npm:build:readme": "node scripts/build-readme.mjs",
+    "npm:build": "npm run npm:build:readme && rm -rf dist && vite build -c ./vite.config.ts",
+    "prepare": "node scripts/build-readme.mjs",
+    "prepublishOnly": "node scripts/build-readme.mjs"
   },
   "peerDependencies": {
     "tailwindcss": "^3.0.0 || ^4.0.0"
