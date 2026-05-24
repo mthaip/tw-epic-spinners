@@ -1,6 +1,10 @@
+<!-- cSpell:words semipolar rhombuses -->
+
 ## Introduction
 
-This library is the Tailwind CSS Plugin of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners)
+`tw-epic-spinners` is a Tailwind CSS plugin that provides 20 pure-CSS loading spinners. Supports Tailwind v3 and v4.
+
+This library is the Tailwind CSS port of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners).
 
 ## Installation
 
@@ -8,8 +12,10 @@ This library is the Tailwind CSS Plugin of [epic-spinners](http://epic-spinners.
 npm install --save-dev tw-epic-spinners
 
 # Or use Yarn
-
 yarn add -D tw-epic-spinners
+
+# Or use pnpm
+pnpm add -D tw-epic-spinners
 ```
 
 ## Usage
@@ -83,6 +89,8 @@ export default Spinner;
 
 
 ### Spinners
+
+There are 20 spinners. Each is a single utility class applied to a `<div>`, with the inner markup shown below.
 
 #### `spinner-flower`
 
@@ -346,3 +354,5 @@ Color can be controlled by [Tailwind CSS Text Color utility](https://tailwindcss
 ```html
 <div class="spinner-fulfilling-square text-sky-600" />
 ```
+
+Color follows `currentColor`, so any Tailwind text-color utility works (including arbitrary values and responsive prefixes).

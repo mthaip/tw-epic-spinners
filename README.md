@@ -1,6 +1,19 @@
-# Tailwind CSS Epic Spinners
+<!-- This file is generated from demo/content/documentation.md by scripts/build-readme.mjs. Do not edit directly. -->
+<!-- cSpell:words semipolar rhombuses mthaip -->
 
-This library is the Tailwind CSS Plugin of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners)
+# tw-epic-spinners
+
+> 20 pure-CSS loading spinners as a Tailwind CSS plugin. Works with Tailwind v3 and v4, and any framework.
+
+Live previews & docs: [tw-epic-spinners.mthaip.com](https://tw-epic-spinners.mthaip.com)
+
+<!-- cSpell:words semipolar rhombuses -->
+
+## Introduction
+
+`tw-epic-spinners` is a Tailwind CSS plugin that provides 20 pure-CSS loading spinners. Supports Tailwind v3 and v4.
+
+This library is the Tailwind CSS port of [epic-spinners](http://epic-spinners.epicmax.co/) by [EpicMax](https://github.com/epicmaxco/epic-spinners).
 
 ## Installation
 
@@ -8,8 +21,10 @@ This library is the Tailwind CSS Plugin of [epic-spinners](http://epic-spinners.
 npm install --save-dev tw-epic-spinners
 
 # Or use Yarn
-
 yarn add -D tw-epic-spinners
+
+# Or use pnpm
+pnpm add -D tw-epic-spinners
 ```
 
 ## Usage
@@ -24,7 +39,7 @@ Then, when using Tailwind CSS v4, add the plugin to your main stylesheet:
 
 If you are still using Tailwind CSS v3, add the plugin to your `tailwind.config.js` file:
 
-```javascript
+```typescript
 import spinners from 'tw-epic-spinners';
 
 export default {
@@ -33,10 +48,328 @@ export default {
 };
 ```
 
-## Documentation
+## Core concepts
 
-For complete documentation, please visit [official website](https://tw-epic-spinners.mthaip.com/docs).
+### Using Spinner Creator (BETA)
+
+`creator(spinner, classes?) => string`
+
+Returns an HTML string for a given spinner type, which can be injected into your UI.
+
+#### Parameters
+
+- `spinner` (`string`): Spinner name (see [Spinners](#spinners) section).
+
+- `classes` (`string | string[]`, optional): Additional classes to apply to the spinner wrapper. Can be a string or array of Tailwind utility classes.
+
+#### Returns
+
+- `string`: HTML markup string representing the selected spinner.
+
+#### Usage Examples
+
+##### Vue
+
+```vue
+<template>
+  <div v-html="spinnerHTML" />
+</template>
+
+<script setup>
+import { creator } from 'tw-epic-spinners';
+
+const spinnerHTML = creator('spinner-half-circle', ['spinner-size-12', 'sm:spinner-size-16', 'spinner-duration-[2.5s]']);
+</script>
+```
+
+##### React
+
+```tsx
+import { creator } from 'tw-epic-spinners';
+
+const Spinner = () => {
+  const html = creator('spinner-half-circle', 'spinner-size-12 sm:spinner-size-16 spinner-duration-[2.5s]');
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
+export default Spinner;
+```
+
+
+### Spinners
+
+There are 20 spinners. Each is a single utility class applied to a `<div>`, with the inner markup shown below.
+
+#### `spinner-flower`
+
+```html
+<div class="spinner-flower">
+  <div>
+    <div />
+  </div>
+</div>
+```
+
+#### `spinner-pixel`
+
+```html
+<div class="spinner-pixel" />
+```
+
+#### `spinner-hollow-dots`
+
+```html
+<div class="spinner-hollow-dots">
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-intersecting-circles`
+
+```html
+<div class="spinner-intersecting-circles">
+  <div>
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+```
+
+#### `spinner-orbit`
+
+```html
+<div class="spinner-orbit">
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-radar`
+
+```html
+<div class="spinner-radar">
+  <div>
+    <div />
+  </div>
+  <div>
+    <div />
+  </div>
+  <div>
+    <div />
+  </div>
+  <div>
+    <div />
+  </div>
+</div>
+```
+
+#### `spinner-scaling-squares`
+
+```html
+<div class="spinner-scaling-squares">
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-half-circle`
+
+```html
+<div class="spinner-half-circle" />
+```
+
+#### `spinner-trinity-rings`
+
+```html
+<div class="spinner-trinity-rings">
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-fulfilling-square`
+
+```html
+<div class="spinner-fulfilling-square" />
+```
+
+#### `spinner-circles-to-rhombuses`
+
+```html
+<div class="spinner-circles-to-rhombuses">
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-semipolar`
+
+```html
+<div class="spinner-semipolar">
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-self-building-square`
+
+```html
+<div class="spinner-self-building-square">
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-swapping-squares`
+
+```html
+<div class="spinner-swapping-squares">
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-fulfilling-bouncing-circle`
+
+```html
+<div class="spinner-fulfilling-bouncing-circle" />
+```
+
+#### `spinner-fingerprint`
+
+```html
+<div class="spinner-fingerprint">
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-spring`
+
+```html
+<div class="spinner-spring">
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-atom`
+
+```html
+<div class="spinner-atom">
+  <div>
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+```
+
+#### `spinner-looping-rhombuses`
+
+```html
+<div class="spinner-looping-rhombuses">
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+#### `spinner-breeding-rhombus`
+
+```html
+<div class="spinner-breeding-rhombus">
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+```
+
+### Utility
+
+#### Size
+
+The `spinner-size-*` utility class allows you to quickly define the size of a spinner.
+
+It follows a similar pattern to [Tailwind CSS spacing](https://tailwindcss.com/docs/theme#spacing) utilities.
+
+```html
+<div class="spinner-fulfilling-square spinner-size-16" />
+```
+
+Using arbitrary values:
+
+```html
+<div class="spinner-fulfilling-square spinner-size-[70px]" />
+```
+
+#### Duration
+
+The `spinner-duration-*` utility class allows you control the duration.
+
+It follows also a similar pattern to [Tailwind CSS Transition duration](https://tailwindcss.com/docs/transition-duration) utilities.
+
+```html
+<div class="spinner-fulfilling-square spinner-duration-1000" />
+```
+
+Using arbitrary values:
+
+```html
+<div class="spinner-fulfilling-square spinner-duration-[2.5s]" />
+```
+
+#### Color
+
+Color can be controlled by [Tailwind CSS Text Color utility](https://tailwindcss.com/docs/text-color).
+
+```html
+<div class="spinner-fulfilling-square text-sky-600" />
+```
+
+Color follows `currentColor`, so any Tailwind text-color utility works (including arbitrary values and responsive prefixes).
+
+## Credits
+
+Spinner designs by [EpicMax / epic-spinners](https://github.com/epicmaxco/epic-spinners). This package re-implements them as a Tailwind plugin.
 
 ## License
 
-[MIT](./LICENSE) License
+[MIT](./LICENSE)
