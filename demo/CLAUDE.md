@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Read and follow the shared project instructions in [../AGENTS.md](../AGENTS.md),
+including required testing, browser verification when needed, and focused commits.
+
+@../AGENTS.md
+
 ## What this is
 
 The marketing / documentation / playground site for the [`tw-epic-spinners`](https://www.npmjs.com/package/tw-epic-spinners) Tailwind CSS plugin. The plugin itself lives in the parent repo (`../`); this `demo/` package consumes it as a regular npm dependency and ships as a static site to Netlify.
