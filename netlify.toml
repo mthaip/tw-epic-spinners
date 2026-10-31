@@ -7,6 +7,12 @@
   NODE_VERSION = "24"
   YARN_VERSION = "1.22.22"
 
+[context.deploy-preview.environment]
+  NUXT_SITE_ENV = "preview"
+
+[context.branch-deploy.environment]
+  NUXT_SITE_ENV = "preview"
+
 [dev]
   framework = "#custom"
   command = "yarn dev"

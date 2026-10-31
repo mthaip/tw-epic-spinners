@@ -1,71 +1,44 @@
 # tw-epic-spinners v2
 
-20 composable, pure-CSS loading spinners as a Tailwind CSS plugin for v3 and v4.
-Inspired by EpicMax / epic-spinners: https://github.com/epicmaxco/epic-spinners
+> 20 composable, pure-CSS loading spinners for Tailwind CSS v3 and v4. Framework-agnostic and MIT licensed. Start with a baseline, add or remove items, and make it your own.
 
-## Installation
+This site documents version 2.0.0. Use the v2 documentation for current markup;
+v1 examples and the removed creator() helper are not compatible with v2.
+The spinner animations require modern CSS sibling-count() and sibling-index().
+These became Baseline Newly available in August 2026; older browsers may not work.
+Tailwind v3 compatibility does not imply older-browser support.
 
-npm install -D tw-epic-spinners@2.0.0
-Tailwind v4: @import "tailwindcss"; @plugin "tw-epic-spinners";
-Tailwind v3: import spinners from 'tw-epic-spinners'; add it to plugins.
+## Documentation
 
-## Composable Approach
+- [Complete v2 documentation, Markdown](https://tw-epic-spinners.mthaip.com/docs.md): Installation for Tailwind v3/v4, composable markup, size/duration syntax, accessibility, browser requirements, migration, and baseline HTML for all 20 spinners.
+- [v2 documentation, HTML](https://tw-epic-spinners.mthaip.com/docs): The same documentation with highlighted code and links to the Lab.
+- [Installation](https://tw-epic-spinners.mthaip.com/docs#installation): Install tw-epic-spinners@2.0.0 and register the Tailwind plugin.
+- [Composable Approach](https://tw-epic-spinners.mthaip.com/docs#composable-approach): A spinner-<name> container with repeated direct spinner-item children. CSS adapts layout and animation to their count; keep unrelated siblings and loading labels outside.
+- [Utils](https://tw-epic-spinners.mthaip.com/docs#utils): spinner-size-* follows Tailwind size-* for the whole footprint; spinner-duration-* follows duration-* for animation cycles. Use text-* for color. Tailwind v4 supports numeric, arbitrary, and CSS-variable values; v3 uses configured scales and arbitrary values.
+- [Compatibility](https://tw-epic-spinners.mthaip.com/docs#compatibility): Browser requirements and Baseline status.
+- [Accessibility](https://tw-epic-spinners.mthaip.com/docs#accessibility): Decorative spinners use aria-hidden="true" with a separate accessible loading label. Animations pause for prefers-reduced-motion.
+- [Migration from v1](https://tw-epic-spinners.mthaip.com/docs#migration-from-v1): Replace creator() and fixed markup with ordinary HTML or templates containing spinner-item children. Size now describes the whole spinner.
 
-The container uses spinner-<name>. Repeated direct children use spinner-item.
-Add or remove items; CSS automatically adjusts layout and animation.
-Keep unrelated siblings and loading labels outside the container.
+## Examples and Lab
 
-<div class="spinner-flower spinner-size-16 text-violet-500" aria-hidden="true">
-  <div class="spinner-item"></div>
-  <div class="spinner-item"></div>
-  <div class="spinner-item"></div>
-</div>
+- [Spinner collection](https://tw-epic-spinners.mthaip.com/#collections): All 20 baseline designs.
+- [Live HTML Lab](https://tw-epic-spinners.mthaip.com/labs): Edit, format, copy, and reset markup with a sandboxed preview. Size/duration utilities compile live; there is no CSS tab.
+- [Flower baseline in the Lab](https://tw-epic-spinners.mthaip.com/labs?spinner=flower): Select any catalogue name with the spinner query parameter. Invalid or missing names fall back to flower; markup formats automatically on load, selection, and reset.
 
-## Utils
-
-spinner-size-* follows Tailwind size-* and sets the overall spinner footprint.
-spinner-duration-* follows Tailwind duration-* and sets the animation cycle.
-Examples: spinner-size-16, spinner-size-[72px], spinner-duration-3500,
-spinner-duration-[2.5s], md:spinner-size-24. Tailwind v4 also supports
-spinner-size-(--loader-size) and spinner-duration-(--loader-duration).
-Tailwind v3 uses configured spacing/duration scales; brackets allow custom values.
-Use text-* for color. Animations pause for prefers-reduced-motion.
-Set aria-hidden="true" on decorative spinners and provide a separate loading label.
-
-## Compatibility
-
-Last checked 2026-10-31. sibling-count() and sibling-index() became Baseline
-Newly available in August 2026. Older browsers may not work. Use at your own risk.
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-count
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-index
-
-## Migration from v1
-
-Keep the plugin registration. Replace creator() with ordinary HTML or templates.
-Replace the old structure with direct spinner-item children; size now refers to
-the whole spinner.
-Before: <div class="spinner-half-circle spinner-size-12"></div>
-After: <div class="spinner-half-circle spinner-size-12"><div class="spinner-item"></div><div class="spinner-item"></div></div>
-Previous docs: https://tw-epic-spinners-v1.mthaip.com/docs
-
-## Baseline spinners and Lab
-
-The 20 designs are flower, pixel, hollow-dots, intersecting-circles, orbit, radar,
+The designs are flower, pixel, hollow-dots, intersecting-circles, orbit, radar,
 scaling-squares, half-circle, trinity-rings, fulfilling-square,
 circles-to-rhombuses, semipolar, self-building-square, swapping-squares,
 fulfilling-bouncing-circle, fingerprint, spring, atom, looping-rhombuses,
-and breeding-rhombus.
+and breeding-rhombus. Copy complete baseline markup from the documentation;
+keep at least its item count when preserving the supplied appearance.
 
-Each baseline code block has a Try it out link to /labs?spinner=<name>.
-Lab validates the query, preselects the spinner, and formats its baseline markup
-on load, selection, and reset.
-Invalid or missing names fall back to flower. Edit HTML with live preview;
-Format, Copy, and Reset act on the markup. Size/duration classes compile live.
+## Project
 
-## Links
+- [npm package](https://www.npmjs.com/package/tw-epic-spinners): Package versions and installation.
+- [Source code](https://github.com/mthaip/tw-epic-spinners): Tailwind plugin implementation, demo, and issues.
+- [MIT license](https://github.com/mthaip/tw-epic-spinners/blob/develop/LICENSE): License terms.
+- [Original inspiration: EpicMax / epic-spinners](https://github.com/epicmaxco/epic-spinners): Original spinner designs, reimplemented here as a composable Tailwind plugin.
 
-- Docs: https://tw-epic-spinners.mthaip.com/docs
-- Lab: https://tw-epic-spinners.mthaip.com/labs
-- Source: https://github.com/mthaip/tw-epic-spinners
-- npm: https://www.npmjs.com/package/tw-epic-spinners
-- License: MIT
+## Optional
+
+- [Archived v1 documentation](https://tw-epic-spinners-v1.mthaip.com/docs): Historical reference for v1 only; use the migration guide for upgrading.

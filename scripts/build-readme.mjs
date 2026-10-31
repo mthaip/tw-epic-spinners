@@ -38,6 +38,10 @@ const body = readFileSync(source, 'utf8').trimEnd().replace(
 writeFileSync(target, header + body + footer);
 console.log(`README.md generated from ${source}`);
 
+const markdownTarget = resolve(root, 'demo/public/docs.md');
+writeFileSync(markdownTarget, `# ${pkg.name} v${pkg.version} documentation\n\n${body}\n`);
+console.log(`Markdown docs generated at ${markdownTarget}`);
+
 const llmsTarget = resolve(root, 'demo/public/llms.txt');
 writeFileSync(llmsTarget, readFileSync(llmsSource, 'utf8'));
 console.log(`llms.txt copied to ${llmsTarget}`);

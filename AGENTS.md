@@ -23,7 +23,7 @@ implementation. There is no hostname routing or second demo app.
 - `demo/content/documentation.md`: source for site docs and the generated root
   `README.md`, including the v1-to-v2 migration guide. Edit this source, not README.
 - `scripts/build-readme.mjs`: generates README and copies root `llms.txt` into
-  `demo/public/llms.txt`.
+  `demo/public/llms.txt`; also generates `demo/public/docs.md` from the same docs.
 - `scripts/build-demo.mjs`: builds the linked plugin, optionally installs demo
   dependencies, and builds the Netlify SSR server plus public assets. The demo
   build does not run cleanup; use `yarn nuxt cleanup` from `demo/` separately when needed.
@@ -157,6 +157,17 @@ this automatically. Building a release does not publish it to npm.
   are Docs and Lab. The visible brand is `tw-epic-spinners`, with `epic` in the
   primary color; the version button uses primary/subtle. Read the current version from root `package.json`.
 - **Metadata**: Nuxt's site URL and name come from the root plugin's `package.json`.
+- **SEO and AI discovery**: Keep v2 route titles/descriptions in `data/routes.ts`.
+  The shared layout emits canonical URLs without queries, Open Graph/Twitter tags,
+  and factual WebSite/SoftwareSourceCode/WebPage JSON-LD. Keep the static 1200×630
+  social card consistent with the release. Nuxt Robots owns meta/header directives;
+  `server/plugins/robots-errors.ts` overrides error responses to `noindex`.
+  `public/_robots.txt` permits crawling in production, while development and Netlify
+  previews stay non-indexable. The sitemap has no XSL and lists real page routes,
+  excluding the Content source path `/documentation` and old `/playground` route.
+  `/playground` redirects permanently to `/labs`. Regenerate `/docs.md` and
+  `/llms.txt` with `yarn npm:build:readme`; edit their source files, not public copies.
+  Treat llms.txt as supplemental guidance, not an indexing or ranking guarantee.
 - **SSR deployment**: `ssr: true` with Nitro's `netlify` preset. `nuxt build`
   writes public assets to `demo/dist/` and the server to
   `demo/.netlify/functions-internal/server/` with the installed Nitro version.

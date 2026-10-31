@@ -22,19 +22,35 @@ export default defineNuxtConfig({
   // The script-free preview has an opaque origin and loads these public assets.
   routeRules: {
     '/_fonts/**': { headers: { 'Access-Control-Allow-Origin': '*' } },
+    '/docs.md': {
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Link': `<${mainPkgJson.homepage}/docs>; rel="canonical"`,
+      },
+    },
+    '/playground': { redirect: { to: '/labs', statusCode: 301 } },
   },
 
   modules: [
     '@nuxt/ui',
     '@nuxt/eslint',
-    '@nuxt/content',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
+    '@nuxt/content',
   ],
 
   site: {
     url: mainPkgJson.homepage,
     name: mainPkgJson.name,
+    description: mainPkgJson.description,
+    defaultLocale: 'en',
+  },
+
+  sitemap: {
+    xsl: false,
+    // The Markdown source renders at /docs, not its Content path /documentation.
+    excludeAppSources: ['@nuxt/content@v3:urls'],
+    exclude: ['/playground', '/documentation'],
   },
 
   content: {

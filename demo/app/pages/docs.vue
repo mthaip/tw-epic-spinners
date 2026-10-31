@@ -13,6 +13,7 @@ if (!content.value) throw createError({ statusCode: 404, statusMessage: 'Documen
   <UContainer>
     <UPage>
       <UPageBody>
+        <h1 class="sr-only">tw-epic-spinners v2 documentation</h1>
         <UContentToc :links="content?.body.toc?.links" class="lg:hidden" />
         <ContentRenderer v-if="content" :value="content" :components="{ pre: DocsCodeBlock, h2: DocsHeading }" />
       </UPageBody>
