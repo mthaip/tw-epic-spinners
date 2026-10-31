@@ -1,5 +1,6 @@
 <template>
   <main class="bg-base-100 flex min-h-screen flex-col scroll-smooth">
+    <VersionAnnouncement />
     <VersionBanner />
     <AppNavigation />
 
