@@ -12,7 +12,7 @@
     "llms.txt"
   ],
   "description": "20 composable pure-CSS loading spinners for Tailwind CSS v3 and v4. Add named parts; CSS automatically adapts layout and animation to their count.",
-  "author": "mthaip <fanmt.fmt@gmail.com>",
+  "author": "mthaip <mthaipx@gmail.com>",
   "homepage": "https://tw-epic-spinners.mthaip.com",
   "url": "https://github.com/mthaip/tw-epic-spinners",
   "repository": {
