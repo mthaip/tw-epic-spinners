@@ -1,13 +1,12 @@
 <template>
-  <Html :data-theme="theme">
+  <UApp>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </Html>
+  </UApp>
 </template>
 
 <script setup lang="ts">
-import useTheme from '~/composable/useTheme';
-
-const theme = useTheme();
+import useThemeFavicon from '~/composable/useThemeFavicon';
+useThemeFavicon();
 </script>

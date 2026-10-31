@@ -1,0 +1,3 @@
+# Nuxt Robots merges this with the sitemap and environment-specific rules.
+User-agent: *
+Allow: /

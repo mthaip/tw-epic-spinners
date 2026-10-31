@@ -1,35 +1,25 @@
 export const routes = [
   {
     path: '/',
-    name: 'Home',
-    // component: Home,
-    icon: 'icon-[lucide--house]',
     meta: {
-      title: 'Tailwind Epic Spinners',
+      title: 'tw-epic-spinners v2 · Composable Tailwind CSS spinners',
       description:
-        'Welcome to Tailwind Epic Spinners – Beautiful, customizable CSS spinners built with Tailwind CSS.',
+        '20 composable, pure-CSS loading spinners for Tailwind CSS v3 and v4. Start with a baseline, add or remove items, and make it your own.',
     },
   },
   {
     path: '/docs',
-    name: 'Docs',
-    // component: Documentation,
-    icon: 'icon-[lucide--book-open-text]',
     meta: {
-      title: 'Docs · Tailwind Epic Spinners',
+      title: 'v2 Docs · tw-epic-spinners',
       description:
-        'Explore the documentation for Tailwind Epic Spinners to learn how to install, customize, and integrate spinners in your project.',
+        'Install tw-epic-spinners v2, compose spinner-item markup, customize size and duration, and migrate from v1. Includes all 20 baseline spinners.',
     },
   },
   {
-    path: '/playground',
-    name: 'Playground',
-    // component: Playground,
-    icon: 'icon-[lucide--codesandbox]',
+    path: '/labs',
     meta: {
-      title: 'Playground · Tailwind Epic Spinners',
-      description:
-        'Try out and customize your favorite spinner components in our interactive playground.',
+      title: 'Spinner Lab · tw-epic-spinners v2',
+      description: 'Build a custom Tailwind CSS spinner in the v2 Lab. Edit HTML, add or remove spinner items, and preview size and animation duration changes live.',
     },
   },
 ] as const;

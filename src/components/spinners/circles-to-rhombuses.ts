@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_CIRCLES_TO_RHOMBUSES = 'spinner-circles-to-rhombuses';
 
@@ -9,7 +16,7 @@ const CIRCLES_TO_RHOMBUSES_ANIMATION = {
 } as const;
 
 // ! Loop does not work
-const circlesToRhombusesKeyframes = {
+const circlesToRhombusesKeyframes: CSSRules = {
   [`@keyframes ${CIRCLES_TO_RHOMBUSES_ANIMATION.MAIN}`]: {
     '0%': { borderRadius: '10%' },
     '17.5%': { borderRadius: '10%' },
@@ -19,50 +26,33 @@ const circlesToRhombusesKeyframes = {
   },
 };
 
-const circlesToRhombusesCSS = {
-  height: `var(${SPINNER_SIZE_VAR})`,
-  width: `calc((var(${SPINNER_SIZE_VAR}) + var(${SPINNER_SIZE_VAR}) * 1.125) * 3)`,
+const circlesToRhombusesCSS: CSSRules = {
+  height: size,
+  width: size,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 
-  '& > div': {
-    width: `var(${SPINNER_SIZE_VAR})`,
-    height: `var(${SPINNER_SIZE_VAR})`,
-    marginLeft: `calc(var(${SPINNER_SIZE_VAR}) * 1.125)`,
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--shape-size': `calc(${size} / (2.125 * ${count}))`,
+    width: 'var(--shape-size)',
+    height: 'var(--shape-size)',
+    flex: 'none',
+    marginLeft: 'calc(var(--shape-size) * 1.125)',
     transform: 'rotate(45deg)',
     borderRadius: '10%',
-    border: `calc(var(${SPINNER_SIZE_VAR}) / 5) solid currentColor`,
+    border: 'calc(var(--shape-size) / 5) solid currentColor',
     overflow: 'hidden',
     background: 'transparent',
-    animation: `${CIRCLES_TO_RHOMBUSES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,
+    animation: `${CIRCLES_TO_RHOMBUSES_ANIMATION.MAIN} ${duration} linear infinite`,
+    animationDelay: `calc(${duration} * 0.375 * (${index} + 1) / ${count})`,
 
-    '&:nth-child(1)': {
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) / 8 * 1)`,
-      marginLeft: '0',
-    },
-    '&:nth-child(2)': {
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) / 8 * 2)`,
-    },
-    '&:nth-child(3)': {
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) / 8 * 3)`,
-    },
+    '&:where(:first-child)': { marginLeft: '0' },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_CIRCLES_TO_RHOMBUSES} ${classes}">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_CIRCLES_TO_RHOMBUSES,
-  components: circlesToRhombusesCSS,
+  styles: circlesToRhombusesCSS,
   keyframes: circlesToRhombusesKeyframes,
-  creator,
-};
+});

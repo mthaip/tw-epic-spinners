@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_ORBIT = 'spinner-orbit';
 
@@ -10,7 +17,7 @@ const ORBIT_ANIMATION = {
   THIRD: buildSpinnerAnimationName(SPINNER_ORBIT, 'third'),
 } as const;
 
-const orbitKeyframes = {
+const orbitKeyframes: CSSRules = {
   [`@keyframes ${ORBIT_ANIMATION.FIRST}`]: {
     '0%': { transform: 'rotateX(35deg) rotateY(-45deg) rotateZ(0deg)' },
     '100%': { transform: 'rotateX(35deg) rotateY(-45deg) rotateZ(360deg)' },
@@ -25,55 +32,48 @@ const orbitKeyframes = {
   },
 };
 
-const orbitCSS = {
-  width: `var(${SPINNER_SIZE_VAR})`,
-  height: `var(${SPINNER_SIZE_VAR})`,
+const orbitCSS: CSSRules = {
+  width: size,
+  height: size,
   borderRadius: '50%',
-  perspective: '800px', // ? what is this
+  perspective: '800px',
 
-  '& > div': {
+  [`& > :where(.${SPINNER_ITEM})`]: {
     position: 'absolute',
     boxSizing: 'border-box',
     width: '100%',
     height: '100%',
     borderRadius: '50%',
+    '--borderWidth': `calc(${size} / 18.3)`,
 
-    '--borderWidth': `calc(var(${SPINNER_SIZE_VAR}) / 18.3)`,
-
-    '&:nth-child(1)': {
+    // Repeat the three original roles, rather than inventing a new orbit.
+    '&:where(:nth-child(3n+1))': {
       left: '0%',
       top: '0%',
-      animation: `${ORBIT_ANIMATION.FIRST} var(${SPINNER_DURATION_VAR}) linear infinite`,
+      animation: `${ORBIT_ANIMATION.FIRST} ${duration} linear infinite`,
       borderBottom: 'var(--borderWidth) solid currentColor',
     },
-    '&:nth-child(2)': {
+    '&:where(:nth-child(3n+2))': {
       right: '0%',
       top: '0%',
-      animation: `${ORBIT_ANIMATION.SECOND} var(${SPINNER_DURATION_VAR}) linear infinite`,
+      animation: `${ORBIT_ANIMATION.SECOND} ${duration} linear infinite`,
       borderRight: 'var(--borderWidth) solid currentColor',
     },
-    '&:nth-child(3)': {
+    '&:where(:nth-child(3n))': {
       right: '0%',
       bottom: '0%',
-      animation: `${ORBIT_ANIMATION.THIRD} var(${SPINNER_DURATION_VAR}) 1200ms linear infinite`,
+      animation: `${ORBIT_ANIMATION.THIRD} ${duration} 1200ms linear infinite`,
       borderTop: 'var(--borderWidth) solid currentColor',
+    },
+    // Additional items retain those roles, with a count-derived phase.
+    '&:where(:nth-child(n+4))': {
+      animationDelay: `calc(-1 * ${duration} * ${index} / ${count})`,
     },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_ORBIT} ${classes}">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_ORBIT,
-  components: orbitCSS,
+  styles: orbitCSS,
   keyframes: orbitKeyframes,
-  creator,
-};
+});

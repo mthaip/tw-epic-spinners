@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_FULFILLING_BOUNCING_CIRCLE = 'spinner-fulfilling-bouncing-circle';
 
@@ -13,7 +20,7 @@ const FULFILLING_BOUNCING_CIRCLE_ANIMATION = {
   ),
 } as const;
 
-const fulfillingBouncingCircleKeyframes = {
+const fulfillingBouncingCircleKeyframes: CSSRules = {
   [`@keyframes ${FULFILLING_BOUNCING_CIRCLE_ANIMATION.MAIN}`]: {
     '0%': { transform: 'rotate(0deg)' },
     '100%': { transform: 'rotate(360deg)' },
@@ -55,50 +62,42 @@ const fulfillingBouncingCircleKeyframes = {
   },
 };
 
-const fulfillingBouncingCircleCSS = {
-  height: `var(${SPINNER_SIZE_VAR})`,
-  width: `var(${SPINNER_SIZE_VAR})`,
-  position: 'relative',
-  animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.MAIN} infinite var(${SPINNER_DURATION_VAR}) ease`,
-
-  '&::before, &::after': {
-    content: '""',
+const fulfillingBouncingCircleCSS: CSSRules = {
+  height: size,
+  width: size,
+  animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.MAIN} infinite ${duration} ease`,
+  [`& > :where(.${SPINNER_ITEM})`]: {
     display: 'block',
-  },
-
-  '&::before': {
-    height: `var(${SPINNER_SIZE_VAR})`,
-    width: `var(${SPINNER_SIZE_VAR})`,
-    border: `calc(var(${SPINNER_SIZE_VAR}) * 0.1) solid currentColor`,
-    color: 'currentColor',
-    display: 'block',
-    borderRadius: '50%',
-    position: 'relative',
-    transform: 'rotate(0deg) scale(1)',
-    animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.FIRST} infinite var(${SPINNER_DURATION_VAR}) ease`,
-  },
-
-  '&::after': {
-    height: `var(${SPINNER_SIZE_VAR})`,
-    width: `var(${SPINNER_SIZE_VAR})`,
-    border: `calc(var(${SPINNER_SIZE_VAR}) * 0.03) solid currentColor`,
     position: 'absolute',
     top: '0',
     left: '0',
+    width: size,
+    height: size,
     borderRadius: '50%',
-    animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.SECOND} infinite var(${SPINNER_DURATION_VAR}) ease`,
+
+    '&:where(:nth-child(odd))': {
+      border: `calc(${size} * 0.1) solid currentColor`,
+      transform: 'rotate(0deg) scale(1)',
+      animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.FIRST} infinite ${duration} ease`,
+    },
+
+    '&:where(:nth-child(even))': {
+      border: `calc(${size} * 0.03) solid currentColor`,
+      animation: `${FULFILLING_BOUNCING_CIRCLE_ANIMATION.SECOND} infinite ${duration} ease`,
+    },
+
+    '&:where(:nth-child(n+3))': {
+      inset: '0',
+      margin: 'auto',
+      width: `calc(${size} * 2 / (${index} + 1))`,
+      height: `calc(${size} * 2 / (${index} + 1))`,
+      animationDelay: `calc(-1 * ${duration} * ${index} / ${count})`,
+    },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_FULFILLING_BOUNCING_CIRCLE} ${classes}"></div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_FULFILLING_BOUNCING_CIRCLE,
-  components: fulfillingBouncingCircleCSS,
+  styles: fulfillingBouncingCircleCSS,
   keyframes: fulfillingBouncingCircleKeyframes,
-  creator,
-};
+});

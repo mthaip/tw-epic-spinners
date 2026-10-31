@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_INTERSECTING_CIRCLES = 'spinner-intersecting-circles';
 
@@ -8,98 +15,42 @@ const INTERSECTING_CIRCLES_ANIMATION = {
   MAIN: buildSpinnerAnimationName(SPINNER_INTERSECTING_CIRCLES),
 };
 
-const intersectingCirclesKeyframes = {
+const intersectingCirclesKeyframes: CSSRules = {
   [`@keyframes ${INTERSECTING_CIRCLES_ANIMATION.MAIN}`]: {
     from: { transform: 'rotate(0deg)' },
     to: { transform: 'rotate(360deg)' },
   },
 };
 
-const intersectingCirclesCSS = {
-  width: `var(${SPINNER_SIZE_VAR})`,
-  height: `var(${SPINNER_SIZE_VAR})`,
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
+const intersectingCirclesCSS: CSSRules = {
+  width: size,
+  height: size,
+  animation: `${INTERSECTING_CIRCLES_ANIMATION.MAIN} ${duration} linear infinite`,
 
-  '--halfSpinnerSize': `calc(var(${SPINNER_SIZE_VAR}) / 2)`,
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--circle-radius-x': `calc(${size} * 0.18 / cos(30deg))`,
+    '--circle-radius-y': `calc(${size} * 0.2)`,
+    '--circle-angle': `calc(150deg + 360deg * (${index} - 1) / max(1, ${count} - 1))`,
+    position: 'absolute',
+    inset: '0',
+    margin: 'auto',
+    height: `calc(${size} / 2)`,
+    width: `calc(${size} / 2)`,
+    border: `calc(${size} / 35) solid currentColor`,
+    borderRadius: '50%',
+    // V1 has a centre circle and six outer circles. Only the outer ring grows.
+    transform: `translate(calc(cos(var(--circle-angle)) * var(--circle-radius-x)), calc(sin(var(--circle-angle)) * var(--circle-radius-y)))`,
 
-  '& > div': {
-    transformOrigin: 'center',
-    display: 'block',
-    height: 'var(--halfSpinnerSize)',
-    width: 'var(--halfSpinnerSize)',
-    animation: `${INTERSECTING_CIRCLES_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,
-
-    '& > div': {
-      display: 'block',
-      border: `calc(var(${SPINNER_SIZE_VAR}) / 35) solid currentColor`,
-      borderRadius: '50%',
-      height: '100%',
-      width: '100%',
-      position: 'absolute',
-      left: '0',
-      top: '0',
-
-      '&:nth-child(1)': {
-        left: '0',
-        top: '0',
-      },
-
-      '&:nth-child(2)': {
-        left: 'calc(var(--halfSpinnerSize) * -0.36)',
-        top: 'calc(var(--halfSpinnerSize) * 0.2)',
-      },
-
-      '&:nth-child(3)': {
-        left: 'calc(var(--halfSpinnerSize) * -0.36)',
-        top: 'calc(var(--halfSpinnerSize) * -0.2)',
-      },
-
-      '&:nth-child(4)': {
-        left: '0',
-        top: 'calc(var(--halfSpinnerSize) * -0.36)',
-      },
-
-      '&:nth-child(5)': {
-        left: 'calc(var(--halfSpinnerSize) * 0.36)',
-        top: 'calc(var(--halfSpinnerSize) * -0.2)',
-      },
-
-      '&:nth-child(6)': {
-        left: 'calc(var(--halfSpinnerSize) * 0.36)',
-        top: 'calc(var(--halfSpinnerSize) * 0.2)',
-      },
-
-      '&:nth-child(7)': {
-        left: '0',
-        top: 'calc(var(--halfSpinnerSize) * 0.36)',
-      },
+    '&:where(:nth-child(3n+1))': {
+      '--circle-radius-y': `calc(${size} * 0.18)`,
     },
+
+    '&:where(:first-child)': { transform: 'none' },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_INTERSECTING_CIRCLES} ${classes}">
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_INTERSECTING_CIRCLES,
-  components: intersectingCirclesCSS,
+  styles: intersectingCirclesCSS,
   keyframes: intersectingCirclesKeyframes,
-  creator,
-};
+});

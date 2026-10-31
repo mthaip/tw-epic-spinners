@@ -1,0 +1,805 @@
+[
+  {
+    "id": "default",
+    "name": "Default",
+    "description": "The stock theme, everything inherited.",
+    "font": {
+      "sans": "Public Sans"
+    },
+    "ui": {
+      "colors": {
+        "primary": "green",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "slate"
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Public Sans', sans-serif;\n}"
+  },
+  {
+    "id": "mono",
+    "name": "Mono",
+    "description": "Black on a pure gray neutral, generous radius, quiet surfaces.",
+    "font": {
+      "sans": "Geist",
+      "mono": "Geist Mono"
+    },
+    "ui": {
+      "colors": {
+        "primary": "green",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "neutral"
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Geist', sans-serif;\n  --font-mono: 'Geist Mono', monospace;\n}\n\n:root {\n  --ui-radius: 0.5rem;\n  --ui-primary: black;\n}\n\n:root, .light {\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-bg-elevated: var(--ui-color-neutral-100);\n  --ui-bg-accented: var(--ui-color-neutral-200);\n  --ui-text: var(--ui-color-neutral-900);\n  --ui-text-highlighted: var(--ui-color-neutral-950);\n}\n\n.dark {\n  --ui-bg: var(--ui-color-neutral-950);\n  --ui-bg-muted: var(--ui-color-neutral-900);\n  --ui-bg-elevated: var(--ui-color-neutral-900);\n  --ui-bg-accented: var(--ui-color-neutral-800);\n  --ui-text: var(--ui-color-neutral-100);\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-primary: white;\n}"
+  },
+  {
+    "id": "cobalt",
+    "name": "Cobalt",
+    "description": "Utility blue on cool grays, tight corners, flat bordered surfaces.",
+    "font": {
+      "sans": "Roboto"
+    },
+    "ui": {
+      "colors": {
+        "primary": "cobalt",
+        "secondary": "cobalt-gray",
+        "success": "green",
+        "info": "cyan",
+        "warning": "amber",
+        "error": "red",
+        "neutral": "cobalt-gray"
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Roboto', sans-serif;\n}\n\n:root {\n  --color-cobalt-50: oklch(95.3% 0.022 260.723);\n  --color-cobalt-100: oklch(90.8% 0.045 258.763);\n  --color-cobalt-200: oklch(81.6% 0.091 257.776);\n  --color-cobalt-300: oklch(72.9% 0.14 258.068);\n  --color-cobalt-400: oklch(64.7% 0.186 258.256);\n  --color-cobalt-500: oklch(57.8% 0.228 260.025);\n  --color-cobalt-600: oklch(49.2% 0.19 259.799);\n  --color-cobalt-700: oklch(40.2% 0.152 259.656);\n  --color-cobalt-800: oklch(30.7% 0.109 258.934);\n  --color-cobalt-900: oklch(20.4% 0.063 257.52);\n  --color-cobalt-950: oklch(14.7% 0.037 249.929);\n  --color-cobalt-gray-50: oklch(99.1% 0 0);\n  --color-cobalt-gray-100: oklch(98.2% 0.002 247.839);\n  --color-cobalt-gray-200: oklch(94.2% 0.005 247.879);\n  --color-cobalt-gray-300: oklch(91.1% 0.007 247.901);\n  --color-cobalt-gray-400: oklch(86.7% 0.011 247.949);\n  --color-cobalt-gray-500: oklch(76.9% 0.015 248.017);\n  --color-cobalt-gray-600: oklch(55.8% 0.016 244.893);\n  --color-cobalt-gray-700: oklch(42.8% 0.015 248.172);\n  --color-cobalt-gray-800: oklch(34.5% 0.013 248.212);\n  --color-cobalt-gray-900: oklch(26.2% 0.009 248.19);\n  --color-cobalt-gray-950: oklch(20.7% 0.008 248.192);\n}\n\n@layer base {\n  html {\n    font-size: 15px;\n  }\n}\n\n:root {\n  --ui-radius: 0.125rem;\n}\n\n:root, .light {\n  --ui-secondary: var(--ui-color-secondary-600);\n  --ui-bg-muted: var(--ui-color-neutral-200);\n  --ui-text: var(--ui-color-neutral-800);\n  --ui-border: var(--ui-color-neutral-400);\n  --ui-border-muted: var(--ui-color-neutral-300);\n  --ui-bg: var(--ui-color-neutral-100);\n  --ui-text-toned: var(--ui-color-neutral-700);\n  --ui-text-muted: var(--ui-color-neutral-600);\n  --ui-text-dimmed: var(--ui-color-neutral-600);\n  --ui-bg-elevated: var(--ui-color-neutral-200);\n  --ui-bg-accented: var(--ui-color-neutral-300);\n}\n\n.dark {\n  --ui-primary: var(--ui-color-primary-500);\n  --ui-secondary: var(--ui-color-secondary-500);\n  --ui-success: var(--ui-color-success-500);\n  --ui-info: var(--ui-color-info-500);\n  --ui-warning: var(--ui-color-warning-500);\n  --ui-error: var(--ui-color-error-500);\n  --ui-bg-muted: var(--ui-color-neutral-700);\n  --ui-text: var(--ui-color-neutral-300);\n  --ui-border: var(--ui-color-neutral-800);\n  --ui-border-muted: var(--ui-color-neutral-700);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-text-toned: var(--ui-color-neutral-300);\n  --ui-text-muted: var(--ui-color-neutral-400);\n  --ui-text-dimmed: var(--ui-color-neutral-500);\n  --ui-bg-elevated: var(--ui-color-neutral-800);\n  --ui-bg-accented: var(--ui-color-neutral-700);\n}"
+  },
+  {
+    "id": "sky",
+    "name": "Sky",
+    "description": "Sky blue on a mist neutral, pastel fills everywhere, airy type.",
+    "font": {
+      "sans": "Figtree",
+      "lineHeight": 1.6
+    },
+    "ui": {
+      "colors": {
+        "primary": "sky",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "mist"
+      },
+      "button": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "badge": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Figtree', sans-serif;\n}\n\n@layer base {\n  body {\n    line-height: 1.6;\n  }\n}\n\n:root {\n  --ui-radius: 0.75rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n}\n\n.dark {\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n}"
+  },
+  {
+    "id": "mint",
+    "name": "Mint",
+    "description": "Teal on an olive neutral, pill buttons and fields, chunky rounded type, large controls.",
+    "font": {
+      "sans": "Nunito",
+      "weights": {
+        "normal": 500,
+        "medium": 600,
+        "semibold": 700,
+        "bold": 800
+      }
+    },
+    "ui": {
+      "colors": {
+        "primary": "teal",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "olive"
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        },
+        "slots": {
+          "base": "rounded-full"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        },
+        "slots": {
+          "base": "rounded-full"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        },
+        "slots": {
+          "base": "rounded-full"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        },
+        "slots": {
+          "base": "rounded-full"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "soft",
+          "size": "lg"
+        }
+      },
+      "button": {
+        "defaultVariants": {
+          "size": "lg"
+        },
+        "slots": {
+          "base": "rounded-full"
+        }
+      },
+      "badge": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "inputRating": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "tabs": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "checkbox": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "checkboxGroup": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "radioGroup": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "switch": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "slider": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "stepper": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "calendar": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "colorPicker": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "fileUpload": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "formField": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "fieldGroup": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "dropdownMenu": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "contextMenu": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "commandPalette": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      },
+      "listbox": {
+        "defaultVariants": {
+          "size": "lg"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Nunito', sans-serif;\n  --font-weight-normal: 500;\n  --font-weight-medium: 600;\n  --font-weight-semibold: 700;\n  --font-weight-bold: 800;\n}\n\n@layer base {\n  body {\n    font-weight: 500;\n  }\n}\n\n:root {\n  --ui-radius: 0.75rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n}\n\n.dark {\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n}"
+  },
+  {
+    "id": "iris",
+    "name": "Iris",
+    "description": "Violet outlines on a mauve neutral, fuchsia secondary, tinted fields.",
+    "font": {
+      "sans": "Manrope",
+      "letterSpacing": -0.01
+    },
+    "ui": {
+      "colors": {
+        "primary": "violet",
+        "secondary": "fuchsia",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "mauve"
+      },
+      "button": {
+        "defaultVariants": {
+          "variant": "outline"
+        }
+      },
+      "badge": {
+        "defaultVariants": {
+          "variant": "outline"
+        }
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Manrope', sans-serif;\n}\n\n@layer base {\n  body {\n    letter-spacing: -0.01em;\n  }\n}\n\n:root {\n  --ui-radius: 0.5rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n}\n\n.dark {\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n}"
+  },
+  {
+    "id": "crimson",
+    "name": "Crimson",
+    "description": "Cinema red on pure gray, square corners, filled fields, near-black in dark mode.",
+    "font": {
+      "sans": "Inter",
+      "weights": {
+        "semibold": 700,
+        "bold": 800
+      }
+    },
+    "ui": {
+      "colors": {
+        "primary": "red",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "neutral"
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "soft"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Inter', sans-serif;\n  --font-weight-semibold: 700;\n  --font-weight-bold: 800;\n}\n\n:root {\n  --ui-radius: 0rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n  --ui-primary: var(--ui-color-primary-600);\n}\n\n.dark {\n  --ui-bg: var(--ui-color-neutral-950);\n  --ui-bg-muted: var(--ui-color-neutral-900);\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-primary: var(--ui-color-primary-500);\n  --ui-bg-elevated: var(--ui-color-neutral-900);\n  --ui-bg-accented: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n}"
+  },
+  {
+    "id": "coral",
+    "name": "Coral",
+    "description": "Rose on warm stone, cards floating on shadows, teal for success, neutral focus rings.",
+    "font": {
+      "sans": "Plus Jakarta Sans"
+    },
+    "ui": {
+      "colors": {
+        "primary": "rose",
+        "secondary": "blue",
+        "success": "teal",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "stone"
+      },
+      "input": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "color": "neutral"
+        }
+      },
+      "card": {
+        "compoundVariants": [
+          {
+            "variant": "outline",
+            "class": {
+              "root": "ring-0 dark:ring shadow-xl shadow-black/5"
+            }
+          }
+        ]
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Plus Jakarta Sans', sans-serif;\n}\n\n:root {\n  --ui-radius: 0.5rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n}\n\n.dark {\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n}"
+  },
+  {
+    "id": "sunset",
+    "name": "Sunset",
+    "description": "Orange on a warm taupe neutral, glowing actions, yellow secondary, subtle panels.",
+    "font": {
+      "sans": "Bricolage Grotesque"
+    },
+    "ui": {
+      "colors": {
+        "primary": "orange",
+        "secondary": "yellow",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "taupe"
+      },
+      "card": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "alert": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "empty": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "button": {
+        "compoundVariants": [
+          {
+            "color": "primary",
+            "variant": "solid",
+            "class": "shadow-md shadow-primary/30"
+          }
+        ]
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Bricolage Grotesque', sans-serif;\n}\n\n:root {\n  --ui-radius: 0.625rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n  --ui-primary: var(--ui-color-primary-600);\n}\n\n.dark {\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n  --ui-primary: var(--ui-color-primary-400);\n}"
+  },
+  {
+    "id": "carbon",
+    "name": "Carbon",
+    "description": "Amber on a warm carbon neutral, with ink-dark borders throughout.",
+    "font": {
+      "sans": "Outfit"
+    },
+    "ui": {
+      "colors": {
+        "primary": "amber",
+        "secondary": "yellow",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "carbon"
+      },
+      "button": {
+        "defaultVariants": {
+          "variant": "solid"
+        }
+      },
+      "badge": {
+        "defaultVariants": {
+          "variant": "solid"
+        }
+      },
+      "card": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "alert": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "empty": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "input": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "select": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "textarea": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "selectMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputMenu": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputNumber": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTags": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputDate": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "inputTime": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      },
+      "pinInput": {
+        "defaultVariants": {
+          "variant": "subtle"
+        }
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Outfit', sans-serif;\n}\n\n:root {\n  --color-carbon-50: oklch(98.5% 0.017 447.457);\n  --color-carbon-100: oklch(95.9% 0.036 438.639);\n  --color-carbon-200: oklch(92.6% 0.054 428.8);\n  --color-carbon-300: oklch(87% 0.053 417.734);\n  --color-carbon-400: oklch(70.5% 0.032 405.184);\n  --color-carbon-500: oklch(55.3% 0.014 390.836);\n  --color-carbon-600: oklch(44.7% 0.001 374.343);\n  --color-carbon-700: oklch(35.9% 0 0);\n  --color-carbon-800: oklch(28% 0 0);\n  --color-carbon-900: oklch(20.8% 0 0);\n  --color-carbon-950: oklch(14.1% 0.005 285.805);\n}\n\n:root {\n  --ui-radius: 0.5rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-300);\n  --ui-bg-elevated: var(--ui-color-neutral-300);\n  --ui-bg-accented: var(--ui-color-neutral-400);\n  --ui-bg-inverted: var(--ui-color-neutral-900);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n  --ui-text-dimmed: var(--ui-color-neutral-500);\n  --ui-text-muted: var(--ui-color-neutral-800);\n  --ui-text-toned: var(--ui-color-neutral-900);\n  --ui-text: var(--ui-color-neutral-900);\n  --ui-text-highlighted: var(--ui-color-neutral-950);\n  --ui-border: var(--ui-color-neutral-950);\n  --ui-border-muted: var(--ui-color-neutral-400);\n  --ui-border-accented: var(--ui-color-neutral-950);\n  --ui-border-inverted: var(--ui-color-neutral-500);\n}\n\n.dark {\n  --ui-bg: var(--ui-color-neutral-800);\n  --ui-bg-muted: var(--ui-color-neutral-700);\n  --ui-bg-elevated: var(--ui-color-neutral-700);\n  --ui-bg-accented: var(--ui-color-neutral-600);\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-text-dimmed: var(--ui-color-neutral-400);\n  --ui-text-muted: var(--ui-color-neutral-300);\n  --ui-text-highlighted: var(--ui-color-neutral-100);\n  --ui-border: var(--ui-color-neutral-600);\n  --ui-border-accented: var(--ui-color-neutral-500);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n  --ui-text-toned: var(--ui-color-neutral-300);\n  --ui-text: var(--ui-color-neutral-200);\n  --ui-border-muted: var(--ui-color-neutral-700);\n}"
+  },
+  {
+    "id": "bubblegum",
+    "name": "Bubblegum",
+    "description": "Pastel pink softness with mauve-tinted grays.",
+    "font": {
+      "sans": "Poppins"
+    },
+    "ui": {
+      "colors": {
+        "primary": "pink",
+        "secondary": "violet",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "saturated-mauve"
+      }
+    },
+    "css": ":root {\n  --font-sans: 'Poppins', sans-serif;\n}\n\n:root {\n  --color-saturated-mauve-50: oklch(96.1% 0.021 325.68);\n  --color-saturated-mauve-100: oklch(92.4% 0.039 325.829);\n  --color-saturated-mauve-200: oklch(88% 0.057 325.83);\n  --color-saturated-mauve-300: oklch(81.2% 0.073 325.398);\n  --color-saturated-mauve-400: oklch(66.1% 0.084 323.292);\n  --color-saturated-mauve-500: oklch(52.4% 0.079 322.443);\n  --color-saturated-mauve-600: oklch(42.7% 0.064 322.128);\n  --color-saturated-mauve-700: oklch(34.6% 0.048 322.004);\n  --color-saturated-mauve-800: oklch(27.4% 0.034 321.983);\n  --color-saturated-mauve-900: oklch(20.7% 0.02 322.028);\n  --color-saturated-mauve-950: oklch(14.5% 0.008 322.12);\n}\n\n:root {\n  --ui-radius: 0.375rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-50);\n  --ui-text-inverted: var(--ui-color-neutral-50);\n  --ui-bg-muted: var(--ui-color-neutral-100);\n}\n\n.dark {\n  --ui-bg-inverted: var(--ui-color-neutral-50);\n  --ui-text-highlighted: var(--ui-color-neutral-50);\n  --ui-border-inverted: var(--ui-color-neutral-50);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-text-inverted: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n}"
+  },
+  {
+    "id": "parchment",
+    "name": "Parchment",
+    "description": "Warm parchment neutrals with a book-cloth clay primary.",
+    "font": {
+      "sans": "DM Sans",
+      "serif": "Source Serif 4"
+    },
+    "ui": {
+      "colors": {
+        "primary": "clay",
+        "secondary": "blue",
+        "success": "green",
+        "info": "blue",
+        "warning": "yellow",
+        "error": "red",
+        "neutral": "parchment"
+      }
+    },
+    "css": ":root {\n  --font-sans: 'DM Sans', sans-serif;\n  --font-serif: 'Source Serif 4', serif;\n}\n\n:root {\n  --color-clay-50: oklch(97.4% 0.009 48.308);\n  --color-clay-100: oklch(94.2% 0.019 52.207);\n  --color-clay-200: oklch(88.5% 0.036 51.142);\n  --color-clay-300: oklch(82.1% 0.058 50.392);\n  --color-clay-400: oklch(74.1% 0.094 47.255);\n  --color-clay-500: oklch(67.2% 0.131 38.798);\n  --color-clay-600: oklch(58.9% 0.138 37.63);\n  --color-clay-700: oklch(51.4% 0.123 37.45);\n  --color-clay-800: oklch(44.4% 0.103 36.916);\n  --color-clay-900: oklch(38.8% 0.086 36.46);\n  --color-clay-950: oklch(25.9% 0.054 38.197);\n  --color-parchment-50: oklch(98% 0.006 100);\n  --color-parchment-100: oklch(96.5% 0.011 99);\n  --color-parchment-200: oklch(93.6% 0.014 97.348);\n  --color-parchment-300: oklch(85.8% 0.018 100);\n  --color-parchment-400: oklch(72.1% 0.015 102.54);\n  --color-parchment-500: oklch(57.8% 0.008 88.877);\n  --color-parchment-600: oklch(43.2% 0.006 91.526);\n  --color-parchment-700: oklch(38.2% 0.003 84.572);\n  --color-parchment-800: oklch(29.3% 0.003 106.588);\n  --color-parchment-900: oklch(21.7% 0.002 106.561);\n  --color-parchment-950: oklch(14.6% 0 0);\n}\n\n/* until v5 ships --ui-font-heading */\n@layer base {\n  h1, h2, h3, h4, h5, h6 {\n    font-family: var(--font-serif);\n  }\n}\n\n:root {\n  --ui-radius: 0.375rem;\n}\n\n:root, .light {\n  --ui-bg: var(--ui-color-neutral-100);\n  --ui-bg-muted: var(--ui-color-neutral-200);\n  --ui-bg-elevated: var(--ui-color-neutral-200);\n  --ui-bg-accented: var(--ui-color-neutral-300);\n  --ui-border: var(--ui-color-neutral-300);\n  --ui-border-muted: var(--ui-color-neutral-300);\n  --ui-border-accented: var(--ui-color-neutral-400);\n}\n\n.dark {\n  --ui-primary: var(--ui-color-primary-500);\n  --ui-bg-accented: var(--ui-color-neutral-800);\n  --ui-bg: var(--ui-color-neutral-900);\n  --ui-bg-muted: var(--ui-color-neutral-800);\n  --ui-bg-elevated: var(--ui-color-neutral-800);\n  --ui-border: var(--ui-color-neutral-800);\n  --ui-border-muted: var(--ui-color-neutral-700);\n  --ui-border-accented: var(--ui-color-neutral-700);\n}"
+  }
+]

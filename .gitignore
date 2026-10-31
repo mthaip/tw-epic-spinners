@@ -26,3 +26,8 @@ dist-ssr
 *.tgz
 
 test-app*
+
+# Verification fixtures and local Netlify runtime
+.output/
+.netlify/
+/deno.lock

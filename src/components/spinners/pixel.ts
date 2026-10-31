@@ -1,75 +1,68 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_PIXEL = 'spinner-pixel';
-
 const PIXEL_ANIMATION = buildSpinnerAnimationName(SPINNER_PIXEL);
+const PIXEL_PART_ANIMATION = buildSpinnerAnimationName(SPINNER_PIXEL, 'part');
 
-const pixelKeyframes = {
+const pixelKeyframes: CSSRules = {
   [`@keyframes ${PIXEL_ANIMATION}`]: {
-    '50%': {
-      boxShadow: `
-        20px 20px 0px 0px,
-        -20px -20px 0px 0px,
-        20px -20px 0px 0px,
-        -20px 20px 0px 0px,
-        0px 10px 0px 0px,
-        10px 0px 0px 0px,
-        -10px 0px 0px 0px,
-        0px -10px 0px 0px
-      `,
-    },
-    '75%': {
-      boxShadow: `
-        20px 20px 0px 0px,
-        -20px -20px 0px 0px,
-        20px -20px 0px 0px,
-        -20px 20px 0px 0px,
-        0px 10px 0px 0px,
-        10px 0px 0px 0px,
-        -10px 0px 0px 0px,
-        0px -10px 0px 0px
-      `,
-    },
     '100%': { transform: 'rotate(360deg)' },
   },
-};
-
-const pixelCSS = {
-  width: `var(${SPINNER_SIZE_VAR})`,
-  height: `var(${SPINNER_SIZE_VAR})`,
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-
-  '&::before': {
-    content: '""',
-    display: 'block',
-
-    '--shadowFactor': `calc(var(${SPINNER_SIZE_VAR}) / 4.7)`,
-    '--shadowFactorNeg': `calc(var(--shadowFactor) * -1)`,
-
-    height: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
-    width: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
-    backgroundColor: 'currentColor',
-    color: 'currentColor',
-    boxShadow:
-      'var(--shadowFactor) var(--shadowFactor) 0 0, var(--shadowFactorNeg) var(--shadowFactorNeg) 0 0, var(--shadowFactor) var(--shadowFactorNeg) 0 0, var(--shadowFactorNeg) var(--shadowFactor) 0 0, 0 var(--shadowFactor) 0 0, var(--shadowFactor) 0 0 0, var(--shadowFactorNeg) 0 0 0, 0 var(--shadowFactorNeg) 0 0',
-    animation: `${PIXEL_ANIMATION} var(${SPINNER_DURATION_VAR}) linear infinite`,
+  [`@keyframes ${PIXEL_PART_ANIMATION}`]: {
+    '50%, 75%': {
+      transform:
+        'translate(calc(var(--x) / var(--edge) * var(--expanded-distance)), calc(var(--y) / var(--edge) * var(--expanded-distance)))',
+    },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_PIXEL} ${classes}"></div>
-  `.trim();
+const pixelCSS: CSSRules = {
+  width: size,
+  height: size,
+  animation: `${PIXEL_ANIMATION} ${duration} linear infinite`,
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '0',
+    margin: 'auto',
+    height: `calc(${size} / 7)`,
+    width: `calc(${size} / 7)`,
+    backgroundColor: 'currentColor',
+  },
+
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--pixel-angle': `calc(45deg + 360deg * ${index} / ${count})`,
+    '--x': 'cos(var(--pixel-angle))',
+    '--y': 'sin(var(--pixel-angle))',
+    '--edge':
+      'max(var(--x), calc(-1 * var(--x)), var(--y), calc(-1 * var(--y)))',
+    '--expanded-distance': `calc(${size} / 7.2)`,
+    position: 'absolute',
+    inset: '0',
+    margin: 'auto',
+    height: `calc(${size} * 8 / (max(8, ${count}) * 7))`,
+    width: `calc(${size} * 8 / (max(8, ${count}) * 7))`,
+    backgroundColor: 'currentColor',
+    transform: `translate(calc(var(--x) / var(--edge) * ${size} / 4.7), calc(var(--y) / var(--edge) * ${size} / 4.7))`,
+    animation: `${PIXEL_PART_ANIMATION} ${duration} linear infinite`,
+
+    '&:where(:nth-child(odd))': {
+      '--expanded-distance': `calc(${size} / 3.6)`,
+    },
+  },
 };
 
-export default {
+export default defineSpinner({
   name: SPINNER_PIXEL,
-  components: pixelCSS,
+  styles: pixelCSS,
   keyframes: pixelKeyframes,
-  creator,
-};
+});
