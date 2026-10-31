@@ -1,106 +1,71 @@
-# tw-epic-spinners v2 beta
+# tw-epic-spinners v2
 
-> 20 composable CSS loading spinners. Tailwind CSS v3 and v4. No runtime JavaScript.
+20 composable, pure-CSS loading spinners as a Tailwind CSS plugin for v3 and v4.
+Inspired by EpicMax / epic-spinners: https://github.com/epicmaxco/epic-spinners
 
-## Install and register
+## Installation
 
-After publication: npm install -D tw-epic-spinners@2.0.0-beta.1
-In this repository demo/ links the local package. Build it with yarn npm:build.
+npm install -D tw-epic-spinners@2.0.0
 Tailwind v4: @import "tailwindcss"; @plugin "tw-epic-spinners";
 Tailwind v3: import spinners from 'tw-epic-spinners'; add it to plugins.
 
-## Markup
+## Composable Approach
 
-The root spinner-<name> selects the design. All repeated direct children use
-the shared spinner-item class, regardless of spinner type.
+The container uses spinner-<name>. Repeated direct children use spinner-item.
+Add or remove items; CSS automatically adjusts layout and animation.
+Keep unrelated siblings and loading labels outside the container.
 
-Container class: spinner-<name>. Every repeated direct child: spinner-item.
-Example:
-<div class="spinner-flower spinner-size-16 text-violet-500">
+<div class="spinner-flower spinner-size-16 text-violet-500" aria-hidden="true">
   <div class="spinner-item"></div>
-  <div class="spinner-item text-pink-500"></div>
+  <div class="spinner-item"></div>
   <div class="spinner-item"></div>
 </div>
 
-Add/remove items and CSS automatically adjusts positions, size and animation phase.
-Only matching items belong directly inside the container: sibling counting includes
-all sibling elements. No manual counts/indices, runtime helper, or creator() export.
-Named parts are styling hooks; the animation owns transforms. Use CSS variables or
-custom keyframes to customize motion. Baselines are editable starting points.
+## Utils
 
-## Utilities
+spinner-size-* follows Tailwind size-* and sets the overall spinner footprint.
+spinner-duration-* follows Tailwind duration-* and sets the animation cycle.
+Examples: spinner-size-16, spinner-size-[72px], spinner-duration-3500,
+spinner-duration-[2.5s], md:spinner-size-24. Tailwind v4 also supports
+spinner-size-(--loader-size) and spinner-duration-(--loader-duration).
+Tailwind v3 uses configured spacing/duration scales; brackets allow custom values.
+Use text-* for color. Animations pause for prefers-reduced-motion.
+Set aria-hidden="true" on decorative spinners and provide a separate loading label.
 
-spinner-size-* sets the overall square footprint for ALL spinners. Supports theme,
-decimal, arbitrary, and responsive values. In v4, spinner-size-* mirrors native
-size-* (numbers times --spacing, CSS theme tokens, fractions, keywords, arbitrary
-values and (--variable) shorthand). spinner-duration-* mirrors duration-*:
-non-negative whole milliseconds, --transition-duration-* theme tokens, [time],
-(--variable), and initial. Both utilities respect @theme inline. No predefined
-numeric scales. In v3, both use the configured spacing/transitionDuration scales.
-text-* controls currentColor on the container or individual items. Class order is
-irrelevant. Public variables: --spinner-size and --spinner-duration.
-Component-specific geometry and easing stay in each spinner; no global stagger.
-Periodic selectors repeat baseline roles without a maximum child index.
-Grid spinners use ceil(sqrt(count)) columns; incomplete last rows fill from the left.
-Respect prefers-reduced-motion; expose an accessible loading label outside the
-aria-hidden decorative spinner (paused original frames can be invisible).
+## Compatibility
 
-## Browser requirements
+Last checked 2026-10-31. sibling-count() and sibling-index() became Baseline
+Newly available in August 2026. Older browsers may not work. Use at your own risk.
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-count
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-index
 
-Checked 2026-10-31: sibling-index()/sibling-count() reached Baseline Newly
-available in August 2026, not Widely available. Chrome/Edge 138+, Safari 26.2+,
-Firefox 154+. Trigonometry and sqrt are Widely available; round/mod (grid layouts)
-reached Newly available in May 2024, reaching 30 months in November 2026.
-Tailwind v3 support does not mean old browser support. --spacing()/--theme()
-are Tailwind build-time functions, not runtime browser requirements.
-Older-browser alternatives: framework/server CSS metadata, an optional DOM
-helper, or a bounded selector fallback. Grid metadata must also replace round/mod.
-These adapters are researched options, not shipped. No polyfill. V1 remains usable.
+## Migration from v1
 
-## Spinners and baseline item counts
+Keep the plugin registration. Replace creator() with ordinary HTML or templates.
+Replace the old structure with direct spinner-item children; size now refers to
+the whole spinner.
+Before: <div class="spinner-half-circle spinner-size-12"></div>
+After: <div class="spinner-half-circle spinner-size-12"><div class="spinner-item"></div><div class="spinner-item"></div></div>
+Previous docs: https://tw-epic-spinners-v1.mthaip.com/docs
 
-- spinner-flower: 8
-- spinner-pixel: 8
-- spinner-hollow-dots: 3
-- spinner-intersecting-circles: 7
-- spinner-orbit: 3
-- spinner-radar: 4
-- spinner-scaling-squares: 4
-- spinner-half-circle: 2
-- spinner-trinity-rings: 3
-- spinner-fulfilling-square: 1
-- spinner-circles-to-rhombuses: 3
-- spinner-semipolar: 5
-- spinner-self-building-square: 9
-- spinner-swapping-squares: 4
-- spinner-fulfilling-bouncing-circle: 2
-- spinner-fingerprint: 9
-- spinner-spring: 2
-- spinner-atom: 3
-- spinner-looping-rhombuses: 3
-- spinner-breeding-rhombus: 8
+## Baseline spinners and Lab
 
-## Versions
+The 20 designs are flower, pixel, hollow-dots, intersecting-circles, orbit, radar,
+scaling-squares, half-circle, trinity-rings, fulfilling-square,
+circles-to-rhombuses, semipolar, self-building-square, swapping-squares,
+fulfilling-bouncing-circle, fingerprint, spring, atom, looping-rhombuses,
+and breeding-rhombus.
 
-V2 is 2.0.0-beta.1, a breaking redesign with editable named parts and no creator().
-V1.3.0 retains its old markup and helper; npm install -D tw-epic-spinners@1.
-See the v1 Git branch when maintaining old projects. Effects retain their original
-motifs but are redesigned rather than pixel-identical copies of v1.
-
-## Demo lab
-
-The home page shows the gallery then an embedded Monaco sandbox at /#lab.
-Select a baseline and edit HTML/CSS in separate tabs with live preview. Prettier
-formats the active file; Copy code includes both. Reset replaces both files.
-Size and duration utilities compile on demand using Tailwind v4 and this plugin
-in a worker. Other Tailwind classes use the demo CSS; custom CSS works immediately.
-The sandboxed preview disables scripts and supports light/dark backgrounds.
-There are no standalone /lab or /playground routes.
+Each baseline code block has a Try it out link to /labs?spinner=<name>.
+Lab validates the query, preselects the spinner, and formats its baseline markup
+on load, selection, and reset.
+Invalid or missing names fall back to flower. Edit HTML with live preview;
+Format, Copy, and Reset act on the markup. Size/duration classes compile live.
 
 ## Links
 
-- V2 docs: https://tw-epic-spinners.mthaip.com
-- V1 docs: https://github.com/mthaip/tw-epic-spinners/blob/v1/demo/content/documentation.md
+- Docs: https://tw-epic-spinners.mthaip.com/docs
+- Lab: https://tw-epic-spinners.mthaip.com/labs
 - Source: https://github.com/mthaip/tw-epic-spinners
 - npm: https://www.npmjs.com/package/tw-epic-spinners
-- License: MIT; original designs by EpicMax / epic-spinners.
+- License: MIT

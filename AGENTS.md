@@ -2,7 +2,7 @@
 
 ## Project overview
 
-`tw-epic-spinners` v2 beta provides 20 composable pure-CSS loading spinners as a
+`tw-epic-spinners` v2 provides 20 composable pure-CSS loading spinners as a
 framework-agnostic Tailwind CSS plugin supporting Tailwind v3 and v4. The root
 package is published to npm; `demo/` is the single Nuxt 4 documentation and
 playground app, deployed with SSR through Nitro's `netlify` preset. The `v1` Git branch preserves the old
@@ -25,7 +25,8 @@ implementation. There is no hostname routing or second demo app.
 - `scripts/build-readme.mjs`: generates README and copies root `llms.txt` into
   `demo/public/llms.txt`.
 - `scripts/build-demo.mjs`: builds the linked plugin, optionally installs demo
-  dependencies, and builds the Netlify SSR server plus public assets.
+  dependencies, and builds the Netlify SSR server plus public assets. The demo
+  build does not run cleanup; use `yarn nuxt cleanup` from `demo/` separately when needed.
 - `scripts/plugin.test.mjs`: API and Tailwind v3/v4 compatibility checks.
 - `scripts/package.test.mjs`: checks the actual npm tarball, manifest, release
   files, type entry point, and ESM/CommonJS package resolution.
@@ -39,14 +40,14 @@ implementation. There is no hostname routing or second demo app.
 
 ## Development
 
-Use Yarn Classic 1.22.22 and Node 24.16.0, as declared by `packageManager` and
-`.nvmrc`. Run from the repository root:
+Use Yarn Classic 1.22.22 and Node 24, as declared by `packageManager` and
+`.nvmrc`. Node is pinned to the major version only. Run from the repository root:
 
 - `yarn npm:build:readme`: regenerate README and the demo copy of `llms.txt`.
 - `yarn npm:build`: regenerate documentation and build the library with Vite,
   including type declarations and the standalone npm manifest.
 - `yarn npm:pack`: build and create the release tarball from `dist/`.
-- `yarn npm:publish --tag beta`: build and publish `dist/` with the beta tag.
+- `yarn npm:publish`: build and publish `dist/`.
   The repository root is private; publish only the generated package. Never
   copy root scripts, devDependencies, or package-manager settings into it.
 - `yarn lint`: lint the library source with the flat ESLint config.
@@ -54,11 +55,33 @@ Use Yarn Classic 1.22.22 and Node 24.16.0, as declared by `packageManager` and
   its lockfile, and run the Node compatibility tests. Browser fixtures are written
   to `.output/verification/` for visual and computed-style checks.
 - `yarn demo:dev`: build the linked plugin and start Nuxt on port `3001`.
-- `http://localhost:3001/#lab`: the home-page lab in `demo/app/components/Lab.vue`.
-  Its client-only Monaco editor (`LabEditor.client.vue`) provides HTML/CSS tabs,
-  Prettier formatting, and a sandboxed live preview. Keep Monaco and its workers
-  out of SSR; Vite bundles the editor/HTML/CSS workers locally. The home page shows the gallery first, then the lab;
-  there are no standalone `/lab` or `/playground` routes.
+- `http://localhost:3001/labs`: the full-screen lab in `demo/app/components/Lab.vue`.
+  Its client-only Monaco editor (`LabEditor.client.vue`) provides HTML editing,
+  Prettier formatting, and a sandboxed live preview. Keep the lab minimal: spinner
+  selection, format, reset, copy, editor, and preview only. No CSS tab or status bars. Keep Monaco and its workers
+  out of SSR; Vite bundles the editor and HTML workers locally. The home page uses stock `UHeader`, `UPageHero`, `UPage`/`UPageBody`, `UPageGrid`, and
+  `UPageCard` components for navigation and library; the horizontal hero contains an animated `HeroDemo` with synchronized markup and
+  flower item counts. Animate inserted/removed code lines using stable content/occurrence
+  keys; keep the closing tag stable and respect reduced motion. Keep the demo headerless with a 60%-width code pane and a 3:4 preview capped at 30% of the demo width
+  side by side (full-width 16:9 when stacked below md), followed by the gallery at `#collections`. The editor lives
+  at `/labs` and fills the remaining viewport between navigation and the footer.
+  Keep the footer on every page and use a flex layout to allocate Lab height.
+  Wrap the entire Labs editor in UPageSection so its container shares the
+  navigation max width; remove section vertical padding to retain viewport height.
+  Keep its content-width spinner selector and all toolbar controls aligned left.
+  Use the outline/page-surface variant for the Labs shell so preset card tints
+  do not create different-colored side gutters. The Labs card has no outer border
+  or rounded corners; use a full-viewport-width USeparator between toolbar and editor, bleeding
+  outside the shared container without widening the editor panels. Keep line-highlight
+  borders transparent, show untruncated spinner names in the selector, and provide
+  tooltips for every icon action. Format baseline markup automatically on mount,
+  selection, query changes, and reset; keep in-flight formatting from overwriting
+  newer requests or user edits. Show USkeleton in the server/client fallback and
+  while Monaco initializes, removing it only when the editor and theme are ready. Explicitly register Monaco’s built-in
+  iPadShowKeyboard contribution in the client component; it is iOS-only.
+  Gallery cards use a 3:4 aspect ratio, center the name beneath the spinner,
+  and show no item counts. Preserve the
+  original column counts: 2 by default, 3 at sm, 4 at md, and 5 at lg.
 - `yarn demo:build --install`: build the plugin, install demo dependencies from
   its lockfile, and build the Netlify SSR app.
 - `yarn demo:build`: build the plugin and SSR app with dependencies installed.
@@ -66,37 +89,73 @@ Use Yarn Classic 1.22.22 and Node 24.16.0, as declared by `packageManager` and
 Run from `demo/`:
 
 - `yarn dev`: start Nuxt on port `3001`; build the root plugin first.
-- `yarn build`: build the production Netlify SSR app.
+- `yarn build`: build the production Netlify SSR app without running cleanup.
+- `yarn nuxt <command>`: run Nuxt commands directly; use `yarn nuxt cleanup`
+  separately when generated caches need clearing.
 - `yarn generate`: optional static export; not used for deployment.
 - `yarn preview`: Nuxt preview for compatible builds; use Netlify Dev for the
   Netlify preset.
 - `yarn postinstall`: regenerate Nuxt types and configuration.
+- `yarn nuxt typecheck`: check Vue components, composables, and compiler workers.
 - `yarn exec eslint .`: lint the demo after Nuxt preparation.
 
 The demo uses `link:..` to exercise the actual local v2 package. Build the root
 package before starting or generating the demo. The combined build command does
-this automatically. Building a beta does not publish it to npm.
+this automatically. Building a release does not publish it to npm.
 
 ## Demo architecture and pitfalls
 
 - **App layout**: Nuxt uses `demo/app/` for pages, components, and layouts.
   Theme helpers live in singular `demo/app/composable/`.
 - **Styling**: `demo/app/assets/css/main.css` loads Tailwind v4 through
-  `@tailwindcss/vite`, plus the spinner plugin, Iconify, typography, and DaisyUI.
+  `@tailwindcss/vite`, plus the spinner plugin and Nuxt UI. Use original Nuxt UI components and default
+  styles; do not add DaisyUI, external style sheets, or component-style overrides.
   Keep its `@source inline(...)` declarations: dynamic component names
   and lab colors must be included in the production CSS. Do not add numeric size
   or duration safelists: the lab worker compiles these utilities as needed.
 - **Lab utilities**: `useLabUtilities.ts` sends size/duration classes to
   `workers/spinner-utilities.ts`, which runs the real local plugin and Tailwind v4.
   Keep compilation off the main thread and do not duplicate value resolution in UI code.
+- **Lab styles**: The sandboxed iframe has an opaque origin. Copy stylesheet
+  links with absolute URLs and remove `crossorigin`, or production component CSS
+  can fail to load even when the development preview works.
+- **Preview fonts**: Public `/_fonts/**` assets need CORS for the opaque-origin
+  preview. Keep production route headers and the development header handler;
+  Nuxt Fonts handles development requests before Nitro route rules.
+- **Navigation motion**: Use Nuxt page transitions with Tailwind opacity classes
+  and smooth-scroll HTML utilities, respecting reduced motion.
 - **Catalogue and markup**: `demo/app/data/spinners.ts` supplies names without
   `spinner-` and baseline item counts. `SpinnerPreview.vue` renders ordinary Vue
-  markup. The HTML modal serializes the rendered parts; no package HTML helper.
+  markup. The HTML modal serializes the rendered parts; no package HTML helper. Use the
+  same DocsCodeBlock for modal code/actions, title it with the spinner class name,
+  and keep its desktop maximum width at 3xl.
 - **Content**: Nuxt Content sources `demo/content/*.md`; `docs.vue` renders
-  `documentation.md`. Keep `tokyo-night` highlighting consistent between
-  `demo/nuxt.config.ts` and `demo/app/data/config.ts`.
-- **Themes**: `demo/app/composable/useTheme.ts` wraps VueUse color mode with a
-  Nuxt cookie. Add allowed themes to its `themes` map.
+  `documentation.md` using Nuxt UI prose components and `UContentToc`. Show one
+  mobile TOC; hide the desktop right-slot TOC below lg. Keep docs
+  focused on v2, with previous-package details only in migration. Baseline HTML
+  fences use `spinner=<name>` metadata; `DocsCodeBlock.vue` adds a Try it out
+  button around the original Nuxt UI prose component. Group baseline actions in one absolute top-right flex wrapper using gap-2,
+  with Copy before Try it out; avoid individual button offsets. Preserve copying the
+  rendered code when Nuxt Content omits the plain-text code prop. The README generator turns
+  that metadata into ordinary Markdown links. `/labs?spinner=<name>` validates
+  and seeds the selected spinner, including query changes on the same route.
+- **Themes**: `ThemePicker.vue` persists the selected Nuxt UI preset in a cookie and
+  updates `appConfig.ui`. Iris is the default preset. Presets in `data/theme-presets.json` are precompiled
+  from the Nuxt UI v4.12.0 theme studio (MIT license alongside the data); preserve
+  their colors, fonts, radius, semantic tokens, and default variants. Lucide
+  supplies interface icons; the npm link uses the official Simple Icons npm mark.
+  Exclude the Default preset from the selector and migrate its cookie to Iris. Nuxt Fonts self-hosts preset fonts. Nuxt UI's color-mode module handles light/dark/
+  system appearance. Shared `shared/code-theme.ts` selects the docs’ Material light/GitHub dark themes for Nuxt Content,
+  `CodeHighlight.vue`, and Monaco via the official Shiki integration. Keep one
+  HTML highlighter cached in `utils/code-highlighter.ts`; never hand-color code
+  by token or preset. Monaco resolves UI chrome tokens to hex, and the sandbox copies the current theme styles and color-mode class.
+- **Favicon**: `public/favicon.svg` retains the original loading-ring mark.
+  `useThemeFavicon.ts` updates its SVG fill from the resolved `--ui-primary`
+  token when presets or appearance change.
+- **Navigation**: The logo links to `/`; its adjacent version dropdown links
+  to the current version and `https://tw-epic-spinners-v1.mthaip.com`. Main items
+  are Docs and Lab. The visible brand is `tw-epic-spinners`, with `epic` in the
+  primary color; the version button uses primary/subtle. Read the current version from root `package.json`.
 - **Metadata**: Nuxt's site URL and name come from the root plugin's `package.json`.
 - **SSR deployment**: `ssr: true` with Nitro's `netlify` preset. `nuxt build`
   writes public assets to `demo/dist/` and the server to

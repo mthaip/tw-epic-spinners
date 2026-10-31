@@ -31,7 +31,10 @@ Spinner designs by [EpicMax / epic-spinners](https://github.com/epicmaxco/epic-s
 [MIT](./LICENSE)
 `;
 
-const body = readFileSync(source, 'utf8').trimEnd();
+const body = readFileSync(source, 'utf8').trimEnd().replace(
+  /^```html spinner=([a-z-]+)$/gm,
+  (_, name) => `[Try it out](${docsUrl}/labs?spinner=${name})\n\n` + '```html',
+);
 writeFileSync(target, header + body + footer);
 console.log(`README.md generated from ${source}`);
 
