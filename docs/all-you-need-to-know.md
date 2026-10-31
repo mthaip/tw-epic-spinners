@@ -1,19 +1,12 @@
 # Project guide
 
-`tw-epic-spinners` v2 is a framework-agnostic Tailwind CSS plugin with 20
-composable, pure-CSS loading spinners. It supports Tailwind v3 and v4. The
-private Nuxt 4 app in `demo/` provides documentation, a gallery, and a live HTML
-Lab using Nuxt UI and Monaco.
+20 composable CSS spinners for Tailwind v3/v4. `demo/` is the Nuxt docs and Lab.
+Use Node **24** and Yarn **1.22.22**.
 
-## Requirements and setup
-
-- Node **24**, selected with `nvm use`; both `.nvmrc` files specify the major only.
-- Yarn Classic **1.22.22**, declared in both packages.
-
-Install each package's dependencies separately:
+## Setup
 
 ```sh
-# Repository root
+# Root
 nvm use
 yarn install --frozen-lockfile
 
@@ -21,119 +14,45 @@ cd demo
 yarn install --frozen-lockfile
 ```
 
-## Local development
+## Development
 
-From the repository root:
+From root, run `yarn demo:dev`. It builds the local plugin and starts
+`http://localhost:3001`. Rebuild after changing `src/`.
 
-```sh
-yarn demo:dev
-```
+Development uses the local bundle; production uses npm's latest release.
 
-This builds the local plugin, then starts Nuxt at `http://localhost:3001`.
-Nuxt's development-only alias resolves `tw-epic-spinners` to the root
-`dist/index.js`, including the CSS plugin and Lab compiler worker. Rebuild the
-package after changing `src/`.
+## Commands
 
-The routes are `/` (gallery and animated hero), `/docs`, and `/labs`.
-`/labs?spinner=orbit` selects a baseline in the Lab. The `/playground` route
-redirects permanently to `/labs`.
+| Location | Command | Purpose |
+| --- | --- | --- |
+| Root | `yarn npm:build` | Build the package into `dist/` |
+| Root | `yarn lint` | Lint package code |
+| Root | `yarn test` | Build and test Tailwind v3/v4, baselines, and packaging |
+| Root | `yarn npm:pack` | Build the npm tarball |
+| Demo | `yarn dev` | Start Nuxt with the local plugin already built |
+| Demo | `yarn exec eslint .` | Lint the demo |
+| Demo | `yarn nuxt typecheck` | Check types |
+| Demo | `yarn build` | Build with the installed npm package |
+| Demo | `yarn build:deploy` | Refresh npm's latest release, then build |
+| Demo | `yarn nuxt cleanup` | Clear caches separately when needed |
 
-If the package is already built, `yarn dev` from `demo/` starts Nuxt directly.
-Run `yarn nuxt cleanup` from `demo/` only when caches need clearing; cleanup is
-separate from build commands.
+Check UI changes in a browser and check its console.
 
-## Build and verify the package
+## Documentation
 
-Run from the repository root:
+Edit `demo/content/documentation.md` and root `llms.txt`, then run
+`yarn npm:build:readme` from root. It updates README, `/docs.md`, and `/llms.txt`.
+Keep the original EpicMax credit. Do not edit generated files.
 
-```sh
-yarn lint
-yarn test
-yarn npm:pack
-```
+## Publish and deploy
 
-`yarn test` builds the package, installs the isolated Tailwind v3 test compiler,
-and checks Tailwind v3/v4 output, utility behavior, baseline motion, and the npm
-tarball. `yarn npm:build` builds without running tests. `yarn npm:pack` builds and
-creates the release tarball from `dist/`.
+1. Update the root version, lockfile metadata, and docs.
+2. Run package checks and inspect the tarball.
+3. Run `npm login`, then `yarn npm:publish` from root. This publishes **`dist/`**.
+4. Deploy the demo after the matching major version is on npm's `latest` tag.
 
-`dist/` is the standalone publish directory, containing ESM/CommonJS/UMD bundles,
-types, allowlisted package metadata, README, license, and LLM guidance. Do not
-edit generated files or copy root scripts/devDependencies into this manifest.
+Netlify installs dependencies in `demo/` and runs `yarn build:deploy`.
+It uses SSR with Nitro's `netlify` preset and publishes `demo/dist/`.
+The build stops if npm's latest major differs from the docs.
 
-For demo checks, run from `demo/`:
-
-```sh
-yarn exec eslint .
-yarn nuxt typecheck
-```
-
-Verify rendered changes in a browser, including the affected gallery, docs, or
-Lab flow and its console. The spinners use `sibling-index()` and `sibling-count()`;
-Tailwind v3 support does not imply older-browser support. See the
-[compatibility guidance](../demo/content/documentation.md#compatibility).
-
-## Documentation and discovery files
-
-Edit [demo/content/documentation.md](../demo/content/documentation.md), then run
-from the repository root:
-
-```sh
-yarn npm:build:readme
-```
-
-This generates `README.md` and `demo/public/docs.md`, and copies root `llms.txt`
-to `demo/public/llms.txt`. Edit root `llms.txt` when changing its guidance.
-Preserve credit to [EpicMax / epic-spinners](https://github.com/epicmaxco/epic-spinners).
-
-Page titles/descriptions live in `demo/app/data/routes.ts`; the shared layout
-provides canonical URLs, social metadata, and JSON-LD. Nuxt Robots merges
-`demo/public/_robots.txt` with environment rules. The production sitemap lists
-`/`, `/docs`, and `/labs`, with XSL disabled. Development and Netlify previews
-are non-indexable; error responses also receive `noindex`.
-
-## Publish a package release
-
-1. Update the root `package.json` version and matching `package-lock.json`
-   metadata. Review documentation, migration instructions, and the social card.
-2. Run the package checks above and inspect the tarball contents.
-3. Authenticate with npm, then run from the repository root:
-
-   ```sh
-   npm login
-   yarn npm:publish
-   ```
-
-The publish script rebuilds and publishes **`dist/`**. The repository root is
-private; do not run a bare `npm publish` there. Building does not publish a release.
-
-## Build and deploy the demo
-
-The demo declares `tw-epic-spinners: "latest"`. Production resolves the npm
-package, without the development alias. Publish the matching package major to
-npm's `latest` tag before deploying its docs.
-
-From `demo/`:
-
-```sh
-yarn build:deploy
-```
-
-`demo/scripts/build.mjs` regenerates docs using Node, refreshes the spinner
-dependency from npm even with a cached install, verifies its major matches the
-docs, and runs `yarn build`. It restores Yarn's temporary manifest/lockfile
-changes. A mismatched npm release stops the build instead of using the local
-plugin. `yarn build` alone is just `nuxt build` with the installed dependency;
-use `build:deploy` when the latest npm release must be installed first.
-
-[netlify.toml](../netlify.toml) sets base `demo`, command `yarn build:deploy`, and
-publish directory `dist`. Netlify installs the demo dependencies automatically;
-root dependencies are not required for deployment. Node is set to `24`.
-
-The app uses SSR with Nitro's `netlify` preset. Public assets are written to
-`demo/dist/`, and the server to `demo/.netlify/functions-internal/server/`.
-`yarn generate` is an optional static export, not the deployment workflow.
-Netlify Dev uses port `8888` and proxies Nuxt on `3001`.
-
-See [AGENTS.md](../AGENTS.md) for detailed architecture, verification rules, and
-commit conventions.
+See [AGENTS.md](../AGENTS.md) for architecture and detailed rules.
