@@ -121,7 +121,7 @@
       </a>
 
       <a
-        href="https://www.npmjs.com/package/tw-epic-spinners"
+        :href="`https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`"
         class="btn btn-ghost btn-square"
       >
         <Npm class="size-6" />
