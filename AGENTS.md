@@ -21,8 +21,6 @@ to npm; `demo/` is a separate, private Nuxt 4 documentation and playground site.
   to `demo/public/llms.txt`.
 - `dist/`: generated library bundles and type declarations; do not edit manually.
 
-See [demo/CLAUDE.md](demo/CLAUDE.md) for detailed demo architecture and pitfalls.
-
 ## Development
 
 Use Yarn Classic 1.22.22, as declared in both packages. Follow each package's
@@ -49,6 +47,46 @@ Run from `demo/`:
 The demo consumes the published `tw-epic-spinners` package through a semver
 dependency. When verifying local plugin changes in the demo, explicitly link or
 install the local build and confirm the demo is exercising that build.
+
+## Demo architecture and pitfalls
+
+The demo is a Nuxt 4 marketing, documentation, and playground site deployed to
+Netlify. It uses the `demo/app/` source layout for `app.vue`, pages, components,
+layouts, and theme helpers.
+
+- **Styling**: Tailwind CSS v4 runs through `@tailwindcss/vite`. The stylesheet
+  `demo/app/assets/css/main.css` loads `tw-epic-spinners`, `@iconify/tailwind4`,
+  `@tailwindcss/typography`, and DaisyUI with `themes: all`. Icons use utility
+  classes such as `icon-[lucide--...]`.
+- **Dynamic classes**: Keep the `@source inline(...)` declarations in that
+  stylesheet. Tailwind cannot discover class names constructed at runtime, such
+  as `spinner-size-{n}` and `text-{color}-{shade}`. Extend these declarations
+  whenever the playground introduces a new dynamic class pattern.
+- **Content**: `demo/content.config.ts` defines one `content` collection sourcing
+  `content/*.md`. The documentation page (`demo/app/pages/docs.vue`) renders
+  `demo/content/documentation.md`. Keep the `tokyo-night` highlighting theme
+  consistent between `demo/nuxt.config.ts` and `demo/app/data/config.ts`.
+- **Themes**: `demo/app/composable/useTheme.ts` wraps VueUse's `useColorMode`
+  with Nuxt's `useCookie` storage so the active DaisyUI theme survives SSR. Add
+  new allowed themes to its `themes` map. The directory is singular:
+  `demo/app/composable/`; place new theme helpers there.
+- **Spinner catalogue**: `demo/app/data/spinners.ts` defines the spinners known
+  to the gallery and playground. Names omit the `spinner-` prefix;
+  `demo/app/components/SpinnerConfigurator.vue` adds it when rendering.
+- **Site metadata**: `demo/nuxt.config.ts` reads the site URL and name from the
+  root plugin's `package.json`, not `demo/package.json`. The sitemap and robots
+  modules consume this metadata.
+- **Deployment**: Nitro uses the `netlify` preset. The demo includes
+  `netlify-cli` and local Netlify configuration for emulation.
+- **Package boundaries**: `demo/package.json` is private. Changing its version
+  does not publish the root plugin to npm. Its plugin dependency is a regular
+  published package dependency, not a workspace link.
+- **Generated configuration**: `demo/tsconfig.json` references four generated
+  `.nuxt/tsconfig.*.json` files. Configure compiler options through
+  `demo/nuxt.config.ts` and rerun Nuxt preparation instead of adding them to the
+  stub. The demo ESLint config extends `.nuxt/eslint.config.mjs`; run
+  `yarn postinstall` in `demo/` to regenerate Nuxt types and configuration before
+  TypeScript or lint checks after a fresh install.
 
 ## Required verification
 
