@@ -16,7 +16,11 @@ const header = `<!-- This file is generated from demo/content/documentation.md b
 
 > 20 pure-CSS loading spinners as a Tailwind CSS plugin. Works with Tailwind v3 and v4, and any framework.
 
-Live previews & docs: [${new URL(homepage).host}](${homepage})
+> **v2 is out!** [Try Epic Spinners v2 →](https://tw-epic-spinners.mthaip.com/)
+>
+> This README covers **v1**. Its source branch is [v1](https://github.com/mthaip/tw-epic-spinners/tree/v1) (\`refs/heads/v1\`).
+
+Live previews & docs (v1): [${new URL(homepage).host}](${homepage})
 
 `;
 

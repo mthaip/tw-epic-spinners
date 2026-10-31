@@ -113,7 +113,8 @@
       </div>
 
       <a
-        href="https://github.com/mthaip/tw-epic-spinners"
+        href="https://github.com/mthaip/tw-epic-spinners/tree/v1"
+        aria-label="View v1 source on GitHub"
         class="btn btn-ghost btn-square"
       >
         <Github class="size-6" />

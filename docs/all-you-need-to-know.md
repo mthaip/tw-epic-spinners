@@ -1,3 +1,5 @@
+This is the v1 codebase. Use branch `v1` (`refs/heads/v1`) for v1 maintenance.
+
 ## Requirements
 
 - Node.js `24.x` (both `.nvmrc` files select `24`)
