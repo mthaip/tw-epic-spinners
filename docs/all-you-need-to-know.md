@@ -38,10 +38,21 @@ The typography selector parser is resolved to a patched 6.x release.
 - Update version in `package.json`
 - `yarn npm:publish`
 
-The publish command builds v1 and publishes it to npm with the `legacy` tag,
+The publish command builds v1 and publishes it to npm with the `maintenance` tag,
 keeping `latest` on v2. `publishConfig` also defaults direct `npm publish`
-commands to the npm registry and `legacy` tag. The package version still comes
+commands to the npm registry and `maintenance` tag. The package version still comes
 from `package.json`; a version number cannot be used as a distribution tag.
 
 To inspect the release without publishing, run `yarn npm:build`, then
 `yarn exec -- npm publish --dry-run`.
+
+For an already published version, add the tag without republishing:
+
+```sh
+npm dist-tag add tw-epic-spinners@1.3.1 maintenance --registry=https://registry.npmjs.org/
+```
+
+If the old `legacy` tag exists, remove it with
+`npm dist-tag rm tw-epic-spinners legacy --registry=https://registry.npmjs.org/`.
+These tag changes leave `latest` unchanged. Published versions cannot be
+overwritten; increment the version before publishing another release.

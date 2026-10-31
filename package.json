@@ -4,7 +4,7 @@
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "tag": "legacy"
+    "tag": "maintenance"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -56,7 +56,7 @@
     "lint": "eslint .",
     "npm:build:readme": "node scripts/build-readme.mjs",
     "npm:build": "npm run npm:build:readme && rm -rf dist && vite build -c ./vite.config.ts",
-    "npm:publish": "yarn npm:build && npm publish --tag legacy --registry=https://registry.npmjs.org/",
+    "npm:publish": "yarn npm:build && npm publish --tag maintenance --registry=https://registry.npmjs.org/",
     "prepare": "node scripts/build-readme.mjs",
     "prepublishOnly": "node scripts/build-readme.mjs",
     "typecheck": "tsc --noEmit"
