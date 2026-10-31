@@ -1,68 +1,57 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
-const SPINNER_FULFILLING_BOUNCING = 'spinner-looping-rhombuses';
+const SPINNER_LOOPING_RHOMBUSES = 'spinner-looping-rhombuses';
 
-const FULFILLING_BOUNCING_ANIMATION = {
-  MAIN: buildSpinnerAnimationName(SPINNER_FULFILLING_BOUNCING, 'main'),
+const LOOPING_RHOMBUSES_ANIMATION = {
+  MAIN: buildSpinnerAnimationName(SPINNER_LOOPING_RHOMBUSES, 'main'),
 };
 
-const loopingRhombusesCircleKeyframes = {
-  [`@keyframes ${FULFILLING_BOUNCING_ANIMATION.MAIN}`]: {
+const loopingRhombusesKeyframes: CSSRules = {
+  [`@keyframes ${LOOPING_RHOMBUSES_ANIMATION.MAIN}`]: {
     '0%': { transform: 'translateX(0) rotate(45deg) scale(0)' },
-    '50%': { transform: 'translateX(-233%) rotate(45deg) scale(1)' },
-    '100%': { transform: 'translateX(-466%) rotate(45deg) scale(0)' },
+    '50%': {
+      transform:
+        'translateX(calc(-233% * var(--travel-scale))) rotate(45deg) scale(1)',
+    },
+    '100%': {
+      transform:
+        'translateX(calc(-466% * var(--travel-scale))) rotate(45deg) scale(0)',
+    },
   },
 };
 
-const buildNthChilds = () => {
-  const result: {
-    [k: `&:nth-child(${number})`]: unknown;
-  } = {};
+const loopingRhombusesCSS: CSSRules = {
+  width: size,
+  height: size,
 
-  for (let i = 0; i < 3; i++) {
-    result[`&:nth-child(${i + 1})`] = {
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * ${i + 1} / -1.5)`,
-    };
-  }
-
-  return result;
-};
-
-const loopingRhombusesCircleCSS = {
-  width: `calc(var(${SPINNER_SIZE_VAR}) * 4)`,
-  height: `var(${SPINNER_SIZE_VAR})`,
-  position: 'relative',
-
-  '& > div': {
-    height: `var(${SPINNER_SIZE_VAR})`,
-    width: `var(${SPINNER_SIZE_VAR})`,
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--travel-scale': `calc(max(4, ${count}) / 4)`,
+    '--shape-size': `calc(${size} / max(4, ${count}))`,
+    height: 'var(--shape-size)',
+    width: 'var(--shape-size)',
     backgroundColor: 'currentColor',
-    left: `calc(var(${SPINNER_SIZE_VAR}) * 4)`,
+    left: size,
+    top: 'calc(50% - var(--shape-size) / 2)',
     position: 'absolute',
     margin: '0 auto',
     borderRadius: '2px',
     transform: 'translateY(0) rotate(45deg) scale(0)',
-    animation: `${FULFILLING_BOUNCING_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) linear infinite`,
-
-    ...buildNthChilds(),
+    animation: `${LOOPING_RHOMBUSES_ANIMATION.MAIN} ${duration} linear infinite`,
+    animationDelay: `calc(-2 * ${duration} * (${index} + 1) / ${count})`,
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_FULFILLING_BOUNCING} ${classes}">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  `.trim();
-};
-
-export default {
-  name: SPINNER_FULFILLING_BOUNCING,
-  components: loopingRhombusesCircleCSS,
-  keyframes: loopingRhombusesCircleKeyframes,
-  creator,
-};
+export default defineSpinner({
+  name: SPINNER_LOOPING_RHOMBUSES,
+  styles: loopingRhombusesCSS,
+  keyframes: loopingRhombusesKeyframes,
+});

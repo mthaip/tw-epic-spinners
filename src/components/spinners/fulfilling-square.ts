@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_FULFILLING_SQUARE = 'spinner-fulfilling-square';
 
@@ -9,7 +16,7 @@ const FULFILLING_SQUARE_ANIMATION = {
   SHAPE: buildSpinnerAnimationName(SPINNER_FULFILLING_SQUARE, 'shape'),
 } as const;
 
-const fulfillingSquareKeyframes = {
+const fulfillingSquareKeyframes: CSSRules = {
   [`@keyframes ${FULFILLING_SQUARE_ANIMATION.MAIN}`]: {
     '0%': { transform: 'rotate(0deg)' },
     '25%': { transform: 'rotate(180deg)' },
@@ -26,33 +33,37 @@ const fulfillingSquareKeyframes = {
   },
 };
 
-const fulfillingSquareCSS = {
-  height: `var(${SPINNER_SIZE_VAR})`,
-  width: `var(${SPINNER_SIZE_VAR})`,
-  position: 'relative',
-  border: `calc(var(${SPINNER_SIZE_VAR}) / 12.5) solid currentColor`,
-  animation: `${FULFILLING_SQUARE_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite ease`,
+const fulfillingSquareCSS: CSSRules = {
+  height: size,
+  width: size,
 
-  '&::before': {
-    content: '""',
-    verticalAlign: 'top',
-    display: 'inline-block',
-    backgroundColor: 'currentColor',
-    width: '100%',
-    opacity: '1',
-    animation: `${FULFILLING_SQUARE_ANIMATION.SHAPE} var(${SPINNER_DURATION_VAR}) infinite ease-in`,
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--columns': `round(up, sqrt(${count}), 1)`,
+    '--row': `round(down, calc(${index} / var(--columns)), 1)`,
+    '--column': `mod(${index}, var(--columns))`,
+    '--cell-size': `calc(${size} / var(--columns))`,
+    position: 'absolute',
+    top: 'calc(var(--row) * var(--cell-size))',
+    left: 'calc(var(--column) * var(--cell-size))',
+    height: 'var(--cell-size)',
+    width: 'var(--cell-size)',
+    border: 'calc(var(--cell-size) / 12.5) solid currentColor',
+    animation: `${FULFILLING_SQUARE_ANIMATION.MAIN} ${duration} infinite ease`,
+
+    '&::before': {
+      content: '""',
+      verticalAlign: 'top',
+      display: 'inline-block',
+      backgroundColor: 'currentColor',
+      width: '100%',
+      opacity: '1',
+      animation: `${FULFILLING_SQUARE_ANIMATION.SHAPE} ${duration} infinite ease-in`,
+    },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_FULFILLING_SQUARE} ${classes}"></div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_FULFILLING_SQUARE,
-  components: fulfillingSquareCSS,
+  styles: fulfillingSquareCSS,
   keyframes: fulfillingSquareKeyframes,
-  creator,
-};
+});

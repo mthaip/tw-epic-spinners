@@ -1,46 +1,10 @@
-import {
-  SPINNER_SIZE_DEFAULT,
-  SPINNER_SIZE_VAR,
-} from '../components/utilities/sizes';
-import {
-  SPINNER_DURATION_VAR,
-  SPINNER_DURATION_DEFAULT,
-} from '../components/utilities/durations';
+// Shared CSS variables and animation naming. Component-specific geometry stays local.
+export const SPINNER_ITEM = 'spinner-item';
 
-export const buildTailwindComponent = (
-  className: string,
-  otherCSSRules: Record<string, unknown>,
-) => {
-  return {
-    [`.${className}`]: {
-      // CSS vars
-      [SPINNER_SIZE_VAR]: SPINNER_SIZE_DEFAULT,
-      [SPINNER_DURATION_VAR]: SPINNER_DURATION_DEFAULT,
-      // Reset box model
-      boxSizing: 'border-box',
-      '& *': {
-        boxSizing: 'border-box',
-      },
-      ...otherCSSRules,
-    },
-  };
-};
+export const size = 'var(--spinner-size)';
+export const duration = 'var(--spinner-duration, 0s)';
+export const count = 'var(--spinner-count)';
+export const index = 'var(--spinner-index)';
 
-export const buildSpinnerAnimationName = (...names: string[]) => {
-  return ['animation', ...names].map((name) => name.trim()).join('-');
-};
-
-export const normalizeClasses = (stringInput: unknown): string => {
-  if (typeof stringInput === 'string') {
-    return stringInput;
-  }
-
-  if (
-    Array.isArray(stringInput) &&
-    stringInput.every((item) => typeof item === 'string')
-  ) {
-    return stringInput.join(' ');
-  }
-
-  return '';
-};
+export const buildSpinnerAnimationName = (...names: string[]) =>
+  ['animation', ...names].map((name) => name.trim()).join('-');

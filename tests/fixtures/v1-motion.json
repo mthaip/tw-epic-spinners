@@ -1,0 +1,292 @@
+{
+  "source": "1c3eaa75c43d1548945b01d12c094daadaa4043b",
+  "frames": {
+    "@keyframes animation-spinner-hollow-dots": {
+      "50%": {
+        "transform": "scale(1)",
+        "opacity": "1"
+      },
+      "100%": {
+        "opacity": "0"
+      }
+    },
+    "@keyframes animation-spinner-intersecting-circles": {
+      "from": {
+        "transform": "rotate(0deg)"
+      },
+      "to": {
+        "transform": "rotate(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-orbit-first": {
+      "0%": {
+        "transform": "rotateX(35deg) rotateY(-45deg) rotateZ(0deg)"
+      },
+      "100%": {
+        "transform": "rotateX(35deg) rotateY(-45deg) rotateZ(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-orbit-second": {
+      "0%": {
+        "transform": "rotateX(50deg) rotateY(10deg) rotateZ(0deg)"
+      },
+      "100%": {
+        "transform": "rotateX(50deg) rotateY(10deg) rotateZ(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-orbit-third": {
+      "0%": {
+        "transform": "rotateX(35deg) rotateY(55deg) rotateZ(0deg)"
+      },
+      "100%": {
+        "transform": "rotateX(35deg) rotateY(55deg) rotateZ(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-radar": {
+      "50%": {
+        "transform": "rotate(180deg)"
+      },
+      "100%": {
+        "transform": "rotate(0deg)"
+      }
+    },
+    "@keyframes animation-spinner-scaling-squares-main": {
+      "50%": {
+        "transform": "rotate(90deg)"
+      },
+      "100%": {
+        "transform": "rotate(180deg)"
+      }
+    },
+    "@keyframes animation-spinner-scaling-squares-first": {
+      "50%": {
+        "transform": "translate(150%,150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-scaling-squares-second": {
+      "50%": {
+        "transform": "translate(-150%,150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-scaling-squares-third": {
+      "50%": {
+        "transform": "translate(-150%,-150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-scaling-squares-fourth": {
+      "50%": {
+        "transform": "translate(150%,-150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-half-circle": {
+      "0%": {
+        "transform": "rotate(0deg)"
+      },
+      "100%": {
+        "transform": "rotate(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-trinity-rings-first": {
+      "0%": {
+        "transform": "rotateZ(20deg) rotateY(0deg)"
+      },
+      "100%": {
+        "transform": "rotateZ(100deg) rotateY(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-trinity-rings-second": {
+      "0%": {
+        "transform": "rotateZ(100deg) rotateX(0deg)"
+      },
+      "100%": {
+        "transform": "rotateZ(0deg) rotateX(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-trinity-rings-third": {
+      "0%": {
+        "transform": "rotateZ(100deg) rotateX(-360deg)"
+      },
+      "100%": {
+        "transform": "rotateZ(-360deg) rotateX(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-fulfilling-square-main": {
+      "0%": {
+        "transform": "rotate(0deg)"
+      },
+      "25%": {
+        "transform": "rotate(180deg)"
+      },
+      "50%": {
+        "transform": "rotate(180deg)"
+      },
+      "75%": {
+        "transform": "rotate(360deg)"
+      },
+      "100%": {
+        "transform": "rotate(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-fulfilling-square-shape": {
+      "0%": {
+        "height": "0%"
+      },
+      "25%": {
+        "height": "0%"
+      },
+      "50%": {
+        "height": "100%"
+      },
+      "75%": {
+        "height": "100%"
+      },
+      "100%": {
+        "height": "0%"
+      }
+    },
+    "@keyframes animation-spinner-circles-to-rhombuses-main": {
+      "0%": {
+        "borderRadius": "10%"
+      },
+      "17.5%": {
+        "borderRadius": "10%"
+      },
+      "50%": {
+        "borderRadius": "100%"
+      },
+      "93.5%": {
+        "borderRadius": "10%"
+      },
+      "100%": {
+        "borderRadius": "10%"
+      }
+    },
+    "@keyframes animation-spinner-semipolar-main": {
+      "50%": {
+        "transform": "rotate(360deg) scale(0.7)"
+      }
+    },
+    "@keyframes animation-spinner-swapping-squares-first": {
+      "50%": {
+        "transform": "translate(150%,150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-swapping-squares-second": {
+      "50%": {
+        "transform": "translate(-150%,150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-swapping-squares-third": {
+      "50%": {
+        "transform": "translate(-150%,-150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-swapping-squares-fourth": {
+      "50%": {
+        "transform": "translate(150%,-150%) scale(2,2)"
+      }
+    },
+    "@keyframes animation-spinner-fulfilling-bouncing-circle-main": {
+      "0%": {
+        "transform": "rotate(0deg)"
+      },
+      "100%": {
+        "transform": "rotate(360deg)"
+      }
+    },
+    "@keyframes animation-spinner-fulfilling-bouncing-circle-first": {
+      "0%": {
+        "transform": "scale(1)",
+        "borderColor": "transparent",
+        "borderTopColor": "currentColor"
+      },
+      "16.7%": {
+        "borderColor": "transparent",
+        "borderTopColor": "initial",
+        "borderRightColor": "initial"
+      },
+      "33.4%": {
+        "borderColor": "transparent",
+        "borderTopColor": "currentColor",
+        "borderRightColor": "currentColor",
+        "borderBottomColor": "currentColor"
+      },
+      "50%": {
+        "borderColor": "currentColor",
+        "transform": "scale(1)"
+      },
+      "62.5%": {
+        "borderColor": "currentColor",
+        "transform": "scale(1.4)"
+      },
+      "75%": {
+        "borderColor": "currentColor",
+        "transform": "scale(1)",
+        "opacity": "1"
+      },
+      "87.5%": {
+        "borderColor": "currentColor",
+        "transform": "scale(1.4)"
+      },
+      "100%": {
+        "borderColor": "transparent",
+        "borderTopColor": "currentColor",
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes animation-spinner-fulfilling-bouncing-circle-second": {
+      "0%": {
+        "transform": "scale(1)"
+      },
+      "50%": {
+        "transform": "scale(1)"
+      },
+      "62.5%": {
+        "transform": "scale(0.8)"
+      },
+      "75%": {
+        "transform": "scale(1)"
+      },
+      "87.5%": {
+        "transform": "scale(0.8)"
+      },
+      "100%": {
+        "transform": "scale(1)"
+      }
+    },
+    "@keyframes animation-spinner-fingerprint-main": {
+      "100%": {
+        "transform": "rotate( 360deg )"
+      }
+    },
+    "@keyframes animation-spinner-spring-main": {
+      "0%": {
+        "borderWidth": "calc(var(--spinner-size) / 7)"
+      },
+      "25%": {
+        "borderWidth": "calc(var(--spinner-size) / 23.33)"
+      },
+      "50%": {
+        "transform": "rotate(115deg)",
+        "borderWidth": "calc(var(--spinner-size) / 7)"
+      },
+      "75%": {
+        "borderWidth": "calc(var(--spinner-size) / 23.33)"
+      },
+      "100%": {
+        "borderWidth": "calc(var(--spinner-size) / 7)"
+      }
+    },
+    "@keyframes animation-spinner-looping-rhombuses-main": {
+      "0%": {
+        "transform": "translateX(0) rotate(45deg) scale(0)"
+      },
+      "50%": {
+        "transform": "translateX(-233%) rotate(45deg) scale(1)"
+      },
+      "100%": {
+        "transform": "translateX(-466%) rotate(45deg) scale(0)"
+      }
+    }
+  }
+}

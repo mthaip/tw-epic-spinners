@@ -1,0 +1,8 @@
+{
+  "name": "tw-epic-spinners-tailwind3-tests",
+  "private": true,
+  "dependencies": {
+    "tailwindcss": "3.4.19"
+  },
+  "packageManager": "yarn@1.22.22"
+}

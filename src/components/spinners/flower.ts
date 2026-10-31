@@ -1,145 +1,93 @@
-import { buildSpinnerAnimationName } from '../../utils/builder';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_FLOWER = 'spinner-flower';
-
 const FLOWER_ANIMATION = {
+  ROTATION: buildSpinnerAnimationName(SPINNER_FLOWER, 'rotation'),
   BIGGER_DOT: buildSpinnerAnimationName(SPINNER_FLOWER, 'bigger-dot'),
   SMALLER_DOT: buildSpinnerAnimationName(SPINNER_FLOWER, 'smaller-dot'),
-  __FACTOR_1: `calc(var(${SPINNER_SIZE_VAR}) / 2.7)`,
-  __FACTOR_2: `calc(var(${SPINNER_SIZE_VAR}) / 3.7)`,
-  __FACTOR_3: `calc(var(${SPINNER_SIZE_VAR}) / 5)`,
-  __FACTOR_4: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
 } as const;
 
-const flowerKeyframes = {
-  [`@keyframes ${FLOWER_ANIMATION.BIGGER_DOT}`]: {
-    '0%, 100%': {
-      boxShadow: `
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px
-      `,
-    },
+const flowerKeyframes: CSSRules = {
+  [`@keyframes ${FLOWER_ANIMATION.ROTATION}`]: {
     '50%': { transform: 'rotate(180deg)' },
+    '100%': { transform: 'rotate(360deg)' },
+  },
+  [`@keyframes ${FLOWER_ANIMATION.BIGGER_DOT}`]: {
+    '0%, 100%': { boxShadow: 'currentColor 0 0 0' },
     '25%, 75%': {
-      boxShadow: `
-        currentColor ${FLOWER_ANIMATION.__FACTOR_1} 0px 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_1} * -1) 0px 0px,
-        currentColor 0px ${FLOWER_ANIMATION.__FACTOR_1} 0px,
-        currentColor 0px calc(${FLOWER_ANIMATION.__FACTOR_1} * -1) 0px,
-        currentColor ${FLOWER_ANIMATION.__FACTOR_2} calc(${FLOWER_ANIMATION.__FACTOR_2} * -1) 0px,
-        currentColor ${FLOWER_ANIMATION.__FACTOR_2} ${FLOWER_ANIMATION.__FACTOR_2} 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_2} * -1) calc(${FLOWER_ANIMATION.__FACTOR_2} * -1) 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_2} * -1) ${FLOWER_ANIMATION.__FACTOR_2} 0px
-      `,
-    },
-    '100%': {
-      transform: 'rotate(360deg)',
-      boxShadow: `
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px
-      `,
+      boxShadow: `currentColor calc(cos(var(--petal-angle)) * var(--bigger-radius)) calc(sin(var(--petal-angle)) * var(--bigger-radius)) 0`,
     },
   },
   [`@keyframes ${FLOWER_ANIMATION.SMALLER_DOT}`]: {
-    '0%, 100%': {
-      boxShadow: `
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px
-      `,
-    },
+    '0%, 100%': { boxShadow: 'currentColor 0 0 0' },
     '25%, 75%': {
-      boxShadow: `
-        currentColor ${FLOWER_ANIMATION.__FACTOR_3} 0px 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_3} * -1) 0px 0px,
-        currentColor 0px ${FLOWER_ANIMATION.__FACTOR_3} 0px,
-        currentColor 0px calc(${FLOWER_ANIMATION.__FACTOR_3} * -1) 0px,
-        currentColor ${FLOWER_ANIMATION.__FACTOR_4} calc(${FLOWER_ANIMATION.__FACTOR_4} * -1) 0px,
-        currentColor ${FLOWER_ANIMATION.__FACTOR_4} ${FLOWER_ANIMATION.__FACTOR_4} 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_4} * -1) calc(${FLOWER_ANIMATION.__FACTOR_4} * -1) 0px,
-        currentColor calc(${FLOWER_ANIMATION.__FACTOR_4} * -1) ${FLOWER_ANIMATION.__FACTOR_4} 0px
-      `,
-    },
-    '100%': {
-      boxShadow: `
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px,
-        currentColor 0px 0px 0px
-      `,
+      boxShadow: `currentColor calc(cos(var(--petal-angle)) * var(--smaller-radius)) calc(sin(var(--petal-angle)) * var(--smaller-radius)) 0`,
     },
   },
 };
 
-const flowerCSS = {
-  height: `var(${SPINNER_SIZE_VAR})`,
-  width: `var(${SPINNER_SIZE_VAR})`,
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
+const flowerCSS: CSSRules = {
+  height: size,
+  width: size,
+  animation: `${FLOWER_ANIMATION.ROTATION} ${duration} infinite both`,
 
-  '& > div': {
-    height: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
-    width: `calc(var(${SPINNER_SIZE_VAR}) / 7)`,
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '0',
+    margin: 'auto',
+    height: `calc(${size} / 7)`,
+    width: `calc(${size} / 7)`,
+    backgroundColor: 'currentColor',
+    borderRadius: '50%',
+  },
 
-    '& > div': {
-      backgroundColor: 'currentColor',
-      height: '100%',
-      width: '100%',
-      padding: '10%',
+  [`& > :where(.${SPINNER_ITEM})`]: {
+    '--petal-angle': `calc(360deg * ${index} / ${count})`,
+    '--bigger-radius': `calc(${size} / 2.7)`,
+    '--smaller-radius': `calc(${size} / 5)`,
+    '--petal-size': `min(calc(${size} / 7), calc(${size} * 8 / (${count} * 7)))`,
+    position: 'absolute',
+    inset: '0',
+    margin: 'auto',
+    height: 'var(--petal-size)',
+    width: 'var(--petal-size)',
+    '&:where(:nth-child(even))': {
+      '--bigger-radius': `calc(${size} / 3.7 * sqrt(2))`,
+      '--smaller-radius': `calc(${size} / 7 * sqrt(2))`,
+    },
+
+    '&::before': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      inset: '0',
       borderRadius: '50%',
-      animation: `${FLOWER_ANIMATION.BIGGER_DOT} var(${SPINNER_DURATION_VAR}) 0s infinite both`,
+      animation: `${FLOWER_ANIMATION.BIGGER_DOT} ${duration} infinite both`,
+    },
 
-      '&::before': {
-        content: '""',
-        display: 'block',
-        backgroundColor: 'currentColor',
-        height: '100%',
-        width: '100%',
-        borderRadius: '50%',
-        animation: `${FLOWER_ANIMATION.SMALLER_DOT} var(${SPINNER_DURATION_VAR}) 0s infinite both`,
-      },
+    '&::after': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      inset: '10%',
+      borderRadius: '50%',
+      animation: `${FLOWER_ANIMATION.SMALLER_DOT} ${duration} infinite both`,
     },
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_FLOWER} ${classes}">
-      <div>
-        <div></div>
-      </div>
-    </div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_FLOWER,
-  components: flowerCSS,
+  styles: flowerCSS,
   keyframes: flowerKeyframes,
-  creator,
-};
+});

@@ -1,6 +1,13 @@
-import { SPINNER_SIZE_VAR } from '../utilities/sizes';
-import { SPINNER_DURATION_VAR } from '../utilities/durations';
-import { buildSpinnerAnimationName } from '../../utils/builder';
+import type { CSSRules } from '../../types';
+import { defineSpinner } from '../base';
+import {
+  size,
+  duration,
+  count,
+  index,
+  buildSpinnerAnimationName,
+  SPINNER_ITEM,
+} from '../../utils/builder';
 
 const SPINNER_SEMIPOLAR = 'spinner-semipolar';
 
@@ -8,87 +15,34 @@ const SEMIPOLAR_ANIMATION = {
   MAIN: buildSpinnerAnimationName(SPINNER_SEMIPOLAR, 'main'),
 } as const;
 
-const semipolarKeyframes = {
+const semipolarKeyframes: CSSRules = {
   [`@keyframes ${SEMIPOLAR_ANIMATION.MAIN}`]: {
     '50%': { transform: 'rotate(360deg) scale(0.7)' },
   },
 };
 
-const semipolarCSS = {
-  width: `var(${SPINNER_SIZE_VAR})`,
-  height: `var(${SPINNER_SIZE_VAR})`,
-  position: 'relative',
+const semipolarCSS: CSSRules = {
+  width: size,
+  height: size,
 
-  '& > div': {
-    borderRadius: '50%',
+  [`& > :where(.${SPINNER_ITEM})`]: {
     position: 'absolute',
-    border: `calc(var(${SPINNER_SIZE_VAR}) * 0.05) solid transparent`,
+    borderRadius: '50%',
+    border: `calc(${size} / max(20, ${count} * 4)) solid transparent`,
     borderTopColor: 'currentColor',
     borderLeftColor: 'currentColor',
-    animation: `${SEMIPOLAR_ANIMATION.MAIN} var(${SPINNER_DURATION_VAR}) infinite`,
-
-    '&:nth-child(1)': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 0)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 0)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 0)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 0)`,
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * 0.1 * 4)`,
-      zIndex: '5',
-    },
-
-    '&:nth-child(2)': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 1)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 1)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 1)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 1)`,
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * 0.1 * 3)`,
-      zIndex: '4',
-    },
-
-    '&:nth-child(3)': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 2)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 2)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 2)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 2)`,
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * 0.1 * 2)`,
-      zIndex: '3',
-    },
-
-    '&:nth-child(4)': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 3)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 3)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 3)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 3)`,
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * 0.1 * 1)`,
-      zIndex: '2',
-    },
-
-    '&:nth-child(5)': {
-      height: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 4)`,
-      width: `calc(var(${SPINNER_SIZE_VAR}) - var(${SPINNER_SIZE_VAR}) * 0.2 * 4)`,
-      top: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 4)`,
-      left: `calc(var(${SPINNER_SIZE_VAR}) * 0.1 * 4)`,
-      animationDelay: `calc(var(${SPINNER_DURATION_VAR}) * 0.1 * 0)`,
-      zIndex: '1',
-    },
+    animation: `${SEMIPOLAR_ANIMATION.MAIN} ${duration} infinite`,
+    height: `calc(${size} * (1 - ${index} / ${count}))`,
+    width: `calc(${size} * (1 - ${index} / ${count}))`,
+    top: `calc(${size} * ${index} / ${count} / 2)`,
+    left: `calc(${size} * ${index} / ${count} / 2)`,
+    animationDelay: `calc(${duration} * 0.5 * (${count} - ${index} - 1) / ${count})`,
+    zIndex: `calc(${count} - ${index})`,
   },
 };
 
-const creator = (classes: string = ''): string => {
-  return `
-    <div class="${SPINNER_SEMIPOLAR} ${classes}">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  `.trim();
-};
-
-export default {
+export default defineSpinner({
   name: SPINNER_SEMIPOLAR,
-  components: semipolarCSS,
+  styles: semipolarCSS,
   keyframes: semipolarKeyframes,
-  creator,
-};
+});
