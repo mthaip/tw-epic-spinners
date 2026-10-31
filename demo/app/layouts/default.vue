@@ -1,57 +1,23 @@
 <template>
-  <main class="bg-base-100 flex min-h-screen flex-col scroll-smooth">
-    <AppNavigation />
-
-    <Suspense>
-      <section class="flex-1">
-        <slot />
-      </section>
-
-      <template #fallback>
-        <div
-          class="inline-flex flex-1 items-center justify-center"
-          v-html="creator('spinner-half-circle', 'spinner-size-16')"
-        />
-      </template>
-    </Suspense>
-
-    <AppFooter />
-  </main>
+  <div class="flex flex-col" :class="route.path === '/labs' ? 'h-dvh' : 'min-h-dvh'">
+    <AppNavigation class="shrink-0" />
+    <UMain class="flex min-h-0 flex-1 flex-col">
+      <slot />
+    </UMain>
+    <AppFooter class="shrink-0" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { MetaObject } from 'nuxt/schema';
-import { creator } from 'tw-epic-spinners';
 import { routes } from '~/data/routes';
 
 const route = useRoute();
+const metadata = computed(() => routes.find(({ path }) => path === route.path)?.meta);
 
-const updateSeoMeta = (path: string) => {
-  const baseHead: MetaObject = {
-    title: 'Tailwind Epic Spinners',
-    htmlAttrs: { lang: 'en-US' },
-    meta: [{ name: 'robots', content: 'index, follow' }],
-  };
-
-  const matchRouteData = routes.find((r) => r.path === path);
-
-  if (matchRouteData?.meta.title) {
-    baseHead.title = matchRouteData.meta.title;
-  }
-
-  if (matchRouteData?.meta.description) {
-    baseHead.meta?.push({
-      name: 'description',
-      content: matchRouteData.meta.description,
-    });
-  }
-
-  useSeoMeta(baseHead);
-};
-
-watch(route, (newRoute) => {
-  updateSeoMeta(newRoute.path);
+useHead({ htmlAttrs: { lang: 'en-US', class: 'scroll-smooth motion-reduce:scroll-auto' } });
+useSeoMeta({
+  title: () => metadata.value?.title ?? 'Tailwind Epic Spinners',
+  description: () => metadata.value?.description,
+  robots: 'index, follow',
 });
-
-updateSeoMeta(route.path);
 </script>

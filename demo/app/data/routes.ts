@@ -1,20 +1,14 @@
 export const routes = [
   {
     path: '/',
-    name: 'Home',
-    // component: Home,
-    icon: 'icon-[lucide--house]',
     meta: {
       title: 'Tailwind Epic Spinners',
       description:
-        'Welcome to Tailwind Epic Spinners – Beautiful, customizable CSS spinners built with Tailwind CSS.',
+        'A composable spinner plugin for Tailwind CSS. Start with a baseline, add or remove items, and make it your own.',
     },
   },
   {
     path: '/docs',
-    name: 'Docs',
-    // component: Documentation,
-    icon: 'icon-[lucide--book-open-text]',
     meta: {
       title: 'Docs · Tailwind Epic Spinners',
       description:
@@ -22,14 +16,10 @@ export const routes = [
     },
   },
   {
-    path: '/playground',
-    name: 'Playground',
-    // component: Playground,
-    icon: 'icon-[lucide--codesandbox]',
+    path: '/labs',
     meta: {
-      title: 'Playground · Tailwind Epic Spinners',
-      description:
-        'Try out and customize your favorite spinner components in our interactive playground.',
+      title: 'Lab · Tailwind Epic Spinners',
+      description: 'Build your own spinner with live HTML editing and preview.',
     },
   },
 ] as const;

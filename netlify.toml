@@ -1,0 +1,14 @@
+[build]
+  base = "demo"
+  command = "yarn --cwd .. install --frozen-lockfile --production=false && yarn --cwd .. demo:build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  YARN_VERSION = "1.22.22"
+
+[dev]
+  framework = "#custom"
+  command = "yarn dev"
+  targetPort = 3001
+  port = 8888
