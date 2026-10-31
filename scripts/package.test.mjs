@@ -60,6 +60,7 @@ test('npm tarball contains only release files and resolves both module formats',
         'keywords',
         'type',
         'peerDependencies',
+        'publishConfig',
         'main',
         'types',
         'exports',
@@ -69,6 +70,9 @@ test('npm tarball contains only release files and resolves both module formats',
     );
     assert.equal(manifest.peerDependencies.tailwindcss, '^3.0.0 || ^4.0.0');
     assert.equal(manifest.sideEffects, false);
+    assert.deepEqual(manifest.publishConfig, {
+      registry: 'https://registry.npmjs.org/',
+    });
     // Self-reference exercises package exports rather than importing bundle paths.
     const require = createRequire(join(directory, 'package/consumer.cjs'));
     assert.equal(typeof require(manifest.name).handler, 'function');

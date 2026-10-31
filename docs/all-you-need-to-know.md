@@ -48,7 +48,11 @@ Keep the original EpicMax credit. Do not edit generated files.
 
 1. Update the root version, lockfile metadata, and docs.
 2. Run package checks and inspect the tarball.
-3. Run `npm login`, then `yarn npm:publish` from root. This publishes **`dist/`**.
+3. Run `npm login --registry=https://registry.npmjs.org/`, then
+   `yarn npm:publish` from root. This publishes **`dist/`**. The generated
+   manifest pins `publishConfig.registry` to npm so Yarn Classic's inherited
+   `registry.yarnpkg.com` setting cannot redirect publication. For a preview,
+   build first, then run `yarn exec -- npm publish ./dist --dry-run`.
 4. Deploy the demo after the matching major version is on npm's `latest` tag.
 
 Netlify installs dependencies in `demo/` and runs `yarn build:deploy`.
