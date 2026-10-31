@@ -1,8 +1,16 @@
+import { fileURLToPath } from 'node:url';
 import mainPkgJson from '../package.json';
 import presets from './app/data/theme-presets.json';
 import { codeThemes } from './shared/code-theme';
 
 export default defineNuxtConfig({
+  // Development exercises local changes; production resolves the npm dependency.
+  $development: {
+    alias: {
+      'tw-epic-spinners': fileURLToPath(new URL('../dist/index.js', import.meta.url)),
+    },
+  },
+
   devServer: {
     port: 3001,
   },

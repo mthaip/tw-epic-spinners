@@ -22,10 +22,12 @@ implementation. There is no hostname routing or second demo app.
 - `demo/app/`: Vue pages, components, spinner catalogue, theme handling, and CSS.
 - `demo/content/documentation.md`: source for site docs and the generated root
   `README.md`, including the v1-to-v2 migration guide. Edit this source, not README.
+- `docs/all-you-need-to-know.md`: maintainer setup, verification, release, and
+  deployment guide. Keep it current when those workflows change.
 - `scripts/build-readme.mjs`: generates README and copies root `llms.txt` into
   `demo/public/llms.txt`; also generates `demo/public/docs.md` from the same docs.
-- `scripts/build-demo.mjs`: builds the linked plugin, optionally installs demo
-  dependencies, and builds the Netlify SSR server plus public assets. The demo
+- `demo/scripts/build.mjs`: regenerates docs, refreshes the npm `latest` release,
+  verifies its major version matches the docs, and builds the Netlify SSR app. The demo
   build does not run cleanup; use `yarn nuxt cleanup` from `demo/` separately when needed.
 - `scripts/plugin.test.mjs`: API and Tailwind v3/v4 compatibility checks.
 - `scripts/package.test.mjs`: checks the actual npm tarball, manifest, release
@@ -54,7 +56,7 @@ Use Yarn Classic 1.22.22 and Node 24, as declared by `packageManager` and
 - `yarn test`: build the package, install the isolated Tailwind v3 compiler from
   its lockfile, and run the Node compatibility tests. Browser fixtures are written
   to `.output/verification/` for visual and computed-style checks.
-- `yarn demo:dev`: build the linked plugin and start Nuxt on port `3001`.
+- `yarn demo:dev`: build the local plugin and start Nuxt on port `3001`.
 - `http://localhost:3001/labs`: the full-screen lab in `demo/app/components/Lab.vue`.
   Its client-only Monaco editor (`LabEditor.client.vue`) provides HTML editing,
   Prettier formatting, and a sandboxed live preview. Keep the lab minimal: spinner
@@ -82,14 +84,17 @@ Use Yarn Classic 1.22.22 and Node 24, as declared by `packageManager` and
   Gallery cards use a 3:4 aspect ratio, center the name beneath the spinner,
   and show no item counts. Preserve the
   original column counts: 2 by default, 3 at sm, 4 at md, and 5 at lg.
-- `yarn demo:build --install`: build the plugin, install demo dependencies from
-  its lockfile, and build the Netlify SSR app.
-- `yarn demo:build`: build the plugin and SSR app with dependencies installed.
-
 Run from `demo/`:
 
 - `yarn dev`: start Nuxt on port `3001`; build the root plugin first.
-- `yarn build`: build the production Netlify SSR app without running cleanup.
+- `yarn build`: build the production Netlify SSR app with the installed npm
+  dependency, without cleanup. Use `yarn build:deploy` for deployment so the
+  spinner dependency is refreshed from npm first.
+- `yarn build:deploy`: regenerate docs, refresh npm's `latest` spinner release,
+  and build the Netlify SSR app. Fail if the release's major version does not
+  match the docs; publish v2 before deploying these docs. This uses only demo
+  dependencies; Netlify installs them automatically. Never substitute the local
+  plugin in production. Yarn's temporary manifest/lockfile rewrites are restored.
 - `yarn nuxt <command>`: run Nuxt commands directly; use `yarn nuxt cleanup`
   separately when generated caches need clearing.
 - `yarn generate`: optional static export; not used for deployment.
@@ -99,9 +104,12 @@ Run from `demo/`:
 - `yarn nuxt typecheck`: check Vue components, composables, and compiler workers.
 - `yarn exec eslint .`: lint the demo after Nuxt preparation.
 
-The demo uses `link:..` to exercise the actual local v2 package. Build the root
-package before starting or generating the demo. The combined build command does
-this automatically. Building a release does not publish it to npm.
+The demo declares the npm dependency as `latest`. Nuxt's development-only alias
+points both CSS plugin resolution and the Lab worker at the local `dist/index.js`;
+build the root package before starting development. `yarn demo:dev` does this
+automatically. Production has no local alias, and `yarn build:deploy` refreshes the
+registry tag even when CI restores cached dependencies or a lockfile. Building
+a release does not publish it to npm.
 
 ## Demo architecture and pitfalls
 
@@ -114,7 +122,8 @@ this automatically. Building a release does not publish it to npm.
   and lab colors must be included in the production CSS. Do not add numeric size
   or duration safelists: the lab worker compiles these utilities as needed.
 - **Lab utilities**: `useLabUtilities.ts` sends size/duration classes to
-  `workers/spinner-utilities.ts`, which runs the real local plugin and Tailwind v4.
+  `workers/spinner-utilities.ts`, which runs the actual plugin and Tailwind v4
+  (local in development, npm in production).
   Keep compilation off the main thread and do not duplicate value resolution in UI code.
 - **Lab styles**: The sandboxed iframe has an opaque origin. Copy stylesheet
   links with absolute URLs and remove `crossorigin`, or production component CSS
@@ -173,8 +182,8 @@ this automatically. Building a release does not publish it to npm.
   `demo/.netlify/functions-internal/server/` with the installed Nitro version.
   Pages, content queries, robots, and sitemap are served by the SSR handler.
 - **Netlify**: Root `netlify.toml` uses `demo` as the base so Nitro's internal
-  functions directory is discovered normally. Its command installs root build
-  dependencies and runs `yarn demo:build` from the root; publish directory is
+  functions directory is discovered normally. It installs demo dependencies and
+  runs `yarn build:deploy` there; no root dependency install is needed. The publish directory is
   `dist` relative to `demo`. Netlify Dev starts `yarn dev` on port 3001 and
   proxies through port 8888. There are no version selectors or hostname rewrites.
 - **Generated config**: Configure TypeScript through `demo/nuxt.config.ts`, not

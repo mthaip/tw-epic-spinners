@@ -13958,9 +13958,10 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-"tw-epic-spinners@link:..":
-  version "0.0.0"
-  uid ""
+tw-epic-spinners@latest:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/tw-epic-spinners/-/tw-epic-spinners-1.3.0.tgz#7e5a8fd7e0ed92c02883635be3f515d96008e40e"
+  integrity sha512-9PHPuEGvt77EPA40pCG21pt4AudsIv0fVMdiqnB3zE1DjEp445q1N8xxAr2wX/ojTAGjdNBGVUunnTrv8zSiig==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

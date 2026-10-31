@@ -1,6 +1,6 @@
 [build]
   base = "demo"
-  command = "yarn --cwd .. install --frozen-lockfile --production=false && yarn --cwd .. demo:build"
+  command = "yarn build:deploy"
   publish = "dist"
 
 [build.environment]
