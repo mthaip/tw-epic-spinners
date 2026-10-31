@@ -24,6 +24,9 @@ const manifest = Object.fromEntries(
 );
 
 Object.assign(manifest, {
+  publishConfig: {
+    registry: 'https://registry.npmjs.org/',
+  },
   main: './index.cjs',
   types: './index.d.ts',
   exports: {
