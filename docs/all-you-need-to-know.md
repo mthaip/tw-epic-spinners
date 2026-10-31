@@ -34,7 +34,14 @@ The typography selector parser is resolved to a patched 6.x release.
 
 ### How to publish
 
-- `npm login`
+- `npm login --registry=https://registry.npmjs.org/`
 - Update version in `package.json`
-- `yarn npm:build`
-- `npm publish`
+- `yarn npm:publish`
+
+The publish command builds v1 and publishes it to npm with the `legacy` tag,
+keeping `latest` on v2. `publishConfig` also defaults direct `npm publish`
+commands to the npm registry and `legacy` tag. The package version still comes
+from `package.json`; a version number cannot be used as a distribution tag.
+
+To inspect the release without publishing, run `yarn npm:build`, then
+`yarn exec -- npm publish --dry-run`.
