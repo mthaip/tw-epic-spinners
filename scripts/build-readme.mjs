@@ -7,6 +7,7 @@ const source = resolve(root, 'demo/content/documentation.md');
 const target = resolve(root, 'README.md');
 const llmsSource = resolve(root, 'llms.txt');
 const llmsTarget = resolve(root, 'demo/public/llms.txt');
+const { homepage } = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 
 const header = `<!-- This file is generated from demo/content/documentation.md by scripts/build-readme.mjs. Do not edit directly. -->
 <!-- cSpell:words semipolar rhombuses mthaip -->
@@ -15,7 +16,7 @@ const header = `<!-- This file is generated from demo/content/documentation.md b
 
 > 20 pure-CSS loading spinners as a Tailwind CSS plugin. Works with Tailwind v3 and v4, and any framework.
 
-Live previews & docs: [tw-epic-spinners.mthaip.com](https://tw-epic-spinners.mthaip.com)
+Live previews & docs: [${new URL(homepage).host}](${homepage})
 
 `;
 

@@ -8,15 +8,16 @@ The marketing / documentation / playground site for the [`tw-epic-spinners`](htt
 
 ## Commands
 
-Package manager: **yarn 1.22** (see `packageManager`). Node version: **24.16.0** (`.nvmrc`).
+Package manager: **yarn 1.22** (see `packageManager`). Node version: **24.x** (`.nvmrc`).
 
 - `yarn dev` — Nuxt dev server with HMR
 - `yarn build` — production build (Netlify nitro preset)
 - `yarn generate` — static prerender
 - `yarn preview` — preview the built site
+- `yarn lint` — lint the demo
 - `yarn postinstall` — runs `nuxt prepare` (regenerates `.nuxt/` types; needed before `tsc`/ESLint work after a fresh install)
 
-No test runner is configured. Lint is wired through `@nuxt/eslint` (`eslint.config.mjs` extends the auto-generated `.nuxt/eslint.config.mjs`); run via `npx eslint .` if needed.
+No test runner is configured. Lint is wired through `@nuxt/eslint` (`eslint.config.mjs` extends the auto-generated `.nuxt/eslint.config.mjs`); run via `yarn lint`.
 
 ## Architecture
 

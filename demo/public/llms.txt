@@ -104,7 +104,7 @@ const html = creator('spinner-flower', ['spinner-size-12', 'text-blue-500']);
 
 ## Links
 
-- Docs & live preview: https://tw-epic-spinners.mthaip.com
+- Docs & live preview: https://tw-epic-spinners-v1.mthaip.com
 - Source: https://github.com/mthaip/tw-epic-spinners
 - npm: https://www.npmjs.com/package/tw-epic-spinners
 - License: MIT

@@ -13,7 +13,7 @@
   ],
   "description": "20 pure-CSS loading spinners as a Tailwind CSS plugin (v3 & v4). Zero JS, framework-agnostic — works with Vue, React, Svelte, Astro, Next.js, Nuxt, or plain HTML. A Tailwind port of Epic Spinners by EpicMax.",
   "author": "mthaip <fanmt.fmt@gmail.com>",
-  "homepage": "https://tw-epic-spinners.mthaip.com",
+  "homepage": "https://tw-epic-spinners-v1.mthaip.com",
   "url": "https://github.com/mthaip/tw-epic-spinners",
   "repository": {
     "type": "git",
@@ -49,27 +49,33 @@
     "plugin"
   ],
   "scripts": {
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
+    "lint": "eslint .",
     "npm:build:readme": "node scripts/build-readme.mjs",
     "npm:build": "npm run npm:build:readme && rm -rf dist && vite build -c ./vite.config.ts",
     "prepare": "node scripts/build-readme.mjs",
-    "prepublishOnly": "node scripts/build-readme.mjs"
+    "prepublishOnly": "node scripts/build-readme.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "tailwindcss": "^3.0.0 || ^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "25.9.1",
-    "@typescript-eslint/eslint-plugin": "^8.59.4",
-    "@typescript-eslint/parser": "^8.59.4",
-    "@vue/language-core": "^3.3.1",
-    "eslint": "10.4.0",
-    "prettier": "^3.8.3",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "tailwindcss": "^4.3.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
+    "@typescript-eslint/parser": "^8.72.1",
+    "@vue/language-core": "^3.3.14",
+    "eslint": "^10.14.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vite": "^8.0.14",
-    "vite-plugin-dts": "^5.0.1"
+    "vite": "^8.3.5",
+    "vite-plugin-dts": "^5.1.2"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "24.x"
+  }
 }

@@ -5,7 +5,7 @@
 
 > 20 pure-CSS loading spinners as a Tailwind CSS plugin. Works with Tailwind v3 and v4, and any framework.
 
-Live previews & docs: [tw-epic-spinners.mthaip.com](https://tw-epic-spinners.mthaip.com)
+Live previews & docs: [tw-epic-spinners-v1.mthaip.com](https://tw-epic-spinners-v1.mthaip.com)
 
 <!-- cSpell:words semipolar rhombuses -->
 
