@@ -4,7 +4,7 @@
       <div class="flex shrink-0 items-center gap-2">
         <ULink to="/" aria-label="tw-epic-spinners" :active="route.path === '/'" class="inline-flex shrink-0 items-center whitespace-nowrap text-lg font-bold leading-none text-highlighted sm:text-xl">tw-<span class="text-primary">epic</span>-spinners</ULink>
         <UDropdownMenu :items="versions">
-          <UButton :label="`v${pkg.version}`" trailing-icon="i-lucide-chevron-down" color="primary" variant="subtle" size="sm" aria-label="Select version" />
+          <UButton :label="`v${pkg.version}`" trailing-icon="i-lucide-chevron-down" color="neutral" variant="subtle" size="sm" :aria-label="`v${pkg.version}, select version`" />
         </UDropdownMenu>
       </div>
     </template>

@@ -50,12 +50,12 @@ function syncTheme() {
       .map((channel) => channel.toString(16).padStart(2, '0')).join('');
   };
   const background = color('--ui-bg-muted');
-  const dimmed = color('--ui-text-dimmed');
+  const lineNumber = color('--ui-text');
   const primary = color('--ui-primary');
   const border = color('--ui-border');
   const elevated = color('--ui-bg-elevated');
   const fontFamily = styles.getPropertyValue('--font-mono').trim();
-  const signature = [colorMode.value, background, dimmed, primary, border, elevated, fontFamily].join();
+  const signature = [colorMode.value, background, lineNumber, primary, border, elevated, fontFamily].join();
   if (signature === palette) return;
   palette = signature;
   const name = colorMode.value === 'dark' ? codeThemes.dark : codeThemes.light;
@@ -65,7 +65,7 @@ function syncTheme() {
     colors: {
       ...theme.colors,
       'editor.background': background,
-      'editorLineNumber.foreground': dimmed,
+      'editorLineNumber.foreground': lineNumber,
       'editor.lineHighlightBackground': elevated,
       'editor.lineHighlightBorder': '#00000000',
       'editorOverviewRuler.border': '#00000000',

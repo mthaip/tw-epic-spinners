@@ -12,7 +12,9 @@ Live previews & docs: [tw-epic-spinners.mthaip.com](https://tw-epic-spinners.mth
 20 composable, pure-CSS loading spinners as a Tailwind CSS plugin. Works with
 Tailwind CSS v3 and v4, in any framework.
 
-Inspired by [EpicMax’s epic-spinners](https://github.com/epicmaxco/epic-spinners).
+`tw-epic-spinners` adapts [EpicMax’s Epic Spinners (epic-spinners)](https://github.com/epicmaxco/epic-spinners)
+as a framework-agnostic Tailwind CSS plugin. Start with one of the 20 baseline
+examples below and add or remove HTML parts to customize the animation.
 
 ## Installation
 

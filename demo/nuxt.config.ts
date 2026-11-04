@@ -104,7 +104,7 @@ export default defineNuxtConfig({
         'shiki/engine/javascript',
         'shiki/langs/html.mjs',
         'shiki/themes/github-dark.mjs',
-        'shiki/themes/material-theme-lighter.mjs',
+        'shiki/themes/github-light-high-contrast.mjs',
         'prettier/standalone',
         'prettier/plugins/html',
         'tailwindcss',

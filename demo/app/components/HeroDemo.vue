@@ -2,7 +2,7 @@
   <UCard :ui="{ body: 'p-0 sm:p-0' }">
     <div class="flex min-w-0 flex-col md:flex-row md:items-center md:justify-between">
       <pre class="min-h-96 w-full min-w-0 max-w-full md:w-3/5 md:flex-none overflow-x-auto rounded-t-lg bg-muted p-6 text-left text-xs leading-6 md:rounded-none md:rounded-l-lg"><CodeHighlight :code="markup" :highlight-line="5 + count" animate-lines /></pre>
-      <div class="grid aspect-video w-full shrink-0 self-center place-items-center p-6 md:mx-auto md:aspect-3/4 md:max-w-[30%] md:p-0" aria-label="Live flower spinner demo">
+      <div class="grid aspect-video w-full shrink-0 self-center place-items-center p-6 md:mx-auto md:aspect-3/4 md:max-w-[30%] md:p-0">
         <SpinnerPreview name="flower" :count="count" class="spinner-size-32 spinner-duration-3500 text-primary" />
       </div>
     </div>
@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import { useDocumentVisibility, useIntervalFn, usePreferredReducedMotion } from '@vueuse/core';
 
+const props = defineProps<{ paused: boolean }>();
 const count = ref(4);
 const markup = computed(() => `<div
   class="spinner-flower spinner-size-32
@@ -30,8 +31,8 @@ const { pause, resume } = useIntervalFn(() => {
 }, 1800, { immediate: false });
 
 onMounted(() => {
-  watch([reducedMotion, visibility], ([motion, visible]) => {
-    if (motion !== 'reduce' && visible === 'visible') resume();
+  watch([reducedMotion, visibility, () => props.paused], ([motion, visible, paused]) => {
+    if (motion !== 'reduce' && visible === 'visible' && !paused) resume();
     else pause();
   }, { immediate: true });
 });

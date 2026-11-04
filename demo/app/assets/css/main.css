@@ -5,3 +5,9 @@
 
 @source inline('text-{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,gray,slate,zinc,neutral,stone}-{50..950}');
 @source inline('spinner-{flower,pixel,hollow-dots,intersecting-circles,orbit,radar,scaling-squares,half-circle,trinity-rings,fulfilling-square,circles-to-rhombuses,semipolar,self-building-square,swapping-squares,fulfilling-bouncing-circle,fingerprint,spring,atom,looping-rhombuses,breeding-rhombus}');
+
+[data-previews-paused] [data-spinner-preview] {
+  &, &::before, &::after, & > .spinner-item, & > .spinner-item::before, & > .spinner-item::after {
+    animation-play-state: paused !important;
+  }
+}

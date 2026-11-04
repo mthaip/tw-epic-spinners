@@ -3,12 +3,14 @@
     <UCard variant="outline" class="flex min-h-0 flex-1 flex-col" :ui="{ root: 'overflow-visible rounded-none ring-0 divide-y-0', header: 'relative shrink-0', body: 'min-h-0 flex-1' }">
       <template #header>
         <div class="flex flex-wrap items-center justify-start gap-2">
-          <USelect v-model="selectedName" :items="spinnerNames" aria-label="Spinner" class="w-fit flex-none" :ui="{ value: 'whitespace-nowrap overflow-visible text-clip', content: 'w-max min-w-(--reka-select-trigger-width) max-w-[calc(100vw-1rem)]', itemLabel: 'whitespace-nowrap overflow-visible text-clip' }" />
+          <UFormField label="Spinner" orientation="horizontal">
+            <USelect v-model="selectedName" :items="spinnerNames" class="w-fit flex-none" :ui="{ value: 'whitespace-nowrap overflow-visible text-clip', content: 'w-max min-w-(--reka-select-trigger-width) max-w-[calc(100vw-1rem)]', itemLabel: 'whitespace-nowrap overflow-visible text-clip' }" />
+          </UFormField>
           <UTooltip text="Format HTML">
-            <UButton aria-label="Format" icon="i-lucide-wand-sparkles" color="neutral" variant="ghost" :loading="formatting" @click="formatCode" />
+            <UButton aria-label="Format HTML" icon="i-lucide-wand-sparkles" color="neutral" variant="ghost" :loading="formatting" @click="formatCode" />
           </UTooltip>
           <UTooltip text="Reset">
-            <UButton aria-label="Reset" icon="i-lucide-rotate-ccw" color="neutral" variant="ghost" @click="seedMarkup" />
+            <UButton aria-label="Reset spinner markup" icon="i-lucide-rotate-ccw" color="neutral" variant="ghost" @click="seedMarkup" />
           </UTooltip>
           <CopyToClipboard :content="markup" />
         </div>

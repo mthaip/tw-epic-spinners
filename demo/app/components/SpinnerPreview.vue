@@ -1,6 +1,7 @@
 <template>
   <div
     :class="`spinner-${name}`"
+    data-spinner-preview
     aria-hidden="true"
   >
     <div

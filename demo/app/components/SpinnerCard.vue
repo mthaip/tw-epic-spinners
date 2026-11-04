@@ -4,9 +4,10 @@
     type="button"
     :title="`spinner-${spinner.name}`"
     reverse
-    class="group aspect-3/4"
+    class="group aspect-3/4 enabled:cursor-pointer"
     :ui="{ container: 'h-full lg:flex', wrapper: 'flex-none items-center', body: 'flex-none w-full', title: 'text-center' }"
-    :aria-label="`Get ${spinner.name} markup`"
+    :aria-label="`View spinner-${spinner.name} HTML`"
+    aria-haspopup="dialog"
     @click="viewCode"
   >
     <div ref="preview" class="flex flex-1 items-center justify-center text-primary transition-transform duration-200 motion-safe:group-hover:scale-110 motion-safe:group-focus-visible:scale-110">
@@ -22,10 +23,12 @@
 <script setup lang="ts">
 import type { SpinnerDefinition, SpinnerName } from '~/data/spinners';
 const props = defineProps<{ spinner: SpinnerDefinition }>();
-const emit = defineEmits<{ 'view-code': [element: Element, name: SpinnerName] }>();
+const emit = defineEmits<{ 'view-code': [element: Element, name: SpinnerName, trigger: HTMLElement] }>();
 const preview = useTemplateRef<HTMLElement>('preview');
-const viewCode = () => {
+const viewCode = (event: MouseEvent) => {
   const element = preview.value?.firstElementChild;
-  if (element) emit('view-code', element, props.spinner.name);
+  if (element && event.currentTarget instanceof HTMLElement) {
+    emit('view-code', element, props.spinner.name, event.currentTarget);
+  }
 };
 </script>

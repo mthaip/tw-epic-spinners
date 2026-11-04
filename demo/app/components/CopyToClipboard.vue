@@ -5,10 +5,11 @@
       :color="color"
       :variant="variant"
       :size="size"
-      :aria-label="copied ? 'Copied' : 'Copy code'"
+      aria-label="Copy code"
       @click="copy(content)"
     />
   </UTooltip>
+  <span role="status" class="sr-only">{{ copied ? 'Code copied' : '' }}</span>
 </template>
 
 <script setup lang="ts">

@@ -2,7 +2,8 @@
 
 > 20 composable, pure-CSS loading spinners for Tailwind CSS v3 and v4. Framework-agnostic and MIT licensed. Start with a baseline, add or remove items, and make it your own.
 
-This site documents version 2.0.0. Use the v2 documentation for current markup;
+`tw-epic-spinners` is a Tailwind CSS adaptation of EpicMax’s Epic Spinners
+(`epic-spinners`). This site documents version 2.0.0. Use the v2 documentation for current markup;
 v1 examples and the removed creator() helper are not compatible with v2.
 The spinner animations require modern CSS sibling-count() and sibling-index().
 These became Baseline Newly available in August 2026; older browsers may not work.

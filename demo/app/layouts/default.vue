@@ -1,7 +1,13 @@
 <template>
   <div class="flex flex-col" :class="route.path === '/labs' ? 'h-dvh' : 'min-h-dvh'">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-default focus:p-3 focus:text-highlighted"
+    >
+      Skip to main content
+    </a>
     <AppNavigation class="shrink-0" />
-    <UMain class="flex min-h-0 flex-1 flex-col">
+    <UMain id="main-content" tabindex="-1" class="flex min-h-0 flex-1 flex-col">
       <slot />
     </UMain>
     <AppFooter class="shrink-0" />

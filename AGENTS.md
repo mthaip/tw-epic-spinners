@@ -142,9 +142,9 @@ a release does not publish it to npm.
   `documentation.md` using Nuxt UI prose components and `UContentToc`. Show one
   mobile TOC; hide the desktop right-slot TOC below lg. Keep docs
   focused on v2, with previous-package details only in migration. Baseline HTML
-  fences use `spinner=<name>` metadata; `DocsCodeBlock.vue` adds a Try it out
+  fences use `spinner=<name>` metadata; `DocsCodeBlock.vue` adds an Open in Lab
   button around the original Nuxt UI prose component. Group baseline actions in one absolute top-right flex wrapper using gap-2,
-  with Copy before Try it out; avoid individual button offsets. Preserve copying the
+  with Copy before Open in Lab; avoid individual button offsets. Preserve copying the
   rendered code when Nuxt Content omits the plain-text code prop. The README generator turns
   that metadata into ordinary Markdown links. `/labs?spinner=<name>` validates
   and seeds the selected spinner, including query changes on the same route.
@@ -154,7 +154,7 @@ a release does not publish it to npm.
   their colors, fonts, radius, semantic tokens, and default variants. Lucide
   supplies interface icons; the npm link uses the official Simple Icons npm mark.
   Exclude the Default preset from the selector and migrate its cookie to Iris. Nuxt Fonts self-hosts preset fonts. Nuxt UI's color-mode module handles light/dark/
-  system appearance. Shared `shared/code-theme.ts` selects the docs’ Material light/GitHub dark themes for Nuxt Content,
+  system appearance. Shared `shared/code-theme.ts` selects the docs’ GitHub Light High Contrast/GitHub Dark themes for Nuxt Content,
   `CodeHighlight.vue`, and Monaco via the official Shiki integration. Keep one
   HTML highlighter cached in `utils/code-highlighter.ts`; never hand-color code
   by token or preset. Monaco resolves UI chrome tokens to hex, and the sandbox copies the current theme styles and color-mode class.
@@ -164,7 +164,7 @@ a release does not publish it to npm.
 - **Navigation**: The logo links to `/`; its adjacent version dropdown links
   to the current version and `https://tw-epic-spinners-v1.mthaip.com`. Main items
   are Docs and Lab. The visible brand is `tw-epic-spinners`, with `epic` in the
-  primary color; the version button uses primary/subtle. Read the current version from root `package.json`.
+  primary color; the version button uses neutral/subtle. Read the current version from root `package.json`.
 - **Metadata**: Nuxt's site URL and name come from the root plugin's `package.json`.
 - **SEO and AI discovery**: Keep v2 route titles/descriptions in `data/routes.ts`.
   The shared layout emits canonical URLs without queries, Open Graph/Twitter tags,
@@ -240,8 +240,18 @@ a release does not publish it to npm.
 - Report checks and results. If a check cannot run, state the blocker and what
   remains unverified; do not claim it passed.
 
+## Branch selection
+
+- Before making repository changes, ask whether to work on `develop` or create a
+  new branch if the user has not already specified a branch for the task.
+- Use the branch the user chooses. Create a new branch only when the user
+  requests or approves one.
+
 ## Commits
 
+- Before committing, show the user which files will be included, summarize the
+  changes, and ask them to review and approve the commit. Wait for explicit
+  approval before committing.
 - Group changes into reasonable, focused commits. Each should represent one
   coherent change with related documentation and verification updates.
 - Follow git history: `type(optional-scope): Short description`, using types such

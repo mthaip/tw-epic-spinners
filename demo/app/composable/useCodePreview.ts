@@ -18,10 +18,19 @@ export default function useCodePreview() {
   const open = ref(false);
   const code = ref('');
   const name = ref<SpinnerName>('flower');
-  const showCode = (element: Element, spinner: SpinnerName) => {
+  let trigger: HTMLElement | undefined;
+  const showCode = (element: Element, spinner: SpinnerName, button: HTMLElement) => {
+    trigger = button;
     name.value = spinner;
     code.value = formatElement(element);
     open.value = true;
   };
-  return { open, code, name, showCode };
+  const restoreFocus = (event: Event) => {
+    if (trigger?.isConnected) {
+      event.preventDefault();
+      trigger.focus();
+    }
+    trigger = undefined;
+  };
+  return { open, code, name, showCode, restoreFocus };
 }

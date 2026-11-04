@@ -5,7 +5,7 @@
     </ProsePre>
     <div v-if="spinner" class="absolute end-3 top-3 flex items-center gap-2">
       <CopyToClipboard v-if="props.copy" :content="source" color="neutral" variant="outline" size="sm" />
-      <UButton :to="{ path: '/labs', query: { spinner } }" label="Try it out" color="neutral" variant="outline" size="sm" />
+      <UButton :to="{ path: '/labs', query: { spinner } }" label="Open in Lab" :aria-label="`Open in Lab: spinner-${spinner}`" color="neutral" variant="outline" size="sm" />
     </div>
   </div>
 </template>

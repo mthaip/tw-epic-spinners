@@ -2,9 +2,9 @@ export const routes = [
   {
     path: '/',
     meta: {
-      title: 'tw-epic-spinners v2 · Composable Tailwind CSS spinners',
+      title: 'Epic Spinners for Tailwind CSS · tw-epic-spinners',
       description:
-        '20 composable, pure-CSS loading spinners for Tailwind CSS v3 and v4. Start with a baseline, add or remove items, and make it your own.',
+        'Preview 20 pure-CSS loading spinners inspired by Epic Spinners. Copy the HTML, customize a design in the Spinner Lab, and use it with Tailwind CSS v3 or v4.',
     },
   },
   {
