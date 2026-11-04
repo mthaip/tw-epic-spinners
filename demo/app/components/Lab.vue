@@ -3,7 +3,7 @@
     <UCard variant="outline" class="flex min-h-0 flex-1 flex-col" :ui="{ root: 'overflow-visible rounded-none ring-0 divide-y-0', header: 'relative shrink-0', body: 'min-h-0 flex-1' }">
       <template #header>
         <div class="flex flex-wrap items-center justify-start gap-2">
-          <UFormField label="Spinner" orientation="horizontal">
+          <UFormField label="Spinner" orientation="horizontal" :ui="{ wrapper: 'sr-only' }">
             <USelect v-model="selectedName" :items="spinnerNames" class="w-fit flex-none" :ui="{ value: 'whitespace-nowrap overflow-visible text-clip', content: 'w-max min-w-(--reka-select-trigger-width) max-w-[calc(100vw-1rem)]', itemLabel: 'whitespace-nowrap overflow-visible text-clip' }" />
           </UFormField>
           <UTooltip text="Format HTML">
