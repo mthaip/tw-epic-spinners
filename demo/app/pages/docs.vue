@@ -13,9 +13,11 @@ if (!content.value) throw createError({ statusCode: 404, statusMessage: 'Documen
 <template>
   <UContainer>
     <UPage>
+      <UPageHeader
+        title="Documentation"
+        :links="[{ label: 'Read as Markdown', icon: 'i-lucide-file-text', to: '/docs.md', external: true }]"
+      />
       <UPageBody>
-        <h1 class="text-3xl font-bold text-highlighted">tw-epic-spinners v2 documentation</h1>
-        <ULink to="/docs.md" external class="underline">Read the documentation as Markdown</ULink>
         <UContentToc color="neutral" :links="content?.body.toc?.links" class="lg:hidden" />
         <ContentRenderer v-if="content" :value="content" :components="{ pre: DocsCodeBlock, h2: DocsHeading, a: DocsLink }" />
       </UPageBody>

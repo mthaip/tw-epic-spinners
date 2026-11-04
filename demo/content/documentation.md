@@ -22,7 +22,7 @@ Tailwind CSS v4:
 
 Tailwind CSS v3:
 
-```js
+```javascript
 import spinners from 'tw-epic-spinners';
 
 export default {
@@ -54,8 +54,6 @@ all direct children.
 
 ## Utils
 
-Use `text-*` for color.
-
 ### Size
 
 `spinner-size-*` sets the overall footprint using Tailwind’s `size-*` value syntax.
@@ -82,6 +80,21 @@ Numeric values are milliseconds.
 
 In Tailwind v3, durations use your configured transition-duration scale; use brackets
 for custom values.
+
+### Color
+
+Use Tailwind’s `text-*` color utilities to set the spinner color. The spinner
+uses `currentColor`, so it inherits the surrounding text color by default.
+
+| Syntax | Example |
+| --- | --- |
+| `text-<color>` | `text-violet-500` |
+| `text-[<color>]` | `text-[#7c3aed]` |
+| `text-[color:var(--<variable>)]` | `text-[color:var(--loader-color)]` |
+
+Apply the utility to the spinner container to color the whole spinner, or to an
+individual `spinner-item` to color that part. Tailwind variants work as usual,
+such as `dark:text-violet-300`.
 
 ## Compatibility
 
